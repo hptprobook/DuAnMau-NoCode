@@ -8,7 +8,7 @@ Bấm vào Branch -> New Branch -> Đặt tên branch theo kiểu feat/teenbranc
 - Cấu trúc Folder
   - dashboard: trang quản trị website(admin)
   - website: trang web chính
-    - inc: chứa code, hàm hỗ trợ
+    - inc: chứa code, hàm dùng chung cho website
     - libs: các thư viện
     - modules: các thành phần của website
     - public: gồm css, js
