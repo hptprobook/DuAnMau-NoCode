@@ -8,6 +8,6 @@ Sau khi Pull code mới về
      * composer install (cài sẵn composer) -> cài các thư viện laravel
      * php artisan migrate -> tạo database( phải tạo trước database it-device trong phpMyAdmin)
   4. Khởi chạy dự án( mở 2 terminal chạy cùng lúc 2 lệnh dưới)
-    - npm run dev
-    - php artisan serve
+     * npm run dev
+     * php artisan serve
   5. Vào URL: 127.0.0.1:8000 -> tạo tài khoản mới, vào link Administrator
