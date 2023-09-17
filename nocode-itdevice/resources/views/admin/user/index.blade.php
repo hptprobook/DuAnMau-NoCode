@@ -10,22 +10,37 @@
                 <h5 class="m-0 ">Danh sách thành viên</h5>
                 <div class="form-search form-inline">
                     <form action="#">
-                        <input type="text" class="form-control form-search" name="keyword" placeholder="Tìm kiếm">
+                        <input type="text" class="form-control form-search" value="{{ $keyword }}" name="keyword"
+                            placeholder="Tìm kiếm">
                         <input type="submit" name="btn-search" value="Tìm kiếm" class="btn btn-primary">
                     </form>
                 </div>
             </div>
+
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="alert alert-error">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <div class="card-body">
                 <div class="analytic">
-                    <a href="" class="text-primary">Trạng thái 1<span class="text-muted">(10)</span></a>
-                    <a href="" class="text-primary">Trạng thái 2<span class="text-muted">(5)</span></a>
-                    <a href="" class="text-primary">Trạng thái 3<span class="text-muted">(20)</span></a>
+                    <a href="{{ request()->fullUrlWithQuery(['status' => 'active']) }}" class="text-primary">Active<span
+                            class="text-muted">({{ $count[0] }})</span></a>
+                    <a href="{{ request()->fullUrlWithQuery(['status' => 'banned']) }}" class="text-primary">Banned<span
+                            class="text-muted">({{ $count[1] }})</span></a>
                 </div>
                 <div class="form-action py-3 d-flex">
                     <select class="form-control w-25 mr-1" id="">
                         <option>Chọn</option>
-                        <option>Tác vụ 1</option>
-                        <option>Tác vụ 2</option>
+                        <option>ADMIN</option>
+                        <option>USER</option>
                     </select>
                     <input type="submit" name="btn-search" value="Áp dụng" class="btn btn-primary">
                 </div>
@@ -72,9 +87,16 @@
                                         <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button"
                                             data-toggle="tooltip" data-placement="top" title="Edit"><i
                                                 class="fa fa-edit"></i></a>
-                                        <a href="#" class="btn btn-danger btn-sm rounded-0 text-white" type="button"
-                                            data-toggle="tooltip" data-placement="top" title="Delete"><i
-                                                class="fa fa-trash"></i></a>
+                                        <form action="{{ route('admin.user.delete', $user->id) }}" method="POST"
+                                            style="display: inline;"
+                                            onsubmit="return confirm('Bạn có chắc chắn muốn xóa người dùng này?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm rounded-0 text-white"
+                                                data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
