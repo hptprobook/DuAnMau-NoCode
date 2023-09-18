@@ -102,6 +102,7 @@ ul#sidebar-menu * {
     position: absolute;
     right: 10px;
     cursor: pointer;
+    top: 12px;
 }
 
 #sidebar-menu .sub-menu {

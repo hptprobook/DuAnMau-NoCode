@@ -7,9 +7,16 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            session(['module_active' => 'order']);
+
+            return $next($request);
+        });
+    }
+
     public function index()
     {
         return view('admin.order');

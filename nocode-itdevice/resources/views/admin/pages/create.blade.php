@@ -7,7 +7,7 @@
     <div id="content" class="container-fluid">
         <div class="card">
             <div class="card-header font-weight-bold">
-                Thêm bài viết giới thiệu
+                <b>Thêm bài viết giới thiệu</b>
             </div>
             <div class="card-body">
                 <form>
@@ -17,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         <label for="content">Nội dung bài viết</label>
-                        <textarea name="" class="form-control" id="content" cols="30" rows="5"></textarea>
+                        <textarea name="" class="form-control" id="textarea" cols="30" rows="5"></textarea>
                     </div>
 
 

@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            session(['module_active' => 'page']);
+
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      */

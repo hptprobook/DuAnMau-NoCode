@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            session(['module_active' => 'product']);
+
+            return $next($request);
+        });
+    }
+
+
     /**
      * Display a listing of the resource.
      */
