@@ -6,6 +6,26 @@ a:hover {
     text-decoration: none;
 }
 
+.pagination svg {
+    width: 20px !important;
+}
+
+.pagination p {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding: 4px 0;
+}
+
+.pagination .hidden div {
+    height: 40px !important;
+}
+
+input[type="number"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
 .topnav .navbar-brand {
     width: 15rem;
     padding-left: 1rem;
