@@ -5,49 +5,49 @@
 @section('admin-content')
 
     <div id="content" class="container-fluid">
+
         <div class="row">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="col-4">
                 <div class="card">
                     <div class="card-header font-weight-bold">
-                        Danh mục sản phẩm
+                        <b>Danh mục sản phẩm</b>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form action="{{ route('admin.product.createCategory') }}" method="POST">
+                            @csrf
+                            @method('POST')
                             <div class="form-group">
                                 <label for="name">Tên danh mục</label>
                                 <input class="form-control" type="text" name="name" id="name">
+                                @error('name')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">Danh mục cha</label>
-                                <select class="form-control" id="">
-                                    <option>Chọn danh mục</option>
-                                    <option>Danh mục 1</option>
-                                    <option>Danh mục 2</option>
-                                    <option>Danh mục 3</option>
-                                    <option>Danh mục 4</option>
+                                <label for="cat">Danh mục cha</label>
+                                <select class="form-control" id="cat" name="main_cat_id">
+                                    <option value="">Chọn danh mục</option>
+                                    @foreach ($mainCats as $mainCat)
+                                        <option value="{{ $mainCat->id }}">{{ $mainCat->name }}</option>
+                                    @endforeach
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Trạng thái</label>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                                        value="option1" checked>
-                                    <label class="form-check-label" for="exampleRadios1">
-                                        Chờ duyệt
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                                        value="option2">
-                                    <label class="form-check-label" for="exampleRadios2">
-                                        Công khai
-                                    </label>
-                                </div>
+                                @error('main_cat_id')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
 
-
-
-                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            <button type="submit" class="btn btn-primary mt-3">Thêm mới</button>
                         </form>
                     </div>
                 </div>
@@ -59,35 +59,35 @@
                     </div>
                     <div class="card-body">
                         <table class="table table-striped">
+                            @php
+                                $countCategory = ($categories->currentPage() - 1) * $categories->perPage();
+                            @endphp
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">Tên danh mục</th>
+                                    <th scope="col">Danh mục cha</th>
+                                    <th scope="col">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                @foreach ($categories as $category)
+                                    @php
+                                        $category->countCategory = ++$countCategory;
+                                    @endphp
+                                    <tr>
+                                        <th scope="row">{{ $category->countCategory }}</th>
+                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $mainCats[$category->main_cat_id - 1]->name }}</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
+                    </div>
+                    <div class="ms-3 paginate">
+                        {{ $categories->links() }}
                     </div>
                 </div>
             </div>

@@ -9,13 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-
-
     public function up(): void
     {
-        Schema::table('category', function (Blueprint $table) {
-            $table->unsignedBigInteger('main-cat-id')->nullable();
-            $table->foreign('main-cat-id')->references('id')->on('main-categories');
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('short_description');
+            $table->text('detail');
+            $table->timestamps();
         });
     }
 
@@ -24,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('category', function (Blueprint $table) {
-            $table->dropColumn('main-cat-id');
-        });
+        Schema::dropIfExists('posts');
     }
 };

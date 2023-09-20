@@ -6,6 +6,29 @@ a:hover {
     text-decoration: none;
 }
 
+.paginate nav {
+    height: 40px;
+}
+
+.paginate a {
+    color: blue;
+}
+
+.paginate span {
+    color: #888;
+    cursor: no-drop;
+}
+
+.paginate a:hover {
+    font-weight: 600;
+}
+
+input[type="number"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
 .topnav .navbar-brand {
     width: 15rem;
     padding-left: 1rem;

@@ -34,12 +34,26 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('index');
         Route::get('/create', [ProductController::class, 'create'])->name('create');
         Route::get('/category', [ProductController::class, 'category'])->name('category');
+        Route::post('/create-category', [ProductController::class, 'createCategory'])->name('createCategory');
+        Route::get('/main-category', [ProductController::class, 'mainCategory'])->name('mainCategory');
+        Route::post('/create-main-category', [ProductController::class, 'createMainCategory'])->name('createMainCategory');
+
+        Route::post('/store', [ProductController::class, 'store'])->name('store');
+        Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('delete');
+        Route::post('/action', [ProductController::class, 'action'])->name('action');
+        Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [ProductController::class, 'update'])->name('update');
     });
 
     Route::prefix('post')->name('post.')->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('index');
         Route::get('/create', [PostController::class, 'create'])->name('create');
+        Route::post('/store', [PostController::class, 'store'])->name('store');
         Route::get('/category', [PostController::class, 'category'])->name('category');
+        Route::get('/delete/{id}', [PostController::class, 'destroy'])->name('delete');
+        Route::get('/edit/{id}', [PostController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [PostController::class, 'update'])->name('update');
+        Route::post('/action', [PostController::class, 'action'])->name('action');
     });
 
     Route::get('order', [OrderController::class, 'index'])->name('order');
@@ -58,4 +72,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/', [PageController::class, 'index'])->name('index');
         Route::get('/create', [PageController::class, 'create'])->name('create');
     });
+});
+
+Route::group(['prefix' => 'laravel-filemanager'], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
 });

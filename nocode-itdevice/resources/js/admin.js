@@ -23,6 +23,24 @@ $(document).ready(function () {
             checked
         );
     });
+
+    if ($(".add-post #post__image")) {
+        $("#post__image").change(function () {
+            var fileInput = $("#post__image")[0];
+            var imagePreview = $("#post__preview")[0];
+
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    $(imagePreview).css("display", "block");
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        });
+    }
 });
 
 /**
