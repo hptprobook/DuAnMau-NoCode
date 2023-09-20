@@ -9,6 +9,8 @@ class Product extends Model
 {
     use HasFactory;
 
+    public $countProduct;
+
     protected $fillable =
     [
         'id',
@@ -23,7 +25,7 @@ class Product extends Model
         'status'
     ];
 
-    function image()
+    function images()
     {
         return $this->hasMany('App\Models\Image');
     }

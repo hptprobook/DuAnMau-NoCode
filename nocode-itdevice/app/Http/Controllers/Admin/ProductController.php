@@ -22,14 +22,33 @@ class ProductController extends Controller
         });
     }
 
-    public function index()
+    public function index(Request $request)
     {
 
-        $products = Product::paginate(10);
+        $status = $request->input('status');
+        $keyword = '';
+        $count_products_in_stock = 0;
+        $count_products_in_stock = Product::where('status', 0)->count();
+
+        if ($status == 'outOfStock') {
+            $products = Product::where('status', 1)->simplePaginate(10);
+        } elseif ($status == 'inStock') {
+            $products = Product::where('status', 0)->simplePaginate(10);
+        } else {
+            if ($request->input('keyword')) {
+                $keyword = $request->input('keyword');
+            }
+
+            $products = Product::where('name', 'LIKE', "%$keyword%")->simplePaginate(10);
+        }
+
+        $count_products_out_of_stock = Product::where('status', 1)->count();
+
+        $count = [$count_products_in_stock, $count_products_out_of_stock];
 
         $productImages = Image::all();
 
-        return view('admin.product.index', compact('products', 'productImages'));
+        return view('admin.product.index', compact('products', 'productImages', 'keyword', 'count'));
     }
 
     public function create()
@@ -114,6 +133,44 @@ class ProductController extends Controller
             ->with('status', 'Thêm mới thành công!');
     }
 
+    public function action(Request $request)
+    {
+        $list_check = $request->input('list_check');
+
+        if (empty($list_check)) {
+            return redirect('admin/product')->with('error', 'Không có bản ghi nào được chọn');
+        }
+
+        $act = $request->input('act');
+
+        if ($act == 'delete') {
+
+            foreach ($list_check as $id) {
+                $images = Product::find($id)->images;
+
+                foreach ($images as $image) {
+                    $image->delete();
+                }
+            }
+
+            Product::destroy($list_check);
+            return redirect('admin/product')->with('success', 'Bạn đã xóa thành công');
+        }
+
+        if ($act == 'inStock') {
+            Product::whereIn('id', $list_check)->update(['status' => 0]);
+            return redirect('admin/product')->with('success', 'Bạn đã xác nhận còn hàng thành công');
+        }
+
+        if ($act == 'outOfStock') {
+            Product::whereIn('id', $list_check)->update(['status' => 1]);
+            return redirect('admin/product')->with('success', 'Bạn đã xác nhận hết hàng thành công');
+        }
+
+        return redirect('admin/product')->with('error', 'Có lỗi trong quá trình xử lý');
+    }
+
+
     public function show(string $id)
     {
         //
@@ -131,7 +188,21 @@ class ProductController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $product = Product::find($id);
+
+        if (!$product) {
+            return redirect()->route('admin.product.index')->with('error', 'Không tìm thấy bài viết');
+        }
+
+        $images = Product::find($id)->images;
+
+        foreach ($images as $image) {
+            $image->delete();
+        }
+
+        $product->delete();
+
+        return redirect()->route('admin.product.index')->with('success', 'Xóa bài viết thành công');
     }
 
     /*
@@ -145,7 +216,7 @@ class ProductController extends Controller
 
         $mainCats = MainCategory::all();
 
-        $categories = Category::paginate(10);
+        $categories = Category::simplePaginate(10);
 
         return view('admin.product.category', compact('mainCats', 'categories'));
     }
@@ -177,7 +248,7 @@ class ProductController extends Controller
             ]
         );
 
-        $categories = Category::paginate(10);
+        $categories = Category::simplePaginate(10);
 
         return view('admin.product.category', compact('request', 'mainCats', 'categories'))->with('success', 'Thêm mới thành công!');
     }
@@ -185,7 +256,7 @@ class ProductController extends Controller
     public function mainCategory()
     {
 
-        $mainCats = MainCategory::paginate(10);
+        $mainCats = MainCategory::simplePaginate(10);
 
         return view('admin.product.mainCategory', compact('mainCats'));
     }
@@ -211,7 +282,7 @@ class ProductController extends Controller
             ]
         );
 
-        $mainCats = MainCategory::paginate(10);
+        $mainCats = MainCategory::simplePaginate(10);
 
         return view('admin.product.mainCategory', compact('request', 'mainCats'))->with('success', 'Thêm mới thành công!');
     }

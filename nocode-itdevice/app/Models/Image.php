@@ -10,7 +10,7 @@ class Image extends Model
     use HasFactory;
     protected $fillable = ['id', 'img_url', 'img_title', 'img_alt', 'product_id'];
 
-    function products()
+    function product()
     {
         return $this->belongsTo('App\Models\Product');
     }

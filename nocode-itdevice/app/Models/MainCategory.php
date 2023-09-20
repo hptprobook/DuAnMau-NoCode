@@ -11,6 +11,8 @@ class MainCategory extends Model
 {
     use HasFactory, HasApiTokens, Notifiable;
 
+    public $countMainCat;
+
     protected $fillable = [
         'id',
         'name'

@@ -60,7 +60,7 @@
                     <div class="card-body">
                         <table class="table table-striped">
                             @php
-                                $count = 0;
+                                $countCategory = ($categories->currentPage() - 1) * $categories->perPage();
                             @endphp
                             <thead>
                                 <tr>
@@ -73,10 +73,10 @@
                             <tbody>
                                 @foreach ($categories as $category)
                                     @php
-                                        $count++;
+                                        $category->countCategory = ++$countCategory;
                                     @endphp
                                     <tr>
-                                        <th scope="row">{{ $count }}</th>
+                                        <th scope="row">{{ $category->countCategory }}</th>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $mainCats[$category->main_cat_id - 1]->name }}</td>
                                         <td>@mdo</td>
@@ -86,7 +86,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="ms-3 pagination mt-3">
+                    <div class="ms-3 paginate">
                         {{ $categories->links() }}
                     </div>
                 </div>

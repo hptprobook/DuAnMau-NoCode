@@ -31,7 +31,7 @@ class PostController extends Controller
             $keyword = $request->input('keyword');
         }
 
-        $posts = Post::where('title', 'LIKE', "%$keyword%")->paginate(10);
+        $posts = Post::where('title', 'LIKE', "%$keyword%")->simplePaginate(10);
 
         return view('admin.post.index', compact('posts', 'keyword'));
     }

@@ -57,23 +57,23 @@
                         </thead>
                         <tbody>
                             @php
-                                $count = 0;
+                                $countPost = ($posts->currentPage() - 1) * $posts->perPage();
                             @endphp
 
-                            @if ($posts->total() <= 0)
+                            @if ($posts->isEmpty())
                                 <tr>
                                     <td colspan="8" class="text-center py-5">Không có bản ghi nào</td>
                                 </tr>
                             @else
                                 @foreach ($posts as $post)
                                     @php
-                                        $count++;
+                                        $post->countPost = ++$countPost;
                                     @endphp
                                     <tr>
                                         <td>
                                             <input type="checkbox" name="list_check[]" value="{{ $post->id }}">
                                         </td>
-                                        <td scope="row">{{ $count }}</td>
+                                        <td scope="row">{{ $post->countPost }}</td>
                                         <td><img src="{{ asset($post->thumbnail) }}" width="80" height="80"
                                                 alt="">
                                         </td>
@@ -96,7 +96,9 @@
                         </tbody>
                     </table>
                 </form>
-                {{ $posts->links() }}
+                <div class="paginate">
+                    {{ $posts->links() }}
+                </div>
             </div>
         </div>
     </div>

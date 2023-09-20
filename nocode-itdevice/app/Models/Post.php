@@ -9,6 +9,9 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Post extends Model
 {
+
+    public $countPost;
+
     use HasFactory, HasApiTokens, Notifiable;
 
     protected $fillable = [

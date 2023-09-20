@@ -11,6 +11,8 @@ class Category extends Model
 {
     use HasFactory, HasApiTokens, Notifiable;
 
+    public $countCategory;
+
     protected $fillable = [
         'id',
         'name',

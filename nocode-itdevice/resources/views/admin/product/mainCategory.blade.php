@@ -58,22 +58,25 @@
                                 </tr>
                             </thead>
                             @php
-                                $count = 0;
+                                $countMainCat = ($mainCats->currentPage() - 1) * $mainCats->perPage();
                             @endphp
                             <tbody>
 
                                 @foreach ($mainCats as $mainCat)
                                     @php
-                                        $count++;
+                                        $mainCat->countMainCat = ++$countMainCat;
                                     @endphp
                                     <tr>
-                                        <th scope="row">{{ $count }}</th>
+                                        <th scope="row">{{ $mainCat->countMainCat }}</th>
                                         <td>{{ $mainCat->name }}</td>
                                         <td>Sửa</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="ms-3 paginate">
+                        {{ $mainCats->links() }}
                     </div>
                 </div>
             </div>

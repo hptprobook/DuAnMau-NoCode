@@ -37,8 +37,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::post('/create-category', [ProductController::class, 'createCategory'])->name('createCategory');
         Route::get('/main-category', [ProductController::class, 'mainCategory'])->name('mainCategory');
         Route::post('/create-main-category', [ProductController::class, 'createMainCategory'])->name('createMainCategory');
-
         Route::post('/store', [ProductController::class, 'store'])->name('store');
+        Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('delete');
+        Route::post('/action', [ProductController::class, 'action'])->name('action');
     });
 
     Route::prefix('post')->name('post.')->group(function () {
