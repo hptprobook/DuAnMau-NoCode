@@ -77,6 +77,7 @@
                     </div>
                     <div class="ms-3 paginate">
                         {{ $mainCats->withPath(route('admin.product.mainCategory'))->links() }}
+
                     </div>
                 </div>
             </div>
