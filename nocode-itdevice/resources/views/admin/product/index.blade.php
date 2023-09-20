@@ -95,7 +95,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-success btn-sm rounded-0 text-white" type="button"
+                                        <a href="{{ route('admin.product.edit', $product->id) }}"
+                                            class="btn btn-success btn-sm rounded-0 text-white" type="button"
                                             data-toggle="tooltip" data-placement="top" title="Edit"><i
                                                 class="fa fa-edit"></i></a>
                                         <a href="{{ route('admin.product.delete', $product->id) }}"

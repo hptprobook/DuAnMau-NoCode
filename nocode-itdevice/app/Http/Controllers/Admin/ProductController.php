@@ -178,12 +178,98 @@ class ProductController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $product = Product::find($id);
+        $categories = Category::all();
+        $mainCats = MainCategory::all();
+
+        return view('admin.product.edit', compact('product', 'categories', 'mainCats'));
     }
 
     public function update(Request $request, string $id)
     {
-        //
+        $categories = Category::all();
+
+        $mainCats = MainCategory::all();
+
+        $request->validate(
+            [
+                'name' => ['required', 'string', 'max:255'],
+                'price' => ['required', 'numeric', 'max:999999999.99'],
+                'discount' => ['required', 'numeric', 'max:99.99'],
+                'product_code' => ['required', 'string', 'max:128'],
+                'images' => ['array', 'max:6'],
+                'images.*' => ['image', 'mimes:jpeg,png,jpg,gif'],
+                'description' => ['required', 'string', 'min:10', 'max:512'],
+                'detail' => ['required', 'string', 'min:10', 'max:2048'],
+                'cat_id' => ['required'],
+                'status' => ['required'],
+            ],
+            [
+                'required' => ':attribute không được để trống',
+                'min' => ':attribute không ít hơn :min ký tự',
+                'max' => ':attribute không vượt quá :max ký tự',
+                'mimes' => ':attribute phải có đuôi .jpeg, .png, .jpg, .gif',
+                'images.*.images' => 'Tệp :attribute phải là một hình ảnh.',
+                'images.*.mimes' => 'Tệp :attribute phải có đuôi .jpeg, .png, .jpg, .gif',
+                'numeric' => ':attribute phải là một số'
+            ],
+            [
+                'name' => 'Tên sản phẩm',
+                'price' => 'Giá sản phẩm',
+                'discount' => 'Giảm giá',
+                'product_code' => 'Mã sản phẩm',
+                'images' => 'Ảnh sản phẩm',
+                'description' => 'Mô tả sản phẩm',
+                'detail' => 'Chi tiết sản phẩm',
+                'cat_id' => 'Danh mục',
+                'status' => 'Trạng thái'
+            ]
+        );
+
+        if ($request->file('images')) {
+
+            $images = $request->file('images');
+            $avatarName = time() . '_' . $images[0]->getClientOriginalName();
+
+            $product = Product::where('id', $id)->update([
+                'name' => $request->input('name'),
+                'price' => $request->input('price'),
+                'discount' => $request->input('discount'),
+                'product_code' => $request->input('product_code'),
+                'description' => $request->input('description'),
+                'detail' => $request->input('detail'),
+                'avatar' => 'uploads/products/' . $avatarName,
+                'cat_id' => $request->input('cat_id'),
+                'status' => $request->input('status'),
+            ]);
+
+
+            foreach ($images as $image) {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+
+                $image->move(public_path('uploads/products'), $imageName);
+
+                Image::where('product_id', $id)->update([
+                    'img_url' => 'uploads/products/' . $imageName,
+                    'product_id' => $id
+                ]);
+            }
+        } else {
+            $product = Product::where('id', $id)->update([
+                'name' => $request->input('name'),
+                'price' => $request->input('price'),
+                'discount' => $request->input('discount'),
+                'product_code' => $request->input('product_code'),
+                'description' => $request->input('description'),
+                'detail' => $request->input('detail'),
+                'cat_id' => $request->input('cat_id'),
+                'status' => $request->input('status'),
+            ]);
+        }
+
+        session()->flash('status', 'Thêm mới thành công!');
+        return view('admin.product.create', compact('categories', 'mainCats'))
+            ->with('status', 'Thêm mới thành công!');
     }
 
     public function destroy(string $id)
