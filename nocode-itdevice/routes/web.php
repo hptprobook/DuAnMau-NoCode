@@ -33,6 +33,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('index');
         Route::get('/create', [ProductController::class, 'create'])->name('create');
+        Route::get('/child-category', [ProductController::class, 'childCategory'])->name('childCategory');
         Route::get('/category', [ProductController::class, 'category'])->name('category');
         Route::post('/create-category', [ProductController::class, 'createCategory'])->name('createCategory');
         Route::get('/main-category', [ProductController::class, 'mainCategory'])->name('mainCategory');

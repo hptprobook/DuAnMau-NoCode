@@ -102,6 +102,7 @@
                         <ul class="sub-menu">
                             <li><a href="{{ route('admin.product.create') }}">Thêm mới</a></li>
                             <li><a href="{{ route('admin.product.index') }}">Danh sách</a></li>
+                            <li><a href="{{ route('admin.product.childCategory') }}">Danh mục con</a></li>
                             <li><a href="{{ route('admin.product.category') }}">Danh mục</a></li>
                             <li><a href="{{ route('admin.product.mainCategory') }}">Danh mục lớn</a></li>
                         </ul>

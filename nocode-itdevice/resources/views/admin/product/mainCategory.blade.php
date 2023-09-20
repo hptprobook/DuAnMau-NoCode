@@ -28,17 +28,15 @@
                             </div>
                         @endif
                         <div class="card-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="name">Tên danh mục</label>
-                                    <input class="form-control" type="text" name="cat_name" id="name">
-                                    @error('cat_name')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
+                            <div class="form-group">
+                                <label for="name">Tên danh mục</label>
+                                <input class="form-control" type="text" name="cat_name" id="name">
+                                @error('cat_name')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
 
-                                <button type="submit" class="btn btn-primary mt-3">Thêm mới</button>
-                            </form>
+                            <button type="submit" class="btn btn-primary mt-3">Thêm mới</button>
                         </div>
                     </div>
                 </form>
@@ -76,7 +74,7 @@
                         </table>
                     </div>
                     <div class="ms-3 paginate">
-                        {{ $mainCats->links() }}
+                        {{ $mainCats->withPath(route('admin.product.mainCategory'))->links() }}
                     </div>
                 </div>
             </div>

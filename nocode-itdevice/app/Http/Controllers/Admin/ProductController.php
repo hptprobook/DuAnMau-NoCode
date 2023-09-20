@@ -297,6 +297,11 @@ class ProductController extends Controller
      *|--------------------------------------------------
      */
 
+    public function childCategory()
+    {
+        return view('admin.product.childCategory');
+    }
+
     public function category()
     {
 
