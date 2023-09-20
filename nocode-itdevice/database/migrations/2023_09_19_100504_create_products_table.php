@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('rate');
             $table->unsignedBigInteger('price');
             $table->unsignedTinyInteger('discount');
-            $table->string('image_url');
+            $table->string('avatar');
             $table->string('product_code');
             $table->string('description');
             $table->text('detail');
