@@ -102,6 +102,7 @@
                         <ul class="sub-menu">
                             <li><a href="{{ route('admin.product.create') }}">Thêm mới</a></li>
                             <li><a href="{{ route('admin.product.index') }}">Danh sách</a></li>
+                            <li><a href="{{ route('admin.product.childCategory') }}">Danh mục con</a></li>
                             <li><a href="{{ route('admin.product.category') }}">Danh mục</a></li>
                             <li><a href="{{ route('admin.product.mainCategory') }}">Danh mục lớn</a></li>
                         </ul>
@@ -130,6 +131,20 @@
                         <ul class="sub-menu">
                             <li><a href="{{ route('admin.user.create') }}">Thêm mới</a></li>
                             <li><a href="{{ route('admin.user.index') }}">Danh sách</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-link {{ $module_active == 'website' ? 'active' : '' }}">
+                        <a href="{{ route('admin.website.index') }}">
+                            <div class="nav-link-icon d-inline-flex">
+                                <i class="far fa-folder"></i>
+                            </div>
+                            Websites
+                        </a>
+                        <i class="arrow fas fa-angle-right"></i>
+
+                        <ul class="sub-menu">
+                            <li><a href="">Hình ảnh</a></li>
+                            <li><a href="">Thông tin</a></li>
                         </ul>
                     </li>
 
