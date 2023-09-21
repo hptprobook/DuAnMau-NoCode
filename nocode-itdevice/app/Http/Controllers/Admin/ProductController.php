@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\MainCategory;
 use App\Models\Category;
+use App\Models\ChildCategory;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -54,10 +55,10 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-
         $mainCats = MainCategory::all();
+        $childCats = ChildCategory::all();
 
-        return view('admin.product.create', compact('categories', 'mainCats'));
+        return view('admin.product.create', compact('categories', 'mainCats', 'childCats'));
     }
 
     public function store(Request $request)
@@ -66,6 +67,8 @@ class ProductController extends Controller
         $categories = Category::all();
 
         $mainCats = MainCategory::all();
+
+        $childCats = ChildCategory::all();
 
         $request->validate(
             [
@@ -129,7 +132,7 @@ class ProductController extends Controller
             ]);
         }
         session()->flash('status', 'Thêm mới thành công!');
-        return view('admin.product.create', compact('categories', 'mainCats'))
+        return view('admin.product.create', compact('categories', 'mainCats', 'childCats'))
             ->with('status', 'Thêm mới thành công!');
     }
 
@@ -299,7 +302,44 @@ class ProductController extends Controller
 
     public function childCategory()
     {
-        return view('admin.product.childCategory');
+
+        $mainCats = MainCategory::all();
+        $categories = Category::all();
+        $childCats = ChildCategory::simplePaginate(10);
+
+        return view('admin.product.childCategory', compact('mainCats', 'categories', 'childCats'));
+    }
+
+    public function createChildCategory(Request $request)
+    {
+        $mainCats = MainCategory::all();
+        $categories = Category::all();
+
+        $request->validate(
+            [
+                'name' => ['required', 'max:128'],
+                'cat_id' => ['required']
+            ],
+            [
+                'required' => ':attribute không được để trống',
+                'max' => ':attribute không vượt quá :max ký tự'
+            ],
+            [
+                'name' => 'Tên danh mục',
+                'cat_id' => 'Danh mục'
+            ]
+        );
+
+        ChildCategory::create(
+            [
+                'name' => $request->input('name'),
+                'cat_id' => $request->input('cat_id'),
+            ]
+        );
+
+        $childCats = ChildCategory::simplePaginate(10);
+
+        return view('admin.product.childCategory', compact('mainCats', 'categories', 'childCats'));
     }
 
     public function category()

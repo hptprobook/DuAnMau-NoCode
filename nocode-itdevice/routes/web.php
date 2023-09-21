@@ -34,6 +34,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('index');
         Route::get('/create', [ProductController::class, 'create'])->name('create');
         Route::get('/child-category', [ProductController::class, 'childCategory'])->name('childCategory');
+        Route::post('/create-child-category', [ProductController::class, 'createChildCategory'])->name('createChildCategory');
         Route::get('/category', [ProductController::class, 'category'])->name('category');
         Route::post('/create-category', [ProductController::class, 'createCategory'])->name('createCategory');
         Route::get('/main-category', [ProductController::class, 'mainCategory'])->name('mainCategory');
@@ -73,8 +74,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/', [PageController::class, 'index'])->name('index');
         Route::get('/create', [PageController::class, 'create'])->name('create');
     });
-});
 
-Route::group(['prefix' => 'laravel-filemanager'], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
+    Route::prefix('website')->name('website.')->group(function () {
+        Route::get('/', [PageController::class, 'index'])->name('index');
+    });
 });
