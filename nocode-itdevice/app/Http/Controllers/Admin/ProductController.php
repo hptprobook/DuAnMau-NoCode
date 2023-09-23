@@ -183,9 +183,10 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $categories = Category::all();
+        $childCats = ChildCategory::all();
         $mainCats = MainCategory::all();
 
-        return view('admin.product.edit', compact('product', 'categories', 'mainCats'));
+        return view('admin.product.edit', compact('product', 'categories', 'mainCats', 'childCats'));
     }
 
     public function update(Request $request, string $id)
@@ -193,6 +194,8 @@ class ProductController extends Controller
         $categories = Category::all();
 
         $mainCats = MainCategory::all();
+
+        $childCats = ChildCategory::all();
 
         $request->validate(
             [
@@ -270,9 +273,9 @@ class ProductController extends Controller
             ]);
         }
 
-        session()->flash('status', 'Thêm mới thành công!');
-        return view('admin.product.create', compact('categories', 'mainCats'))
-            ->with('status', 'Thêm mới thành công!');
+        session()->flash('status', 'Chỉnh sửa thành công!');
+        return view('admin.product.create', compact('categories', 'mainCats', 'childCats', 'request'))
+            ->with('status', 'Chỉnh sửa thành công!');
     }
 
     public function destroy(string $id)
@@ -280,7 +283,7 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         if (!$product) {
-            return redirect()->route('admin.product.index')->with('error', 'Không tìm thấy bài viết');
+            return redirect()->route('admin.product.index')->with('error', 'Không tìm thấy sản phẩm');
         }
 
         $images = Product::find($id)->images;
@@ -291,7 +294,7 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('admin.product.index')->with('success', 'Xóa bài viết thành công');
+        return redirect()->route('admin.product.index')->with('success', 'Xóa sản phẩm thành công');
     }
 
     /*
