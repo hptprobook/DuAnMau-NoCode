@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedTinyInteger('rate');
+            $table->unsignedTinyInteger('rate')->nullable();
             $table->unsignedBigInteger('price');
             $table->unsignedTinyInteger('discount');
             $table->string('avatar');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('description');
             $table->text('detail');
             $table->unsignedBigInteger('cat_id');
-            $table->foreign('cat_id')->references('id')->on('categories');
+            $table->foreign('cat_id')->references('id')->on('child_categories');
             $table->timestamps();
         });
     }

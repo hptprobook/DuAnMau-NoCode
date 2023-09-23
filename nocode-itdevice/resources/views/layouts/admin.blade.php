@@ -133,6 +133,20 @@
                             <li><a href="{{ route('admin.user.index') }}">Danh sách</a></li>
                         </ul>
                     </li>
+                    <li class="nav-link {{ $module_active == 'website' ? 'active' : '' }}">
+                        <a href="{{ route('admin.website.index') }}">
+                            <div class="nav-link-icon d-inline-flex">
+                                <i class="far fa-folder"></i>
+                            </div>
+                            Websites
+                        </a>
+                        <i class="arrow fas fa-angle-right"></i>
+
+                        <ul class="sub-menu">
+                            <li><a href="">Hình ảnh</a></li>
+                            <li><a href="">Thông tin</a></li>
+                        </ul>
+                    </li>
 
                 </ul>
             </div>
