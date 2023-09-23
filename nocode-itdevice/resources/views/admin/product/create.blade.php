@@ -96,8 +96,7 @@
                         <select class="form-control" id="category" name="cat_id">
                             <option value="">Chọn danh mục</option>
                             @foreach ($childCats as $childCat)
-                                <option @if (old('cat_id') == $childCat->id) @selected(true) @endif
-                                    value="{{ $childCat->id }}">
+                                <option value="{{ $childCat->id }}">
                                     {{ $mainCats[$categories[$childCat->cat_id - 1]->main_cat_id - 1]->name }} -
                                     {{ $categories[$childCat->cat_id - 1]->name }} -
                                     {{ $childCat->name }}</option>
