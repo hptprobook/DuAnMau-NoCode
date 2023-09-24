@@ -26,6 +26,9 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 
+        $categories = Category::all();
+        $mainCats = MainCategory::all();
+        $childCats = ChildCategory::all();
         $status = $request->input('status');
         $keyword = '';
         $count_products_in_stock = 0;
@@ -49,7 +52,7 @@ class ProductController extends Controller
 
         $productImages = Image::all();
 
-        return view('admin.product.index', compact('products', 'productImages', 'keyword', 'count'));
+        return view('admin.product.index', compact('products', 'productImages', 'keyword', 'count', 'categories', 'mainCats', 'childCats'));
     }
 
     public function create()
@@ -297,6 +300,69 @@ class ProductController extends Controller
         return redirect()->route('admin.product.index')->with('success', 'Xóa sản phẩm thành công');
     }
 
+    public function images(string $id)
+    {
+
+        $product = Product::find($id);
+
+        $images = Product::find($id)->images;
+
+        return view('admin.product.images', compact('product', 'images'));
+    }
+
+    public function updateImage(Request $request, string $id)
+    {
+
+        $product = Product::find($id);
+
+        $images = Product::find($id)->images;
+        $img_urls = $request->file('img_url');
+        $img_titles = $request->input('img_title');
+        $img_alts = $request->input('img_alt');
+
+        $request->validate([
+            'img_title.*' => ['max:255'],
+            'img_alt.*' => ['max:100']
+        ], [
+            'max' => ':attribute không được vượt quá :max ký tự'
+        ], [
+            'img_title.*' => 'Tiêu đề ảnh',
+            'img_alt.*' => 'Văn bản thay thế'
+        ]);
+
+        foreach ($images as $key => $image) {
+            if (isset($img_titles[$key]) && isset($img_alts[$key])) {
+
+                if (isset($img_urls[$key])) {
+                    if (isset($img_urls[0])) {
+                        $avatarName = time() . '_' . $img_urls[0]->getClientOriginalName();
+
+                        Product::where('id', $id)->update([
+                            'avatar' => 'uploads/products/' . $avatarName
+                        ]);
+                    }
+
+                    $imageName = time() . '_' . $img_urls[$key]->getClientOriginalName();
+                    $img_urls[$key]->move(public_path('uploads/products'), $imageName);
+
+                    Image::where('id', $image->id)->update([
+                        'img_url' => 'uploads/products/' . $imageName,
+                        'img_alt' => $img_alts[$key],
+                        'img_title' => $img_titles[$key]
+                    ]);
+                } else {
+                    Image::where('id', $image->id)->update([
+                        'img_alt' => $img_alts[$key],
+                        'img_title' => $img_titles[$key]
+                    ]);
+                }
+            }
+        }
+        $images = Product::find($id)->images;
+        session()->flash('success', 'Thao tác thành công!');
+        return view('admin.product.images', compact('request', 'images', 'product', 'img_urls'));
+    }
+
     /*
      *|--------------------------------------------------
      * Controller of Category Management
@@ -345,6 +411,67 @@ class ProductController extends Controller
         return view('admin.product.childCategory', compact('mainCats', 'categories', 'childCats'));
     }
 
+    public function editChildCat(string $id)
+    {
+        $childCat = ChildCategory::find($id);
+        $mainCats = MainCategory::all();
+        $categories = Category::all();
+
+        return view('admin.product.editChildCat', compact('childCat', 'mainCats', 'categories'));
+    }
+
+    public function updateChildCat(Request $request, string $id)
+    {
+        $mainCats = MainCategory::all();
+        $categories = Category::all();
+
+        $request->validate(
+            [
+                'name' => ['required', 'max:128'],
+                'cat_id' => ['required']
+            ],
+            [
+                'required' => ':attribute không được để trống',
+                'max' => ':attribute không vượt quá :max ký tự'
+            ],
+            [
+                'name' => 'Tên danh mục',
+                'cat_id' => 'Danh mục'
+            ]
+        );
+
+        ChildCategory::where('id', $id)->update(
+            [
+                'name' => $request->input('name'),
+                'cat_id' => $request->input('cat_id'),
+            ]
+        );
+
+        $childCats = ChildCategory::simplePaginate(10);
+
+        return view('admin.product.childCategory', compact('childCats', 'mainCats', 'categories'));
+    }
+
+    public function deleteChildCat(string $id)
+    {
+
+        $mainCats = MainCategory::all();
+        $categories = Category::all();
+
+        $childCat = ChildCategory::find($id);
+
+        if (!$childCat) {
+            return redirect()->route('admin.product.childCat')->with('error', 'Không tìm thấy sản phẩm');
+        }
+
+        $childCat->delete();
+
+
+        $childCats = ChildCategory::simplePaginate(10);
+
+        return redirect()->route('admin.product.childCategory', compact('childCats', 'mainCats', 'categories'))->with('success', 'Xóa danh mục thành công');
+    }
+
     public function category()
     {
 
@@ -387,6 +514,63 @@ class ProductController extends Controller
         return view('admin.product.category', compact('request', 'mainCats', 'categories'))->with('success', 'Thêm mới thành công!');
     }
 
+    public function editCategory(string $id)
+    {
+
+        $mainCats = MainCategory::all();
+        $category = Category::find($id);
+
+        $categories = Category::simplePaginate(10);
+
+        return view('admin.product.editCategory', compact('mainCats', 'categories', 'category'));
+    }
+
+    public function updateCategory(Request $request, string $id)
+    {
+        $mainCats = MainCategory::all();
+        $request->validate(
+            [
+                'name' => ['required', 'max:128'],
+                'main_cat_id' => ['required']
+            ],
+            [
+                'required' => ':attribute không được để trống',
+                'max' => ':attribute không vượt quá :max ký tự'
+            ],
+            [
+                'name' => 'Tên danh mục',
+                'main_cat_id' => 'Danh mục'
+            ]
+        );
+
+        Category::where('id', $id)->update(
+            [
+                'name' => $request->input('name'),
+                'main_cat_id' => $request->input('main_cat_id'),
+            ]
+        );
+        $categories = Category::simplePaginate(10);
+
+        return view('admin.product.category', compact('mainCats', 'categories'));
+    }
+
+    public function deleteCategory(string $id)
+    {
+        $mainCats = MainCategory::all();
+
+        $Category = Category::find($id);
+
+        if (!$Category) {
+            return redirect()->route('admin.product.category')->with('error', 'Không tìm thấy sản phẩm');
+        }
+
+        $Category->delete();
+
+        $categories = Category::simplePaginate(10);
+
+        return view('admin.product.editCategory', compact('mainCats', 'categories'));
+    }
+
     public function mainCategory()
     {
 
@@ -419,5 +603,56 @@ class ProductController extends Controller
         $mainCats = MainCategory::simplePaginate(10);
 
         return view('admin.product.mainCategory', compact('request', 'mainCats'))->with('success', 'Thêm mới thành công!');
+    }
+
+    public function editMainCat(string $id)
+    {
+
+        $mainCat = MainCategory::find($id);
+
+        $mainCats = MainCategory::simplePaginate(10);
+
+        return view('admin.product.editMainCat', compact('mainCats', 'mainCat'));
+    }
+
+    public function updateMainCat(Request $request, string $id)
+    {
+        $request->validate(
+            [
+                'name' => ['required', 'max:128']
+            ],
+            [
+                'required' => ':attribute không được để trống',
+                'max' => ':attribute không vượt quá :max ký tự'
+            ],
+            [
+                'name' => 'Tên danh mục'
+            ]
+        );
+
+        MainCategory::where('id', $id)->update(
+            [
+                'name' => $request->input('name'),
+            ]
+        );
+        $mainCats = MainCategory::simplePaginate(10);
+
+        return view('admin.product.mainCategory', compact('mainCats'));
+    }
+
+    public function deleteMainCat(string $id)
+    {
+
+        $mainCat = MainCategory::find($id);
+
+        if (!$mainCat) {
+            return redirect()->route('admin.product.mainCategory')->with('error', 'Không tìm thấy sản phẩm');
+        }
+
+        $mainCat->delete();
+
+        $mainCats = MainCategory::simplePaginate(10);
+
+        return view('admin.product.mainCategory', compact('mainCats'));
     }
 }

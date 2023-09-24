@@ -65,8 +65,8 @@
 
                             <div id="image-preview" class="image-preview mt-2"
                                 style="width: 136px; height: 120px; overflow: hidden; border: 1px solid #888; border-radius: 4px;">
-                                <img id="post__preview" src="#" alt="Preview"
-                                    style="width: 100%; height: 100%; object-fit: cover; display: none;">
+                                <img id="post__preview" src="{{ asset($product->avatar) }}" alt="Preview"
+                                    style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
 
                         </div>
@@ -96,7 +96,7 @@
                         <select class="form-control" id="category" name="cat_id">
                             <option value="">Chọn danh mục</option>
                             @foreach ($childCats as $childCat)
-                                <option @if (old('cat_id') == $childCat->id) @selected(true) @endif
+                                <option @if ($product->cat_id == $childCat->id) @selected(true) @endif
                                     value="{{ $childCat->id }}">
                                     {{ $mainCats[$categories[$childCat->cat_id - 1]->main_cat_id - 1]->name }} -
                                     {{ $categories[$childCat->cat_id - 1]->name }} -

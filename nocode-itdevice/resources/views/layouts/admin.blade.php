@@ -134,7 +134,7 @@
                         </ul>
                     </li>
                     <li class="nav-link {{ $module_active == 'website' ? 'active' : '' }}">
-                        <a href="{{ route('admin.website.index') }}">
+                        <a href="{{ route('admin.website.info') }}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
                             </div>
@@ -143,8 +143,8 @@
                         <i class="arrow fas fa-angle-right"></i>
 
                         <ul class="sub-menu">
-                            <li><a href="">Hình ảnh</a></li>
-                            <li><a href="">Thông tin</a></li>
+                            <li><a href="{{ route('admin.website.image') }}">Hình ảnh</a></li>
+                            <li><a href="{{ route('admin.website.info') }}">Thông tin</a></li>
                         </ul>
                     </li>
 

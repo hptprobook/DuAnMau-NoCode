@@ -78,12 +78,21 @@
                                         $childCategory->countChildCategory = ++$countChildCategory;
                                     @endphp
                                     <tr>
-                                        <th scope="row">{{ $childCategory->countChildCategory }}</th>
+                                        <td>{{ $childCategory->countChildCategory }}</td>
                                         <td>{{ $childCategory->name }}</td>
                                         <td>{{ $mainCats[$categories[$childCategory->cat_id - 1]->main_cat_id - 1]->name }}
                                             - {{ $categories[$childCategory->cat_id - 1]->name }}
                                         </td>
-                                        <td>@mdo</td>
+                                        <td><a href="{{ route('admin.product.editChildCat', $childCategory->id) }}"
+                                                class="btn btn-success btn-sm rounded-0 text-white" type="button"
+                                                data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                                    class="fa fa-edit"></i></a>
+                                            <a href="{{ route('admin.product.deleteChildCat', $childCategory->id) }}"
+                                                class="btn btn-danger btn-sm rounded-0 text-white"
+                                                onclick="return confirm('Bạn có chắc muốn xóa danh mục này?')"
+                                                type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i
+                                                    class="fa fa-trash"></i></a>
+                                        </td>
                                     </tr>
                                 @endforeach
 
