@@ -65,9 +65,18 @@
                                         $mainCat->countMainCat = ++$countMainCat;
                                     @endphp
                                     <tr>
-                                        <th scope="row">{{ $mainCat->countMainCat }}</th>
+                                        <td>{{ $mainCat->countMainCat }}</td>
                                         <td>{{ $mainCat->name }}</td>
-                                        <td>Sửa</td>
+                                        <td><a href="{{ route('admin.product.editMainCat', $mainCat->id) }}"
+                                                class="btn btn-success btn-sm rounded-0 text-white" type="button"
+                                                data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                                    class="fa fa-edit"></i></a>
+                                            <a href="{{ route('admin.product.deleteMainCat', $mainCat->id) }}"
+                                                class="btn btn-danger btn-sm rounded-0 text-white"
+                                                onclick="return confirm('Bạn có chắc muốn xóa danh mục này không? Hành động này sẽ xóa tất cả các danh mục con liên quan.')"
+                                                type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i
+                                                    class="fa fa-trash"></i></a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
