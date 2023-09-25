@@ -61,6 +61,7 @@
                             <a href="" class="d-flex">
                                 <i class="bi bi-headset pe-2"></i>
                                 <div class="">Hotline<br> 1900 1003</div>
+                                <img src="" alt="">
                             </a>
                         </div>
 
@@ -73,14 +74,16 @@
 
                         <div class="home__navbar--research-order h-44">
                             <a href="" class="d-flex">
-                                <i class="bi bi-clipboard2-check pe-2"></i>
+                                <i class="bi bi-clipboard2-check pe-2 icon"></i>
                                 <div class="">Tra cứu <br> đơn hàng</div>
                             </a>
                         </div>
 
                         <div class="home__navbar--cart h-44">
                             <a href="" class="d-flex">
-                                <i class="bi bi-cart pe-2"></i>
+                                <i class="bi bi-cart pe-2 icon">
+                                    <span class="count">1</span>
+                                </i>
                                 <div class="">Giỏ hàng</div>
                             </a>
                         </div>
@@ -98,12 +101,6 @@
                                     @endguest
                                 </div>
                             </a>
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
                             {{-- @guest
                                 @if (Route::has('login'))
                                     <li class="nav-item">
