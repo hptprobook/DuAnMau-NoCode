@@ -7,13 +7,18 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WebsiteController;
+use App\Http\Controllers\Website\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
+// Route::get('/', function () {
+//     return view('website.home');
+// });
+
+Route::prefix('website')->name('website.')->middleware('auth')->group(function () {
+    Route::get('/', [HomeController::class, 'home'])->name('home');
 });
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Auth::routes();
 
