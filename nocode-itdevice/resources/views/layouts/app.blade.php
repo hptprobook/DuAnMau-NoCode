@@ -25,11 +25,10 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm"
-            style="position:fixed; top: 0; left: 0; width: 100%; z-index: 9999999999999999;">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm home__navbar">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    IT Device
+                    LOGO
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -40,6 +39,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        <div class="home__navbar--category d-flex">
+                            <i class="bi bi-list"></i>
+                            Danh mục
+                        </div>
+                        <form action="" method="POST" class="ms-2">
+                            @csrf
+                            @method('POST')
+                            <input type="text" class="form-input-invisible" name="search"
+                                placeholder="Bạn cần tìm gì?">
+                        </form>
+                    </ul>
+
+                    <!-- Middle Side Of Navbar -->
+
+                    <ul>
 
                     </ul>
 

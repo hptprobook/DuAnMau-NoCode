@@ -31,13 +31,13 @@ class UserController extends Controller
         $count_user_banned = User::where('status', 'banned')->count();
 
         if ($status == 'banned') {
-            $users = User::where('status', 'banned')->paginate(10);
+            $users = User::where('status', 'banned')->simplePaginate(10);
         } else {
             if ($request->input('keyword')) {
                 $keyword = $request->input('keyword');
             }
 
-            $users = User::where('name', 'LIKE', "%$keyword%")->paginate(10);
+            $users = User::where('name', 'LIKE', "%$keyword%")->simplePaginate(10);
         }
 
         $count_user_active = User::where('status', 'active')->count();
