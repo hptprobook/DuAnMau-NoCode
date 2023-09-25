@@ -107,3 +107,109 @@
     font-style: normal;
     color: var(--black-color);
 }
+
+.home__navbar--log {
+    position: relative;
+}
+
+.home__navbar--log:hover .home__log--child {
+    visibility: visible;
+    opacity: 1;
+}
+
+.home__log--child .header {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+.home__log--child .body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6px;
+    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 12px;
+}
+
+.home__log--child .body .login-btn {
+    border: 1px solid #727272;
+    background-color: var(--black-color);
+    color: var(--white-color);
+    height: 32px;
+    border-radius: 6px;
+}
+
+.home__log--child .body .register-btn {
+    border: 1px solid #000;
+    background-color: var(--white-color);
+    color: var(--black-color);
+    height: 32px;
+    border-radius: 6px;
+}
+
+.home__log--child .footer {
+    display: flex;
+    align-items: center;
+}
+
+.home__navbar--logged {
+    position: relative;
+}
+
+
+.home__navbar--logged:hover .home__logged--child {
+    visibility: visible;
+    opacity: 1;
+}
+
+.home__logged--child,
+.home__log--child {
+    position: absolute;
+    right: -12px;
+    top: 58px;
+    background-color: var(--white-color);
+    border: 1px solid #ececec;
+    border-radius: 4px;
+    box-shadow: var(--box-shadow);
+    width: 320px;
+    color: var(--text-color);
+    padding: 0 24px;
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s ease;
+}
+
+.home__logged--child a {
+    color: var(--text-color);
+}
+
+.home__logged--child::after,
+.home__log--child::after {
+    position: absolute;
+    border-width: 16px;
+    border-style: solid;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: #fff;
+    top: -24px;
+    content: '';
+    right: 32px;
+}
+
+.home__logged--child .link:hover {
+    text-decoration: underline;
+}
+
+.home__logged--child .header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 600;
+}
+
+.home__logged--child .body {
+    display: flex;
+    align-items: center;
+}
