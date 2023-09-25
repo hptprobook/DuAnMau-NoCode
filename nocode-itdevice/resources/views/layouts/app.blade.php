@@ -43,55 +43,95 @@
                             <i class="bi bi-list"></i>
                             Danh mục
                         </div>
-                        <form action="" method="POST" class="ms-2">
+                        <form action="" method="POST" class="ms-2 home__navbar--form">
                             @csrf
                             @method('POST')
-                            <input type="text" class="form-input-invisible" name="search"
+                            <input type="text" class="form-input-invisible ps-3 w-90" name="search"
                                 placeholder="Bạn cần tìm gì?">
+                            <button class="form-input-invisible float-end me-2 ms-1">
+                                <i class="bi bi-search"></i>
+                            </button>
                         </form>
                     </ul>
 
-                    <!-- Middle Side Of Navbar -->
-
-                    <ul>
-
-                    </ul>
-
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto fs-13">
+
+                        <div class="home__navbar--hotline h-44">
+                            <a href="" class="d-flex">
+                                <i class="bi bi-headset pe-2"></i>
+                                <div class="">Hotline<br> 1900 1003</div>
+                            </a>
+                        </div>
+
+                        <div class="home__navbar--showroom h-44">
+                            <a href="" class="d-flex">
+                                <i class="bi bi-geo-alt pe-2"></i>
+                                <div class="">Hệ thống Showroom</div>
+                            </a>
+                        </div>
+
+                        <div class="home__navbar--research-order h-44">
+                            <a href="" class="d-flex">
+                                <i class="bi bi-clipboard2-check pe-2"></i>
+                                <div class="">Tra cứu <br> đơn hàng</div>
+                            </a>
+                        </div>
+
+                        <div class="home__navbar--cart h-44">
+                            <a href="" class="d-flex">
+                                <i class="bi bi-cart pe-2"></i>
+                                <div class="">Giỏ hàng</div>
+                            </a>
+                        </div>
+
                         <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
+                        <div class="home__navbar--user h-44">
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+                            <a href="" class="d-flex">
+                                <i class="bi bi-person pe-2"></i>
+                                <div class="">
+                                    @guest
+                                        Đăng nhập / <br>Đăng ký
+                                    @else
+                                        Xin chào<br>{{ Str::limit(Auth::user()->name, $limit = 10, $end = '...') }}
+                                    @endguest
+                                </div>
+                            </a>
+                            {{-- @guest
+                                @if (Route::has('login'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    </li>
+                                @endif
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                @endif
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest --}}
+                        </div>
                     </ul>
                 </div>
             </div>
