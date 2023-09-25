@@ -6,6 +6,29 @@ a:hover {
     text-decoration: none;
 }
 
+.paginate nav {
+    height: 40px;
+}
+
+.paginate a {
+    color: blue;
+}
+
+.paginate span {
+    color: #888;
+    cursor: no-drop;
+}
+
+.paginate a:hover {
+    font-weight: 600;
+}
+
+input[type="number"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
 .topnav .navbar-brand {
     width: 15rem;
     padding-left: 1rem;
@@ -145,6 +168,30 @@ ul#sidebar-menu * {
     top: -1px;
     right: -5px;
     color: #8c8c8c;
+}
+
+.edit-img__thumbnail {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.edit-img__thumbnail img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.form-control-2 {
+    width: 100%;
+    height: 36px;
+    background-color: transparent !important;
+    border-top: 1px solid transparent !important;
+    border-left: 1px solid transparent !important;
+    border-right: 1px solid transparent !important;
+    border-bottom: 1px solid #c8c8c8 !important;
+    outline: none !important;
+    border-radius: 0 !important;
 }
 
 .badge-warning {

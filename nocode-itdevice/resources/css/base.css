@@ -1,0 +1,29 @@
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.form-input-invisible {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-style: 15px;
+}
+
+.form-button-invisible {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.w-90 {
+    width: 90% !important;
+}
+
+.h-44 {
+    height: 46px !important;
+}
+
+.fs-13 {
+    font-size: 14px !important;
+}

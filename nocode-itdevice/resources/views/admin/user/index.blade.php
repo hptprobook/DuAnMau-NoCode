@@ -68,7 +68,7 @@
                                 $count = 0;
                             @endphp
 
-                            @if ($users->total() <= 0)
+                            @if ($users->isEmpty())
                                 <tr>
                                     <td colspan="8" class="text-center py-5">Không có bản ghi nào</td>
                                 </tr>
@@ -113,7 +113,9 @@
                     </table>
                 </form>
 
-                {{ $users->links() }}
+                <div class="paginate">
+                    {{ $users->links() }}
+                </div>
             </div>
         </div>
     </div>

@@ -89,7 +89,6 @@
                         <ul class="sub-menu">
                             <li><a href="{{ route('admin.post.create') }}">Thêm mới</a></li>
                             <li><a href="{{ route('admin.post.index') }}">Danh sách</a></li>
-                            <li><a href="{{ route('admin.post.category') }}">Danh mục</a></li>
                         </ul>
                     </li>
                     <li class="nav-link {{ $module_active == 'product' ? 'active' : '' }}">
@@ -103,7 +102,9 @@
                         <ul class="sub-menu">
                             <li><a href="{{ route('admin.product.create') }}">Thêm mới</a></li>
                             <li><a href="{{ route('admin.product.index') }}">Danh sách</a></li>
+                            <li><a href="{{ route('admin.product.childCategory') }}">Danh mục con</a></li>
                             <li><a href="{{ route('admin.product.category') }}">Danh mục</a></li>
+                            <li><a href="{{ route('admin.product.mainCategory') }}">Danh mục lớn</a></li>
                         </ul>
                     </li>
                     <li class="nav-link {{ $module_active == 'order' ? 'active' : '' }}">
@@ -132,6 +133,20 @@
                             <li><a href="{{ route('admin.user.index') }}">Danh sách</a></li>
                         </ul>
                     </li>
+                    <li class="nav-link {{ $module_active == 'website' ? 'active' : '' }}">
+                        <a href="{{ route('admin.website.info') }}">
+                            <div class="nav-link-icon d-inline-flex">
+                                <i class="far fa-folder"></i>
+                            </div>
+                            Websites
+                        </a>
+                        <i class="arrow fas fa-angle-right"></i>
+
+                        <ul class="sub-menu">
+                            <li><a href="{{ route('admin.website.image') }}">Hình ảnh</a></li>
+                            <li><a href="{{ route('admin.website.info') }}">Thông tin</a></li>
+                        </ul>
+                    </li>
 
                 </ul>
             </div>
@@ -142,11 +157,12 @@
         </div>
     </div>
 
+
     <script>
         tinymce.init({
             selector: 'textarea',
             plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat | colormap | textcolor | forecolor backcolor',
             tinycomments_mode: 'embedded',
             tinycomments_author: 'Author name',
             mergetags_list: [{
