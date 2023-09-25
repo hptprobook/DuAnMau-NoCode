@@ -94,10 +94,16 @@
                                     @guest
                                         Đăng nhập / <br>Đăng ký
                                     @else
-                                        Xin chào<br>{{ Str::limit(Auth::user()->name, $limit = 10, $end = '...') }}
+                                        Xin chào<br>{{ Str::limit(Auth::user()->name, $limit = 8, $end = '...') }}
                                     @endguest
                                 </div>
                             </a>
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
                             {{-- @guest
                                 @if (Route::has('login'))
                                     <li class="nav-item">
