@@ -16,7 +16,7 @@
     justify-content: center;
     font-weight: 600;
     width: 104px;
-    height: 46px;
+    height: 44px;
     background-color: #BE1529 !important;
     border-radius: 6px;
     cursor: pointer;
@@ -24,4 +24,53 @@
 
 .home__navbar--category i {
     font-size: 20px;
+}
+
+.home__navbar--form {
+    width: 400px;
+    height: 44px;
+    background-color: var(--white-color);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.home__navbar--cart,
+.home__navbar--research-order,
+.home__navbar--hotline,
+.home__navbar--showroom,
+.home__navbar--user {
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.home__navbar--cart a i,
+.home__navbar--research-order a i,
+.home__navbar--hotline a i,
+.home__navbar--showroom a i,
+.home__navbar--user a i {
+    font-size: 20px;
+    height: 100%;
+    text-align: center;
+    line-height: 44px;
+}
+
+.home__navbar--hotline {
+    width: 25%;
+}
+
+.home__navbar--showroom {
+    width: 25%;
+}
+
+.home__navbar--research-order {
+    width: 25%;
+}
+
+.home__navbar--user {
+    width: 25%;
 }
