@@ -80,12 +80,17 @@
                                     </td>
                                     <td>{{ $product->countProduct }}</td>
                                     <td>
-                                        <img src="{{ asset($product->avatar) }}" width="100px" height="80px"
-                                            alt="">
+                                        <a href="{{ route('admin.product.images', $product->id) }}"><img
+                                                src="{{ asset($product->avatar) }}" width="100px" height="80px"
+                                                alt=""></a>
                                     </td>
-                                    <td><a href="#">{{ $product->name }}</a></td>
+                                    <td><a href="{{ route('admin.product.edit', $product->id) }}">{{ $product->name }}</a>
+                                    </td>
                                     <td>{{ $product->price }}₫</td>
-                                    <td>Điện thoại</td>
+                                    <td>{{ $mainCats[$categories[$childCats[$product->cat_id - 1]->cat_id - 1]->main_cat_id - 1]->name }}
+                                        -
+                                        {{ $childCats[$product->cat_id - 1]->name }}
+                                    </td>
                                     <td>{{ $product->created_at }}</td>
                                     <td>
                                         @if ($product->status == 0)

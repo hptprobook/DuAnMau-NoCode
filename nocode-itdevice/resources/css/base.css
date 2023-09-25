@@ -1,0 +1,5 @@
+.form-input-invisible {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}

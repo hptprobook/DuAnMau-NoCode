@@ -76,10 +76,19 @@
                                         $category->countCategory = ++$countCategory;
                                     @endphp
                                     <tr>
-                                        <th scope="row">{{ $category->countCategory }}</th>
+                                        <td>{{ $category->countCategory }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $mainCats[$category->main_cat_id - 1]->name }}</td>
-                                        <td>@mdo</td>
+                                        <td><a href="{{ route('admin.product.editCategory', $category->id) }}"
+                                                class="btn btn-success btn-sm rounded-0 text-white" type="button"
+                                                data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                                    class="fa fa-edit"></i></a>
+                                            <a href="{{ route('admin.product.deleteCategory', $category->id) }}"
+                                                class="btn btn-danger btn-sm rounded-0 text-white"
+                                                onclick="return confirm('Bạn có chắc muốn xóa danh mục này không? Các danh mục con liên quan cũng sẽ bị xóa đi!')"
+                                                type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i
+                                                    class="fa fa-trash"></i></a>
+                                        </td>
                                     </tr>
                                 @endforeach
 

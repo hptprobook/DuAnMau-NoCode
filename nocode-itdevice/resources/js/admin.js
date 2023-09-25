@@ -41,6 +41,23 @@ $(document).ready(function () {
             }
         });
     }
+
+    $(".image-input").change(function () {
+        var input = $(this)[0];
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // Hiển thị hình ảnh trước
+                $(this)
+                    .closest("tr")
+                    .find(".current-image")
+                    .attr("src", e.target.result);
+            }.bind(this);
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
 });
 
 /**
