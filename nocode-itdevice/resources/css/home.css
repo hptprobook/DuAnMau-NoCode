@@ -1,0 +1,27 @@
+/* Home Navbar CSS */
+
+.home__navbar {
+    background-color: #e30019 !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999999;
+    height: 74px;
+    color: var(--white-color);
+}
+
+.home__navbar--category {
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    width: 104px;
+    height: 46px;
+    background-color: #BE1529 !important;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.home__navbar--category i {
+    font-size: 20px;
+}
