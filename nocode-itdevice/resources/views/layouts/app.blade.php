@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="home__navbar--showroom h-44">
-                            <a href="" class="d-flex">
+                            <a href="{{ route('website.showroom') }}" class="d-flex">
                                 <i class="bi bi-geo-alt pe-2"></i>
                                 <div class="">Hệ thống Showroom</div>
                             </a>
