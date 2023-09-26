@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="description" content="{{ $website_info->description }}">
+    <title>{{ $website_info->title }}</title>
     <!-- Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/solid.min.css">
@@ -12,12 +13,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>IT Device</title>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="icon" href="{{ asset('assets/img/icon-website/it-icon-3.jpg') }}" type="image/png">
+    <link rel="icon" href="{{ asset('assets/img/logo/icon.jpg') }}" type="image/png">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -27,8 +26,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm home__navbar">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('assets/img/logo/logo.png') }}" alt="">
+                <a class="navbar-brand home__logo" href="{{ url('/') }}">
+                    <img src="{{ asset('assets/img/logo/logo3.jpg') }}" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -46,9 +45,9 @@
                         <form action="" method="POST" class="ms-2 home__navbar--form">
                             @csrf
                             @method('POST')
-                            <input type="text" class="form-input-invisible ps-3 w-90" name="search"
+                            <input type="text" class="form-input-invisible ps-3 w-95" name="search"
                                 placeholder="Bạn cần tìm gì?">
-                            <button class="form-input-invisible float-end me-2 ms-1">
+                            <button type="submit" class="form-input-invisible float-end me-2 ms-1">
                                 <i class="bi bi-search"></i>
                             </button>
                         </form>
@@ -60,7 +59,7 @@
                         <div class="home__navbar--hotline h-44">
                             <a href="" class="d-flex">
                                 <i class="bi bi-headset pe-2"></i>
-                                <div class="">Hotline<br> 1900 1003</div>
+                                <div class="">Hotline<br> {{ $website_info->hotline }}</div>
                             </a>
                         </div>
 
@@ -73,14 +72,16 @@
 
                         <div class="home__navbar--research-order h-44">
                             <a href="" class="d-flex">
-                                <i class="bi bi-clipboard2-check pe-2"></i>
+                                <i class="bi bi-clipboard2-check pe-2 icon"></i>
                                 <div class="">Tra cứu <br> đơn hàng</div>
                             </a>
                         </div>
 
                         <div class="home__navbar--cart h-44">
                             <a href="" class="d-flex">
-                                <i class="bi bi-cart pe-2"></i>
+                                <i class="bi bi-cart pe-2 icon">
+                                    <span class="count">1</span>
+                                </i>
                                 <div class="">Giỏ hàng</div>
                             </a>
                         </div>
@@ -92,9 +93,79 @@
                                 <i class="bi bi-person pe-2"></i>
                                 <div class="">
                                     @guest
-                                        Đăng nhập / <br>Đăng ký
+                                        <div class="home__navbar--log">
+                                            Đăng nhập <br>Đăng ký
+
+                                            <div class="home__log--child">
+                                                <div class="header">
+                                                    <i class="bi bi-emoji-laughing pe-3"></i>
+                                                    Xin chào, vui lòng đăng ký / đăng nhập
+                                                </div>
+
+                                                <div class="body">
+
+                                                    @if (Route::has('login'))
+                                                        <form action="{{ route('login') }}" class="w-50 pe-1"
+                                                            method="GET">
+                                                            <button class="w-100 login-btn">Đăng nhập</button>
+                                                        </form>
+                                                    @endif
+                                                    @if (Route::has('register'))
+                                                        <form action="{{ route('register') }}" class="w-50 ps-1"
+                                                            method="get">
+                                                            <button class="w-100 register-btn">Đăng ký</button>
+                                                        </form>
+                                                    @endif
+                                                </div>
+
+                                                <div class="footer">
+                                                    <i class="bi bi-question-circle pe-3"></i>
+                                                    Trợ giúp
+                                                </div>
+                                            </div>
+                                        </div>
                                     @else
-                                        Xin chào<br>{{ Str::limit(Auth::user()->name, $limit = 10, $end = '...') }}
+                                        <div class="home__navbar--logged">
+                                            Xin chào<br>{{ Str::limit(Auth::user()->name, $limit = 8, $end = '...') }}
+
+                                            <div class="home__logged--child">
+                                                <a href="" class="link">
+                                                    <div class="header">
+                                                        <i class="bi bi-emoji-laughing pe-3"></i>
+                                                        Xin chào, {{ Auth::user()->name }}
+                                                    </div>
+                                                </a>
+
+                                                <a href="" class="link">
+                                                    <div class="body">
+                                                        <i class="bi bi-clipboard2-check pe-3"></i>
+                                                        Đơn hàng của tôi
+                                                    </div>
+                                                </a>
+
+                                                <a href="" class="link">
+                                                    <div class="body" style="border-bottom: 1px solid #f0f0f0">
+                                                        <i class="bi bi-eye pe-3"></i>
+                                                        Đã xem gần đây
+                                                    </div>
+                                                </a>
+
+                                                <a href=""
+                                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();"
+                                                    class="link">
+                                                    <div class="body" style="border-bottom: 1px solid #f0f0f0">
+                                                        <i class="bi bi-box-arrow-left pe-3"></i>
+                                                        Đăng xuất
+                                                    </div>
+
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                        class="d-none">
+                                                        @csrf
+                                                    </form>
+                                                </a>
+                                            </div>
+                                        </div>
                                     @endguest
                                 </div>
                             </a>
