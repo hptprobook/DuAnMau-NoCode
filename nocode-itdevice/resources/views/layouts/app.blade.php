@@ -28,7 +28,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm home__navbar">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    LOGO
+                    <img src="{{ asset('assets/img/logo/logo.png') }}" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -65,7 +65,7 @@
                         </div>
 
                         <div class="home__navbar--showroom h-44">
-                            <a href="" class="d-flex">
+                            <a href="{{ route('website.showroom') }}" class="d-flex">
                                 <i class="bi bi-geo-alt pe-2"></i>
                                 <div class="">Hệ thống Showroom</div>
                             </a>

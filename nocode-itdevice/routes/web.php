@@ -14,6 +14,9 @@ Route::get('/', function () {
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/showroom', function () {
+    return view('website.showroom');
+})->name('website.showroom');
 
 Auth::routes();
 
