@@ -3,6 +3,7 @@
 @import 'bootstrap-icons';
 @import './home.css';
 @import 'font-awesome';
+@import './showroom.css';
 
 
 
@@ -359,6 +360,5 @@
         display: none;
     }
 }
-
 
 

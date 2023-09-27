@@ -18,6 +18,9 @@ Route::prefix('website')->name('website.')->middleware('auth')->group(function (
     Route::get('/', [HomeController::class, 'home'])->name('home');
 });
 
+Route::get('/showroom', function () {
+    return view('website.showroom');
+})->name('website.showroom');
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Auth::routes();
