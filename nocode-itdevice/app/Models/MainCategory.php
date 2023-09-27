@@ -17,4 +17,9 @@ class MainCategory extends Model
         'id',
         'name'
     ];
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class, 'main_cat_id');
+    }
 }
