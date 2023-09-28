@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Website\HomeController;
+use App\Http\Controllers\Website\CartController;
+use App\Http\Controllers\Website\ProductController as WebsiteProductController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -16,11 +18,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('website')->name('website.')->middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'home'])->name('home');
+
+    Route::get('/showroom', function () {
+        return view('website.showroom');
+    })->name('showroom');
+
+    Route::prefix('/product')->name('product.')->group(function () {
+        Route::get('/detail/{id}', [WebsiteProductController::class, 'show'])->name('detail');
+    });
+
+    Route::prefix('/cart')->name('cart.')->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('index');
+    });
 });
 
-Route::get('/showroom', function () {
-    return view('website.showroom');
-})->name('website.showroom');
+
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Auth::routes();
