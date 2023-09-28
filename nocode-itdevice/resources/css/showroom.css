@@ -1,0 +1,61 @@
+.container h1 {
+    font-weight: 900;
+    text-align: center;
+    padding: 32px;
+}
+/* Regions Bac Nam Start */
+.container_regions{
+    display: flex;
+    justify-content: center;
+}
+.container_regions--place{
+    border: 2px solid var(--box-color);
+    margin: 6px;
+    border-radius: 4px;
+    transition: .3s ease-in-out;
+}
+.container_regions--place:hover{
+    border: 2px solid var(--main-color);
+}
+.container_place--img{
+    height: 300px;
+    width: 300px;
+}
+.container_ladi{
+    width: 100%;
+}
+.container_ladi--section{
+    padding: 32px;
+    background-color: var(--main-color);
+    text-align: center;
+    font-weight: bolder;
+    color: var(--box-color);
+}
+/* Regions Bac Nam End */
+/* Shoroom start */
+.container_ladi--in4{
+    padding: 32px 80px 0px 80px;
+    display: flex;
+    flex: 1;
+}
+.container_address--ele{
+    width: 140px;
+    height: 5px;
+    background-color: var(--main-color) !important;
+}
+.container_address--items{
+    margin-top: 8px;
+}
+.container_address--media{
+    color: var(--black-color);
+}
+.container_in4--slide{
+    margin-left: 60px;
+    flex: 1;
+    background-color: var(--main-color);
+}
+.container__slide-img{
+    width: 100%;
+    padding: 16px;
+    
+}

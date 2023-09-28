@@ -1,5 +1,44 @@
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
 .form-input-invisible {
     background-color: transparent;
     border: none;
     outline: none;
+    font-style: 15px;
+}
+
+.form-button-invisible {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.w-90 {
+    width: 90% !important;
+}
+
+.w-95 {
+    width: 95% !important;
+}
+
+.h-44 {
+    height: 44px !important;
+}
+
+.fs-13 {
+    font-size: 14px !important;
+}
+
+.row .col-custom {
+    width: 20%;
+    float: left;
+    box-sizing: border-box;
+    padding: 0 15px;
 }
