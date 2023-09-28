@@ -4,6 +4,8 @@
 @import './home.css';
 @import 'font-awesome';
 @import './showroom.css';
+@import './product/detail.css';
+@import './cart.css';
 
 /* App Navbar CSS */
 

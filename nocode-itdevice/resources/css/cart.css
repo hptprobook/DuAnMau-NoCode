@@ -1,0 +1,25 @@
+.cart {
+    width: 750px;
+}
+
+.cart .back-link {
+    font-size: 16px;
+}
+
+.cart .back-link:hover {
+    text-decoration: underline;
+}
+
+.cartContainer {
+    background-color: var(--white-color);
+    border-radius: 6px;
+    height: 600px;
+    width: 750px;
+}
+
+.cart__orderStatus {
+    height: 100px;
+    width: 100%;
+    border-radius: 6px;
+    background-color: #ffeded;
+}
