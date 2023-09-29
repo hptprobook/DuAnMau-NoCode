@@ -176,12 +176,6 @@ class ProductController extends Controller
         return redirect('admin/product')->with('error', 'Có lỗi trong quá trình xử lý');
     }
 
-
-    public function show(string $id)
-    {
-        //
-    }
-
     public function edit(string $id)
     {
         $product = Product::find($id);

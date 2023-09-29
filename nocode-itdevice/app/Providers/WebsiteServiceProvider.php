@@ -26,14 +26,7 @@ class WebsiteServiceProvider extends ServiceProvider
         $website_info = Website::all()[0];
         view()->share('website_info', $website_info);
 
-        // $mainCats = MainCategory::all();
         $mainCats = MainCategory::with('categories.childCategories')->get();
         view()->share('mainCats', $mainCats);
-
-        // $categories = Category::all();
-        // view()->share('categories', $categories);
-
-        // $childCats = ChildCategory::all();
-        // view()->share('childCats', $childCats);
     }
 }
