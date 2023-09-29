@@ -9,6 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $table = 'products';
     public $countProduct;
 
     protected $fillable =
@@ -28,5 +29,16 @@ class Product extends Model
     function images()
     {
         return $this->hasMany('App\Models\Image');
+    }
+
+
+    public function category()
+    {
+        return $this->belongsTo(ChildCategory::class, 'cat_id');
+    }
+
+    public function ChildCategory()
+    {
+        return $this->belongsTo(ChildCategory::class, 'cat_id');
     }
 }

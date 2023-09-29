@@ -25,6 +25,7 @@ Route::prefix('website')->name('website.')->group(function () {
     })->name('showroom');
 
     Route::prefix('/product')->name('product.')->group(function () {
+        Route::get('/list', [WebsiteProductController::class, 'index'])->name('index');
         Route::get('/detail/{id}', [WebsiteProductController::class, 'show'])->name('detail');
     });
 
