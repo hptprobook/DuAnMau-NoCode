@@ -4,10 +4,10 @@
 <div class="container">
     <h1>CHỌN KHU VỰC CỦA BẠN</h1>
     <div class="container_regions">
-        <a class="container_regions--place" href="#KHUVUCMIENBAC">
+        <a class="container_regions--place" href="#KHUVUCMIENBAC" id="BAC">
             <img src="{{ asset('assets/img/Showroom/Bac/Bac.png') }}" class="container_place--img" alt="Khu vực miền Bắc">
         </a>
-        <a class="container_regions--place" href="#KHUVUCMIENNAM">
+        <a class="container_regions--place" href="#KHUVUCMIENNAM" id="NAM">
             <img src="{{ asset('assets/img/Showroom/Nam/Nam.png') }}" class="container_place--img" alt="Khu vực miền Nam">
         </a>
     </div>
@@ -42,13 +42,13 @@
                     <div class="swiper-slide showroom--slide">
                         <img src="{{ asset('assets/img/region_slide/BuonMaThuot/3.png') }}" class="showroom_slide--img" alt="">
                     </div>
-                    
+
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
             </div>
         </div>
-        
+
     </div>
     <div class="container_ladi--in4">
         <div class="container_in4--address">
@@ -77,14 +77,45 @@
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
-                
+
             </div>
         </div>
     </div>
     <div class="container_ladi--Ser">
         <h1>CÁC TIỆN ÍCH TẠI SHOWROOM NOCODE DEVICE</h1>
         <div class="ladi__ser--items">
-        
+            <div class="ladi__ser--item">
+                <i class="bi bi-p-square"></i>
+                <h4>Giữ xe miễn phí</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-wifi"></i>
+                <h4>Wifi miễn phí</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-laptop"></i>
+                <h4>Trải nghiệm sản phẩm miễn phí</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-chat"></i>
+                <h4>Được chuyên viên tư vấn chuyên sâu</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-check-square"></i>
+                <h4>Sản phẩm chính hãng 100%</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-calendar2-check"></i>
+                <h4>Có chính sách ưu đãi trả góp</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-cash-coin"></i>
+                <h4>Thanh toán dễ dàng</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-truck"></i>
+                <h4>Giao hàng tận nhà</h4>
+            </div>
         </div>
     </div>
 </div>
@@ -120,7 +151,7 @@
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
-                
+
             </div>
         </div>
     </div>
@@ -151,10 +182,48 @@
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
-                
+
             </div>
         </div>
-        
+
     </div>
-</div>   
+    <div class="container_ladi--Ser">
+        <h1>CÁC TIỆN ÍCH TẠI SHOWROOM NOCODE DEVICE</h1>
+        <div class="ladi__ser--items">
+            <div class="ladi__ser--item">
+                <i class="bi bi-p-square"></i>
+                <h4>Giữ xe miễn phí</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-wifi"></i>
+                <h4>Wifi miễn phí</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-laptop"></i>
+                <h4>Trải nghiệm sản phẩm miễn phí</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-chat"></i>
+                <h4>Được chuyên viên tư vấn chuyên sâu</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-check-square"></i>
+                <h4>Sản phẩm chính hãng 100%</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-calendar2-check"></i>
+                <h4>Có chính sách ưu đãi trả góp</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-cash-coin"></i>
+                <h4>Thanh toán dễ dàng</h4>
+            </div>
+            <div class="ladi__ser--item">
+                <i class="bi bi-truck"></i>
+                <h4>Giao hàng tận nhà</h4>
+            </div>
+        </div>
+    </div>
+    
+</div>
 @endsection
