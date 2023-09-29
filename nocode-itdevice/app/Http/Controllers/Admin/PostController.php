@@ -57,7 +57,7 @@ class PostController extends Controller
             [
                 'title' => ['required', 'string', 'max:255', 'min:10'],
                 'short_description' => ['required', 'string', 'max:255', 'min:10'],
-                'detail' => ['required', 'string', 'max:2000'],
+                'detail' => ['required', 'string'],
                 'image' => ['required', 'file', 'mimes:jpeg,png,jpg,gif'],
             ],
             [
@@ -113,7 +113,7 @@ class PostController extends Controller
             [
                 'title' => ['required', 'string', 'max:255', 'min:10'],
                 'short_description' => ['required', 'string', 'max:255', 'min:10'],
-                'detail' => ['required', 'string', 'max:2000'],
+                'detail' => ['required', 'string'],
                 'image' => ['file', 'mimes:jpeg,png,jpg,gif'],
             ],
             [

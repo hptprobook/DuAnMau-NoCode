@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\CartController;
+use App\Http\Controllers\Website\PostController as WebsitePostController;
 use App\Http\Controllers\Website\ProductController as WebsiteProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('website.home');
 // });
 
-Route::prefix('website')->name('website.')->middleware('auth')->group(function () {
+Route::prefix('website')->name('website.')->group(function () {
     Route::get('/', [HomeController::class, 'home'])->name('home');
 
     Route::get('/showroom', function () {
@@ -29,6 +30,10 @@ Route::prefix('website')->name('website.')->middleware('auth')->group(function (
 
     Route::prefix('/cart')->name('cart.')->group(function () {
         Route::get('/', [CartController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('/post')->name('post.')->group(function () {
+        Route::get('/', [WebsitePostController::class, 'index'])->name('index');
     });
 });
 
