@@ -4,10 +4,10 @@
 <div class="container">
     <h1>CHỌN KHU VỰC CỦA BẠN</h1>
     <div class="container_regions">
-        <a class="container_regions--place" href="#KHUVUCMIENBAC">
+        <a class="container_regions--place" href="#KHUVUCMIENBAC" id="BAC">
             <img src="{{ asset('assets/img/Showroom/Bac/Bac.png') }}" class="container_place--img" alt="Khu vực miền Bắc">
         </a>
-        <a class="container_regions--place" href="#KHUVUCMIENNAM">
+        <a class="container_regions--place" href="#KHUVUCMIENNAM" id="NAM">
             <img src="{{ asset('assets/img/Showroom/Nam/Nam.png') }}" class="container_place--img" alt="Khu vực miền Nam">
         </a>
     </div>

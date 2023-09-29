@@ -25,6 +25,12 @@
     width: 100%;
     padding-top: 72px;
 }
+#KHUVUCMIENNAM {
+    display: none ;
+}
+#KHUVUCMIENBAC{
+    display: none ;
+}
 .container_ladi--section{
     padding: 32px;
     background-color: var(--main-color);
