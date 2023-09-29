@@ -22,7 +22,7 @@
         "bootstrap-icons": "^1.11.1",
         "ckeditor4": "^4.23.0",
         "font-awesome": "^4.7.0",
-        "swiper": "^10.2.0"
+        "swiper": "^10.3.0"
     },
     "name": "nocode-itdevice",
     "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\" alt=\"Laravel Logo\"></a></p>",
