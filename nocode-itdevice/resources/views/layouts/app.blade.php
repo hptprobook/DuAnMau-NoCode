@@ -213,6 +213,7 @@
             </div>
         </header>
 
+
         <main class="mt-4">
             @yield('content')
         </main>
