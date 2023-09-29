@@ -1,7 +1,7 @@
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
 
-window.onload = function () {
+$(document).ready(function () {
     const swiper1 = new Swiper(".home__swiper", {
         loop: true,
         spaceBetween: 30,
@@ -50,4 +50,4 @@ window.onload = function () {
             swiper: productSliderThumb,
         },
     });
-};
+});
