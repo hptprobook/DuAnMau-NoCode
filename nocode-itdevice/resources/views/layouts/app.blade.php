@@ -185,7 +185,7 @@
                         Tổng hợp khuyến mại
                     </div>
                 </a>
-                <a href="">
+                <a href="{{ route('website.post.index') }}">
                     <div class="header--item">
                         Tin công nghệ
                     </div>
