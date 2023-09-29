@@ -67,7 +67,7 @@
     border-radius: 6px;
     padding: 8px 16px 12px;
     display: none;
-    z-index: 9999999999;
+    z-index: 999;
 }
 
 .home__sidebar--child::after {
