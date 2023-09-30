@@ -18,4 +18,14 @@ class ChildCategory extends Model
         'name',
         'cat_id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'cat_id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'cat_id');
+    }
 }

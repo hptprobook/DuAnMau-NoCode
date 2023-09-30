@@ -13,9 +13,21 @@ class Category extends Model
 
     public $countCategory;
 
+    protected $table = 'categories';
+
     protected $fillable = [
         'id',
         'name',
         'main_cat_id'
     ];
+
+    public function mainCategory()
+    {
+        return $this->belongsTo(MainCategory::class, 'main_cat_id');
+    }
+
+    public function childCategories()
+    {
+        return $this->hasMany(ChildCategory::class, 'cat_id');
+    }
 }

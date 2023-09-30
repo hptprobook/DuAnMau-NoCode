@@ -1,0 +1,141 @@
+.product__main
+ {
+    background-color: var(--white-color);
+    margin-bottom: 12px;
+    border-radius: 6px;
+    padding-right: 24px !important;
+}
+
+.product__detail--slider {
+    border-right: 1px solid #ccc;
+}
+
+.detail__slider--main {
+    aspect-ratio: 1/1;
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.detail__slider--thumb {
+    width: 100%;
+    height: 60px;
+    margin-top: 12px;
+    overflow: hidden;
+}
+
+.detail__slider--thumb .swiper-slide {
+    height: 60px !important;
+}
+
+.detail__slider--main .swiper-button-next,
+.detail__slider--main .swiper-button-prev {
+    opacity: 0;
+    transition: .5s ease;
+    font-weight: 700;
+    color: #fff;
+}
+
+.detail__slider--main:hover .swiper-button-next {
+    opacity: 1;
+}
+
+.detail__slider--main:hover .swiper-button-prev {
+    opacity: 1;
+}
+
+.detail__slider--thumb .swiper-slide {
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.detail__info--name {
+    font-size: 24px;
+}
+
+.detail__info--rate span {
+    color: #fdd835;
+    font-size: 18px;
+}
+
+.detail__info--rate span i {
+    font-size: 13px;
+}
+
+.detail__info--rate a {
+    margin-top: 2px;
+    margin-left: 12px;
+}
+
+.detail__info--price {
+    display: flex;
+    width: 100%;
+    height: 60px;
+    align-items: center;
+    background-color: #fff4dc;
+    border-radius: 6px;
+    padding: 0 12px;
+}
+
+.detail__info--price .new-price {
+    font-size: 32px;
+}
+
+.detail__info--price .old-price {
+    font-size: 18px;
+    color: #b9b9b9;
+    text-decoration: line-through;
+}
+
+.detail__info--price .discount {
+    padding: 0 8px;
+    border: 1px solid var(--main-color);
+    border-radius: 4px;
+}
+
+.detail__info--gift {
+    border: 1px solid #ffd9d9;
+}
+
+.detail__info--gift .card-header {
+    border-bottom: 1px solid #ffd9d9;
+    background-color: #ffe6e6;
+}
+
+.detail__info--btn {
+    width: 50%;
+    height: 67px;
+    border: 4px solid var(--main-color);
+    background-color: var(--white-color);
+    border-radius: 6px;
+    font-size: 20px;
+    margin-top: 24px;
+    transition: .3s ease;
+}
+
+.detail__info--btn:hover {
+    color: var(--white-color);
+    background-color: var(--main-color);
+}
+
+.detail__info--deal p {
+    font-size: 18px;
+}
+
+.detail__info--endow p {
+    font-size: 18px;
+    font-weight: 700;
+    color: #428bca;
+}
+
+.detail__info--more p {
+    font-style: italic;
+}
+
+.product__detail {
+    background-color: var(--white-color);
+    border-radius: 6px;
+    padding: 24px;
+    margin-bottom: 12px;
+}

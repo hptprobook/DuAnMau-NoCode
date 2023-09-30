@@ -82,7 +82,7 @@ class ProductController extends Controller
                 'images' => ['required', 'array', 'max:6'],
                 'images.*' => ['image', 'mimes:jpeg,png,jpg,gif'],
                 'description' => ['required', 'string', 'min:10', 'max:512'],
-                'detail' => ['required', 'string', 'min:10', ],
+                'detail' => ['required', 'string', 'min:10'],
                 'cat_id' => ['required'],
                 'status' => ['required'],
             ],
@@ -176,12 +176,6 @@ class ProductController extends Controller
         return redirect('admin/product')->with('error', 'Có lỗi trong quá trình xử lý');
     }
 
-
-    public function show(string $id)
-    {
-        //
-    }
-
     public function edit(string $id)
     {
         $product = Product::find($id);
@@ -209,7 +203,7 @@ class ProductController extends Controller
                 'images' => ['array', 'max:6'],
                 'images.*' => ['image', 'mimes:jpeg,png,jpg,gif'],
                 'description' => ['required', 'string', 'min:10', 'max:512'],
-                'detail' => ['required', 'string', 'min:10', ],
+                'detail' => ['required', 'string', 'min:10'],
                 'cat_id' => ['required'],
                 'status' => ['required'],
             ],

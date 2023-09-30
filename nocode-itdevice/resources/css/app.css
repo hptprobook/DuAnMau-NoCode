@@ -2,5 +2,366 @@
 @import './base.css';
 @import 'bootstrap-icons';
 @import './home.css';
+@import 'font-awesome';
+@import './showroom.css';
+@import './product/detail.css';
+@import './cart.css';
+
+/* App Navbar CSS */
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.navbar {
+    background-color: #e30019 !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999999;
+    height: 74px;
+    color: var(--white-color);
+}
+
+.navbar a {
+    color: var(--white-color) !important;
+}
+
+.logo {
+    width: 150px;
+    height: 60px;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.navbar--category {
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    width: 104px;
+    height: 44px;
+    background-color: #BE1529 !important;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.navbar--category i {
+    font-size: 20px;
+}
+
+.navbar--form {
+    width: 500px;
+    height: 44px;
+    background-color: var(--white-color);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar--cart,
+.navbar--research-order,
+.navbar--hotline,
+.navbar--showroom,
+.navbar--user {
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.navbar--cart a i,
+.navbar--research-order a i,
+.navbar--hotline a i,
+.navbar--showroom a i,
+.navbar--user a i {
+    font-size: 20px;
+    height: 100%;
+    text-align: center;
+    line-height: 44px;
+}
+
+.navbar--hotline {
+    width: 25%;
+}
+
+.navbar--showroom {
+    width: 25%;
+}
+
+.navbar--research-order {
+    width: 25%;
+}
+
+.navbar--user {
+    width: 25%;
+    background-color: #BE1529;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.navbar--cart a i {
+    position: relative;
+}
+
+.navbar--cart a i span {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    border-radius: 16px;
+    background-color: #fdd835;
+    width: 14px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+    font-style: normal;
+    color: var(--black-color);
+}
+
+.navbar--log {
+    position: relative;
+}
+
+.navbar--user:hover .log--child {
+    visibility: visible;
+    opacity: 1;
+}
+
+.navbar--user::after {
+    content: "";
+    bottom: -16px;
+    left: 0;
+    background-color: transparent;
+    width: 100%;
+    height: 16px;
+    position: absolute;
+}
+
+.log--child .header {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+.log--child .body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6px;
+    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 12px;
+    padding-top: 12px;
+}
+
+.log--child .body .login-btn {
+    border: 1px solid #727272;
+    background-color: var(--black-color);
+    color: var(--white-color);
+    height: 32px;
+    border-radius: 6px;
+}
+
+.log--child .body .register-btn {
+    border: 1px solid #000;
+    background-color: var(--white-color);
+    color: var(--black-color);
+    height: 32px;
+    border-radius: 6px;
+}
+
+.log--child .footer {
+    display: flex;
+    align-items: center;
+}
+
+.navbar--logged {
+    position: relative;
+}
+
+
+.navbar--user:hover .logged--child {
+    visibility: visible;
+    opacity: 1;
+}
+
+.logged--child,
+.log--child {
+    position: absolute;
+    right: -12px;
+    top: 58px;
+    background-color: var(--white-color);
+    border: 1px solid #ececec;
+    border-radius: 4px;
+    box-shadow: var(--box-shadow);
+    width: 320px;
+    color: var(--text-color);
+    padding: 0 24px;
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s ease;
+}
+
+.log--child {
+    padding-top: 24px;
+}
+
+.logged--child a {
+    color: var(--text-color) !important;
+}
+
+.logged--child::after,
+.log--child::after {
+    position: absolute;
+    border-width: 16px;
+    border-style: solid;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: #fff;
+    top: -24px;
+    content: '';
+    right: 32px;
+}
+
+.logged--child .link:hover {
+    text-decoration: underline;
+}
+
+.logged--child .header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 600;
+}
+
+.logged--child .body {
+    display: flex;
+    align-items: center;
+}
+
+.logged--child .footer {
+    display: flex;
+    align-items: center;
+}
+
+/* App Header CSS */
+
+.header.head {
+    width: 100%;
+    box-shadow: var(--box-shadow);
+    background-color: var(--white-color) !important;
+}
+
+.header .container {
+    margin-top: 74px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 60px;
+}
+
+.header a:not(:first-child) {
+    border-left: 1px solid #d1d1d1;
+}
+
+.header--item {
+    padding: 0 24px;
+}
+
+.footer {
+    background-color: var(--white-color);
+    /* padding-top: 36px; */
+}
+
+.footer ul li {
+    padding: 4px 0;
+}
+
+.footer ul li a:hover {
+    color: var(--main-color);
+    text-decoration: underline;
+}
+
+.footer__contact {
+    color: blue;
+    font-weight: 600;
+}
+
+.footer__ship img {
+    width: 23%;
+    margin-left: 4px;
+}
+
+.footer__end {
+    height: 60px;
+}
+
+.footer__end--contact a i {
+    font-size: 24px;
+    margin: 0 6px;
+}
+
+.footer__end--logo {
+    height: 48px;
+}
+
+
+.footer__end--logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* App Media CSS */
+
+@media only screen and (max-width: 739px) {
+    .navbar .container {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .navbar-collapse {
+        background-color: #000;
+        width: 100%;
+        margin-top: 6px !important;
+        padding: 0 !important;
+    }
+    .header {
+        overflow-x: scroll;
+    }
+    .header .container {
+        justify-content: unset;
+        padding: 0;
+    }
+    .navbar-nav br {
+        display: none;
+    }
+    .navbar__item {
+        width: 100%;
+    }
+    .header::-webkit-scrollbar {
+        display: none;
+    }
+    .header--item {
+        width: 200px;
+        text-align: center;
+        padding: 0;
+    }
+    .footer {
+        text-align: center;
+    }
+    .footer__end--contact b {
+        display: none;
+    }
+}
 
 
