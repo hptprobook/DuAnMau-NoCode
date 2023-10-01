@@ -8,6 +8,7 @@ import "./bootstrap";
 import { createApp } from "vue";
 import "../css/app.css";
 import "./swiperComponent.js";
+import "./home.js";
 import "./showroom.js";
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
