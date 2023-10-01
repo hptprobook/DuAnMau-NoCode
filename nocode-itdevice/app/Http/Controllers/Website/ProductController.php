@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\MainCategory;
@@ -79,7 +80,16 @@ class ProductController extends Controller
         $product = Product::find($id);
         $images = Product::find($id)->images;
 
-        return view('website.product.detail', compact('product', 'images'));
+        // $attributes = $product->attributeValues;
+
+        // $attributeList = Attribute::all();
+
+
+        $product = Product::with('attributeValues.attribute')->find($id);
+
+        $attributes = $product->attributeValues;
+
+        return view('website.product.detail', compact('product', 'images', 'attributes'));
     }
 
     /**

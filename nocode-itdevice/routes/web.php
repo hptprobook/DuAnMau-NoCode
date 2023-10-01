@@ -30,7 +30,7 @@ Route::prefix('website')->name('website.')->group(function () {
         Route::get('/detail/{id}', [WebsiteProductController::class, 'show'])->name('detail');
     });
 
-    Route::prefix('/cart')->name('cart.')->group(function () {
+    Route::prefix('/cart')->name('cart.')->middleware('auth')->group(function () {
         Route::get('/', [CartController::class, 'index'])->name('index');
     });
 

@@ -37,43 +37,52 @@
 
             <div class="px-4">
                 <div>
-                    <div class="cart__list mt-4 mb-5">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="cart__list--img">
-                                    <img src="https://product.hstatic.net/200000722513/product/50d2_c80f9a6e609d4493b899fcc169598061.png"
-                                        class="img-c" alt="">
+
+                    @foreach ($userCarts as $item)
+                        <div class="cart__list mt-4 mb-5">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="cart__list--img">
+                                        <img src="{{ asset($item->product->avatar) }}" class="img-c" alt="">
+                                    </div>
+                                    <a href="" class="cart__list--delete"><i class="bi bi-trash3"></i>Xóa</a>
                                 </div>
-                                <a href="" class="cart__list--delete"><i class="bi bi-trash3"></i>Xóa</a>
-                            </div>
-                            <div class="col-md-7">
-                                <div class="cart__list--info">
-                                    <a href="">
-                                        <h5 class="cart__info--name fw-600">
-                                            Laptop gaming Acer Nitro 5 Tiger AN515 58 50D2
-                                        </h5>
-                                    </a>
-                                    <div class="cart__info--deal">
-                                        <h6>Quà tặng khuyễn mãi</h6>
-                                        <p class="ps-2"><i class="bi bi-arrow-right-short"></i>Áo khoác Nocode</p>
-                                        <p class="ps-2"><i class="bi bi-arrow-right-short"></i>Áo khoác Nocode</p>
+                                <div class="col-md-7">
+                                    <div class="cart__list--info">
+                                        <a href="">
+                                            <h5 class="cart__info--name fw-600">
+                                                {{ $item->product->name }}
+                                            </h5>
+                                        </a>
+                                        <div class="cart__info--deal">
+                                            <h6>Quà tặng khuyễn mãi</h6>
+                                            <p class="ps-2"><i class="bi bi-arrow-right-short"></i>Áo khoác Nocode</p>
+                                            <p class="ps-2"><i class="bi bi-arrow-right-short"></i>Áo khoác Nocode</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="cart__list--handle">
-                                    <p class="new-price text-main fw-600">27490000đ</p>
-                                    <p class="old-price">31490000đ</p>
-                                    <div class="cart__list--quantity mt-2 d-flex">
-                                        <span class="subtract">-</span>
-                                        <input class="quantity" type="number" min="1" max="3" value="1">
-                                        <span class="plus">+</span>
+                                @php
+                                    $newPrice = ($item->product->price - $item->product->price * ($item->product->discount / 100)) * $item->quantity;
+                                @endphp
+                                <div class="col-md-3">
+                                    <div class="cart__list--handle">
+                                        <p class="new-price text-main fw-600">
+                                            {{ number_format(round($newPrice, -4), 0, '.', '.') }}đ</p>
+                                        <p class="old-price">
+                                            {{ number_format($item->quantity * $item->product->price, 0, ',', '.') }}đ</p>
+                                        <div class="cart__list--quantity mt-2 d-flex">
+                                            <span class="subtract">-</span>
+                                            <input class="quantity" type="number" min="1" max="3"
+                                                value="{{ $item->quantity }}">
+                                            <span class="plus">+</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <hr>
+                        <hr>
+                    @endforeach
+
 
 
                 </div>

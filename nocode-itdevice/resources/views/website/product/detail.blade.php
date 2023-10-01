@@ -41,9 +41,41 @@
                     @php
                         $newPrice = $product->price - $product->price * ($product->discount / 100);
                     @endphp
+
+                    @php
+                        $formattedAttributes = [];
+                        
+                        foreach ($attributes as $attribute) {
+                            $attributeName = $attribute->attribute->name;
+                            $attributeValue = $attribute->value;
+                            $attributeId = $attribute->id; // Assuming $attribute has an 'id' property
+                        
+                            if (!isset($formattedAttributes[$attributeName])) {
+                                $formattedAttributes[$attributeName] = [];
+                            }
+                        
+                            $formattedAttributes[$attributeName][] = [
+                                'id' => $attributeId,
+                                'value' => $attributeValue,
+                            ];
+                        }
+                    @endphp
+
+                    @foreach ($formattedAttributes as $attributeName => $attributeValues)
+                        <div class="d-flex align-items-center detail__attribute mt-3" style="font-size: 16px;">
+                            <span class="fw-600">{{ $attributeName }}:</span>
+                            @foreach ($attributeValues as $attributeValue)
+                                <label class="d-flex align-items-center ps-3" style="cursor: pointer;">
+                                    <input class="me-2" type="radio" name="{{ $attributeName }}"
+                                        value="{{ $attributeValue['id'] }}">
+                                    {{ $attributeValue['value'] }}
+                                </label>
+                            @endforeach
+                        </div>
+                    @endforeach
                     <div class="detail__info--price my-3">
                         <span
-                            class="new-price text-main fw-700 pe-3">{{ preg_replace('/\.\d+$/', '.000', number_format($newPrice, 0, ',', '.')) }}đ</span>
+                            class="new-price text-main fw-700 pe-3">{{ number_format(round($newPrice, -4), 0, '.', '.') }}đ</span>
                         <span class="old-price pe-3">{{ number_format($product->price, 0, ',', '.') }}đ</span>
                         <span class="discount text-main">-{{ $product->discount }}%</span>
                     </div>

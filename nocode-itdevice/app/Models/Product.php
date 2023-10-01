@@ -58,4 +58,14 @@ class Product extends Model
             'attribute_id'        // Khóa ngoại trong bảng thuộc tính
         );
     }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 }
