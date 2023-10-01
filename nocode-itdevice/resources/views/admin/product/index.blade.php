@@ -63,6 +63,7 @@
                                 <th scope="col">Ngày tạo</th>
                                 <th scope="col">Trạng thái</th>
                                 <th scope="col">Tác vụ</th>
+                                <th scope="col">Thuộc tính</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -108,6 +109,19 @@
                                             class="btn btn-danger btn-sm rounded-0 text-white" type="button"
                                             data-toggle="tooltip" data-placement="top" title="Delete"><i
                                                 class="fa fa-trash"></i></a>
+
+
+                                    </td>
+
+                                    <td>
+                                        <a href="{{ route('admin.attribute.add', $product->id) }}"
+                                            class="btn btn-warning btn-sm rounded-0 text-white" type="button"
+                                            data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                                class="fa fa-edit"></i></a>
+                                        <a href="{{ route('admin.attribute.list', $product->id) }}"
+                                            class="btn btn-info btn-sm rounded-0 text-white" type="button"
+                                            data-toggle="tooltip" data-placement="top" title="List"><i
+                                                class="fa-solid fa-wand-magic-sparkles"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

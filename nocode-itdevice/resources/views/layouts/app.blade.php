@@ -29,6 +29,52 @@
 
 <body>
     <div id="app">
+        <div class="category-fixed">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="home__sidebar">
+                            <ul class="home__sidebar--list list-unstyled">
+                                @foreach ($mainCats as $mainCat)
+                                    <li class="home__sidebar--item">
+                                        <a href="{{ route('website.product.index', ['mainCat' => $mainCat->id]) }}"
+                                            title="{{ $mainCat->name }}" class="home__sidebar--maincat">
+                                            {{ Str::limit($mainCat->name, $limit = 18, $end = '...') }}
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+
+                                        <div class="home__sidebar--child">
+                                            <div class="row">
+                                                @foreach ($mainCat->categories as $category)
+                                                    <div class="col-custom mt-3">
+                                                        <div class="sidebar__child--list">
+                                                            <h5><a href="{{ route('website.product.index', ['category' => $category->id]) }}"
+                                                                    class="text-dark sidebar__list--title">{{ $category->name }}</a>
+                                                            </h5>
+                                                            <ul class="list-unstyled">
+                                                                @foreach ($category->childCategories as $childCategory)
+                                                                    <li class="sidebar__child--item">
+                                                                        <a href="{{ route('website.product.index', ['childCat' => $childCategory->id]) }}"
+                                                                            title="{{ $childCategory->name }}"
+                                                                            class="sidebar__item--link">{{ $childCategory->name }}</a>
+                                                                    </li>
+                                                                @endforeach
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand logo" href="{{ url('/') }}">
@@ -108,7 +154,8 @@
                                             <div class="body">
 
                                                 @if (Route::has('login'))
-                                                    <form action="{{ route('login') }}" class="w-50 pe-1" method="GET">
+                                                    <form action="{{ route('login') }}" class="w-50 pe-1"
+                                                        method="GET">
                                                         <button class="w-100 login-btn">Đăng nhập</button>
                                                     </form>
                                                 @endif
@@ -214,9 +261,19 @@
         </header>
 
 
+
+
+
+
         <main class="mt-4">
             @yield('content')
         </main>
+
+        <div class="footer-banner">
+            <div class="container my-4">
+                <img src="{{ asset('assets/img/footer/footer-banner.png') }}" class="img-c" alt="">
+            </div>
+        </div>
 
         <footer class="footer pt-5">
             <div class="container">

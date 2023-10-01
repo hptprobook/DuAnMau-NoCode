@@ -42,9 +42,10 @@
                         </div>
                     </div>
                 @endforeach
+            @else
+                <p>Không có sản phẩm nào <a href="{{ url()->previous() }}">Back</a></p>
             @endif
 
-            <p>Không có sản phẩm nào <a href="{{ url()->previous() }}">Back</a></p>
 
         </div>
     </div>

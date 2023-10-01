@@ -31,6 +31,20 @@ class HomeController extends Controller
             $pcProducts = [];
         }
 
-        return view('home', compact('products', 'pcProducts', 'childCategories', 'childCategoryIds'));
+        $mainCatID2 = 1;
+
+        $childCategories = ChildCategory::whereHas('category', function ($query) use ($mainCatID2) {
+            $query->where('main_cat_id', $mainCatID2);
+        })->pluck('cat_id');
+
+        $childCategoryIds = ChildCategory::whereIn('cat_id', $childCategories)->pluck('id');
+
+        if (!empty($childCategories)) {
+            $laptopProducts = Product::whereIn('cat_id', $childCategoryIds)->get();
+        } else {
+            $laptopProducts = [];
+        }
+
+        return view('home', compact('products', 'pcProducts', 'childCategories', 'childCategoryIds', 'laptopProducts'));
     }
 }
