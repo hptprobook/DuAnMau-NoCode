@@ -8,6 +8,7 @@ import "./bootstrap";
 import { createApp } from "vue";
 import "../css/app.css";
 import "./swiperComponent.js";
+import "./ajaxComponent";
 import "./home.js";
 import "./showroom.js";
 /**

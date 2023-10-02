@@ -32,6 +32,10 @@ Route::prefix('website')->name('website.')->group(function () {
 
     Route::prefix('/cart')->name('cart.')->middleware('auth')->group(function () {
         Route::get('/', [CartController::class, 'index'])->name('index');
+        Route::post('/add', [CartController::class, 'add'])->name('add');
+        Route::post('/store', [CartController::class, 'store'])->name('store');
+        Route::get('/delete/{id}', [CartController::class, 'destroy'])->name('delete');
+        Route::post('/update', [CartController::class, 'update'])->name('update');
     });
 
     Route::prefix('/post')->name('post.')->group(function () {

@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('attribute_values', function (Blueprint $table) {
-            $table->float('percent');
+        Schema::table('carts', function (Blueprint $table) {
+            $table->unsignedBigInteger('provision')->after('quantity');
+            $table->text('attributes')->after('status')->nullable();
         });
     }
 
@@ -21,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('attribute_values', function (Blueprint $table) {
-            $table->dropColumn('percent');
+        Schema::table('carts', function (Blueprint $table) {
+            $table->dropColumn('provision', 'attributes');
         });
     }
 };
