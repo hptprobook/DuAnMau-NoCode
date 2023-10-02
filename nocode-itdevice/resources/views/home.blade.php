@@ -161,7 +161,70 @@
                                             @endphp
                                             <div class="home__pc--itemNewPrice d-flex text-main">
                                                 <span
-                                                    class="old-price fw-700">{{ preg_replace('/\.\d+$/', '.000', number_format($newPrice, 0, ',', '.')) }}đ</span>
+                                                    class="old-price fw-700">{{ number_format(round($newPrice, -4), 0, '.', '.') }}đ</span>
+                                                <div class="discount">{{ $product->discount }}%</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home__container my-3">
+            <div class="home__container--pc w-100">
+                <div class="home__pc--header d-flex justify-content-between mx-3 py-3">
+                    <h3 class="pc__header--mainCat"><a class="main-link fw-700"
+                            href="">{{ $mainCats[0]->name }}</a>
+                    </h3>
+                    <div class="pc__header__categories">
+                        <a href="" class="px-3 fw-600 main-link">ACER</a>
+                        <a href="" class="px-3 fw-600 main-link">MSI</a>
+                        <a href="" class="px-3 fw-600 main-link">HP</a>
+                        <a href="" class="px-3 fw-600 main-link">DELL</a>
+                        <a href="" class="fw-700 main-link text-blue ps-3">Xem tất cả</a>
+                    </div>
+                </div>
+                <div class="home__pc--product pb-2 px-2">
+                    <div class="swiper home__pc--productSwiper">
+                        <div class="swiper-wrapper">
+
+                            @foreach ($laptopProducts as $product)
+                                <div class="swiper-slide">
+                                    <a href="{{ route('website.product.detail', $product->id) }}">
+                                        <div class="home__pc--item w-100 px-2 py-3">
+                                            <i class="bi bi-gift-fill float-end mt-2 me-2 fs-icon text-main"></i>
+                                            <div class="home__pc--itemImg img-thumb">
+                                                <img class="img-c" src="{{ asset($product->avatar) }}" alt="">
+                                            </div>
+                                            <h4 class="home__pc--itemName fw-600 my-2">
+                                                {{ $product->name }}
+                                            </h4>
+                                            <div class="home__pc--itemParams">
+                                                <p class="d-block">✔ Lập tr&igrave;nh</p>
+                                                <p>✔ Streaming</p>
+                                                <p>✔ 2D,3D Design</p>
+                                                <p>✔&nbsp;Game</p>
+                                                <p>&nbsp;</p>
+                                            </div>
+
+                                            <div class="home__pc--itemOldPrice">
+                                                <span
+                                                    class="old-price">{{ number_format($product->price, 0, ',', '.') }}đ</span>
+                                            </div>
+
+                                            @php
+                                                $newPrice = $product->price - $product->price * ($product->discount / 100);
+                                            @endphp
+                                            <div class="home__pc--itemNewPrice d-flex text-main">
+                                                <span
+                                                    class="old-price fw-700">{{ number_format(round($newPrice, -4), 0, '.', '.') }}đ</span>
                                                 <div class="discount">{{ $product->discount }}%</div>
                                             </div>
                                         </div>

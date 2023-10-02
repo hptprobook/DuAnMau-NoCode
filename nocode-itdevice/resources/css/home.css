@@ -188,6 +188,16 @@
 .home__pc--itemName {
     font-size: 18px;
     height: 44px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.home__pc--itemName:hover {
+    color: var(--main-color);
 }
 
 .home__pc--itemParams {

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WebsiteController;
+use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\PostController as WebsitePostController;
@@ -29,8 +30,13 @@ Route::prefix('website')->name('website.')->group(function () {
         Route::get('/detail/{id}', [WebsiteProductController::class, 'show'])->name('detail');
     });
 
-    Route::prefix('/cart')->name('cart.')->group(function () {
+    Route::prefix('/cart')->name('cart.')->middleware('auth')->group(function () {
         Route::get('/', [CartController::class, 'index'])->name('index');
+        Route::post('/add', [CartController::class, 'add'])->name('add');
+        Route::post('/store', [CartController::class, 'store'])->name('store');
+        Route::get('/delete/{id}', [CartController::class, 'destroy'])->name('delete');
+        Route::post('/update', [CartController::class, 'update'])->name('update');
+        Route::post('/address', [CartController::class, 'address'])->name('address');
     });
 
     Route::prefix('/post')->name('post.')->group(function () {
@@ -83,6 +89,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::post('/update/{id}', [ProductController::class, 'update'])->name('update');
         Route::get('/edit-img/{id}', [ProductController::class, 'images'])->name('images');
         Route::post('/update-img/{id}', [ProductController::class, 'updateImage'])->name('updateImage');
+
         /*
         |--------------------------------------------------------------------------
         | Category Handle
@@ -98,6 +105,21 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::post('/update-main-category/{id}', [ProductController::class, 'updateMainCat'])->name('updateMainCat');
         Route::get('/delete-main-category/{id}', [ProductController::class, 'deleteCategory'])->name('deleteMainCat');
     });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Attributes
+    |--------------------------------------------------------------------------
+    */
+
+    Route::prefix('/attribute')->name('attribute.')->group(function () {
+        Route::get('/', [AttributeController::class, 'index'])->name('index');
+        Route::post('/create', [AttributeController::class, 'create'])->name('create');
+        Route::get('/add/{id}', [AttributeController::class, 'add'])->name('add');
+        Route::post('/store', [AttributeController::class, 'store'])->name('store');
+        Route::get('/list/{id}', [AttributeController::class, 'list'])->name('list');
+    });
+
 
     Route::prefix('post')->name('post.')->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('index');
