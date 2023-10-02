@@ -426,7 +426,67 @@
                         console.log(error);
                     },
                 });
-            })
+            });
+
+            $('.cart__list--quantity .plus').each(function() {
+                $(this).on('click', function() {
+
+                    const cart_id = $(this).closest('.cart__list').data('cart-id');
+                    const quantityElement = $(this).siblings('.quantity');
+                    const quantity = quantityElement.val();
+
+                    $.ajax({
+                        url: "{{ route('website.cart.update') }}",
+                        type: "POST",
+                        cache: false,
+                        dataType: "json",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            cart_id: cart_id,
+                            quantity: quantity,
+                            plus: true
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            location.reload();
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        },
+                    });
+                });
+            });
+
+            $('.cart__list--quantity .subtract').each(function() {
+                $(this).on('click', function() {
+
+                    const cart_id = $(this).closest('.cart__list').data('cart-id');
+                    const quantityElement = $(this).siblings('.quantity');
+                    const quantity = quantityElement.val();
+
+                    $.ajax({
+                        url: "{{ route('website.cart.update') }}",
+                        type: "POST",
+                        cache: false,
+                        dataType: "json",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            cart_id: cart_id,
+                            quantity: quantity,
+                            plus: false
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            location.reload();
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        },
+                    });
+                });
+            });
+
+
         })
     </script>
 </body>

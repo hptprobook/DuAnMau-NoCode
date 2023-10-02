@@ -38,21 +38,34 @@
             <div class="px-4">
                 <div>
 
+                    @php
+                        $total = 0;
+                    @endphp
+
                     @foreach ($userCarts as $item)
-                        <div class="cart__list mt-4 mb-5">
+                        <div class="cart__list mt-4 mb-5" data-cart-id="{{ $item->id }}">
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="cart__list--img">
                                         <img src="{{ asset($item->product->avatar) }}" class="img-c" alt="">
                                     </div>
-                                    <a href="" class="cart__list--delete"><i class="bi bi-trash3"></i>Xóa</a>
+                                    <a href="{{ route('website.cart.delete', $item->id) }}" class="cart__list--delete"><i
+                                            class="bi bi-trash3"></i>Xóa</a>
                                 </div>
+
+                                <input type="hidden" class="cart__list--id" name="cart_id" value="{{ $item->id }}">
                                 <div class="col-md-7">
                                     <div class="cart__list--info">
                                         <a href="{{ route('website.product.detail', $item->product->id) }}">
                                             @php
+                                                $readableString = '';
                                                 $decodedArray = json_decode($item->attributes);
-                                                $readableString = implode(', ', $decodedArray);
+                                                
+                                                if ($decodedArray != null) {
+                                                    $readableString = implode(', ', $decodedArray);
+                                                } else {
+                                                    $readableString = '';
+                                                }
                                             @endphp
                                             <h5 class="cart__info--name fw-600">
                                                 {{ $item->product->name }} ( {{ $readableString }})
@@ -65,19 +78,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                @php
-                                    $newPrice = ($item->provision - $item->provision * ($item->product->discount / 100)) * $item->quantity;
-                                @endphp
                                 <div class="col-md-3">
                                     <div class="cart__list--handle">
                                         <p class="new-price text-main fw-600">
-                                            {{ number_format(round($newPrice, -4), 0, '.', '.') }}đ</p>
+                                            {{ number_format(round($item->provision * $item->quantity, -4), 0, '.', '.') }}đ
+                                        </p>
                                         <p class="old-price">
-                                            {{ number_format($item->quantity * $item->provision, 0, ',', '.') }}đ</p>
+                                            {{ number_format(round($item->quantity * $item->provision + $item->provision * ($item->product->discount / 100), -4), 0, ',', '.') }}đ
+                                        </p>
+                                        @php
+                                            $total += $item->provision * $item->quantity;
+                                        @endphp
                                         <div class="cart__list--quantity mt-2 d-flex">
                                             <span class="subtract">-</span>
                                             <input class="quantity" type="number" min="1" max="3"
-                                                value="{{ $item->quantity }}">
+                                                value="{{ $item->quantity }}" data-quantity="{{ $item->quantity }}">
                                             <span class="plus">+</span>
                                         </div>
                                     </div>
@@ -104,7 +119,8 @@
                     </div>
                     <div class="d-flex justify-content-between mt-2 mb-3">
                         <span class="fw-500">Tổng tiền: </span>
-                        <span class="fw-700 text-main" style="font-size: 20px">30.000.000đ</span>
+                        <span class="fw-700 text-main"
+                            style="font-size: 20px">{{ number_format(round($total, -4), 0, '.', '.') }} đ</span>
                     </div>
                 </div>
 

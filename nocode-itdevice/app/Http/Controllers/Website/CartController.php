@@ -105,9 +105,23 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+
+        $cart_id = $request->input('cart_id');
+        $quantity = $request->input('quantity');
+
+        if (json_decode($request->input('plus'))) {
+            $quantity++;
+        } else {
+            $quantity--;
+        }
+
+        Cart::where('id', $cart_id)->update([
+            'quantity' => $quantity,
+        ]);
+
+        return response()->json(['message' => 'success']);
     }
 
     /**
@@ -115,6 +129,14 @@ class CartController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $cartItem = Cart::find($id);
+
+        $cartItem->delete();
+
+        $user = Auth::user();
+        $userCarts = $user->carts()->with('product')->get();
+
+        return view('website.cart.index', compact('userCarts'));
     }
 }
