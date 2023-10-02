@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tiny.cloud/1/ccfwwhqm4w7lrxwp1zz4l7xeej6uq3si24gldj34zyqqtcj4/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
     <title>Admintrator</title>
@@ -107,6 +108,19 @@
                             <li><a href="{{ route('admin.product.mainCategory') }}">Danh mục lớn</a></li>
                         </ul>
                     </li>
+                    <li class="nav-link {{ $module_active == 'attribute' ? 'active' : '' }}">
+                        <a href="{{ route('admin.attribute.index') }}">
+                            <div class="nav-link-icon d-inline-flex">
+                                <i class="far fa-folder"></i>
+                            </div>
+                            Thuộc tính sản phẩm
+                        </a>
+                        <i class="arrow fas fa-angle-right"></i>
+                        <ul class="sub-menu">
+                            <li><a href="{{ route('admin.attribute.index') }}">Thêm mới</a></li>
+                            <li><a href="{{ route('admin.order') }}">Danh sách</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-link {{ $module_active == 'order' ? 'active' : '' }}">
                         <a href="{{ route('admin.order') }}">
                             <div class="nav-link-icon d-inline-flex">
@@ -161,21 +175,8 @@
     <script>
         tinymce.init({
             selector: 'textarea',
-            plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat | colormap | textcolor | forecolor backcolor',
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-            mergetags_list: [{
-                    value: 'First.Name',
-                    title: 'First Name'
-                },
-                {
-                    value: 'Email',
-                    title: 'Email'
-                },
-            ],
-            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject(
-                "See docs to implement AI Assistant"))
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
         });
     </script>
 

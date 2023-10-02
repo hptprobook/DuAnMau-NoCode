@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -30,6 +29,60 @@
 
 <body>
     <div id="app">
+
+        <div class="addCard-overlay">
+            <div id="addCart-successfully">
+                <p>Thêm thành công</p>
+                <a href="{{ route('website.cart.index') }}">Xác nhận</a>
+            </div>
+        </div>
+
+        <div class="category-fixed">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="home__sidebar">
+                            <ul class="home__sidebar--list list-unstyled">
+                                @foreach ($mainCats as $mainCat)
+                                    <li class="home__sidebar--item">
+                                        <a href="{{ route('website.product.index', ['mainCat' => $mainCat->id]) }}"
+                                            title="{{ $mainCat->name }}" class="home__sidebar--maincat">
+                                            {{ Str::limit($mainCat->name, $limit = 18, $end = '...') }}
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+
+                                        <div class="home__sidebar--child">
+                                            <div class="row">
+                                                @foreach ($mainCat->categories as $category)
+                                                    <div class="col-custom mt-3">
+                                                        <div class="sidebar__child--list">
+                                                            <h5><a href="{{ route('website.product.index', ['category' => $category->id]) }}"
+                                                                    class="text-dark sidebar__list--title">{{ $category->name }}</a>
+                                                            </h5>
+                                                            <ul class="list-unstyled">
+                                                                @foreach ($category->childCategories as $childCategory)
+                                                                    <li class="sidebar__child--item">
+                                                                        <a href="{{ route('website.product.index', ['childCat' => $childCategory->id]) }}"
+                                                                            title="{{ $childCategory->name }}"
+                                                                            class="sidebar__item--link">{{ $childCategory->name }}</a>
+                                                                    </li>
+                                                                @endforeach
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand logo" href="{{ url('/') }}">
@@ -70,7 +123,7 @@
                         </div>
 
                         <div class="navbar--showroom h-44 navbar__item">
-                            <a href="" class="d-flex">
+                            <a href="{{ route('website.showroom') }}" class="d-flex">
                                 <i class="bi bi-geo-alt pe-2"></i>
                                 <div class="">Hệ thống Showroom</div>
                             </a>
@@ -84,7 +137,7 @@
                         </div>
 
                         <div class="navbar--cart h-44 navbar__item">
-                            <a href="" class="d-flex">
+                            <a href="{{ route('website.cart.index') }}" class="d-flex">
                                 <i class="bi bi-cart pe-2 icon">
                                     <span class="count">1</span>
                                 </i>
@@ -109,7 +162,8 @@
                                             <div class="body">
 
                                                 @if (Route::has('login'))
-                                                    <form action="{{ route('login') }}" class="w-50 pe-1" method="GET">
+                                                    <form action="{{ route('login') }}" class="w-50 pe-1"
+                                                        method="GET">
                                                         <button class="w-100 login-btn">Đăng nhập</button>
                                                     </form>
                                                 @endif
@@ -173,39 +227,6 @@
                                     </div>
                                 @endguest
                             </div>
-                            {{-- @guest
-                                @if (Route::has('login'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                    </li>
-                                @endif
-
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }}
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                            @endguest --}}
                         </div>
                     </ul>
                 </div>
@@ -219,7 +240,7 @@
                         Tổng hợp khuyến mại
                     </div>
                 </a>
-                <a href="">
+                <a href="{{ route('website.post.index') }}">
                     <div class="header--item">
                         Tin công nghệ
                     </div>
@@ -247,9 +268,20 @@
             </div>
         </header>
 
+
+
+
+
+
         <main class="mt-4">
             @yield('content')
         </main>
+
+        <div class="footer-banner">
+            <div class="container my-4">
+                <img src="{{ asset('assets/img/footer/footer-banner.png') }}" class="img-c" alt="">
+            </div>
+        </div>
 
         <footer class="footer pt-5">
             <div class="container">
@@ -310,15 +342,152 @@
 
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    {{-- <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script> --}}
+    <script>
+        $(document).ready(function() {
+            var selectedAttributes = {};
+            $(".detail__attribute--value").change(function() {
+                var attributeName = $(this).data('attribute-name');
+                var attributeValueId = $(this).data('attribute-id');
+                var product_id = $('.product__detail--id').val();
 
-    <!-- Initialize Swiper -->
-    <script></script>
+                selectedAttributes[attributeName] = attributeValueId;
 
-    <script script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+                $.ajax({
+                    url: "{{ route('website.cart.add') }}",
+                    type: "POST",
+                    cache: false,
+                    dataType: "json",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        product_id: product_id,
+                        attributes: selectedAttributes,
+                    },
+                    success: function(response) {
+                        var bonusPrice = response.bonusPrice;
+                        var productPrice = response.productPrice;
+                        var productNewPrice = response.productNewPrice;
+
+                        var formattedPrice = productPrice.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        });
+
+                        var formattedNewPrice = productNewPrice
+                            .toLocaleString('vi-VN', {
+                                style: 'currency',
+                                currency: 'VND'
+                            });
+
+                        $(".detail__info--price .old-price").text(formattedPrice);
+                        $(".detail__info--price .new-price").text(formattedNewPrice);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    },
+                });
+            });
+
+            $('.detail__info--btn').click(function(e) {
+                e.preventDefault();
+                var selectedAttributeValues = [];
+                $('input[type="radio"]:checked').each(function() {
+                    var attributeValue = $(this).data('attribute-value');
+
+                    if (selectedAttributeValues.indexOf(attributeValue) === -1) {
+                        selectedAttributeValues.push(attributeValue);
+                    }
+                });
+
+                var product_id = $('.product__detail--id').val();
+                var cleanedPriceText = parseInt($('.detail__info--price .new-price').text().replace(
+                    /[.,đ₫]/g, ''));
+
+                var price = parseInt(cleanedPriceText);
+
+                $.ajax({
+                    url: "{{ route('website.cart.store') }}",
+                    type: "POST",
+                    cache: false,
+                    dataType: "json",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        attributeValues: selectedAttributeValues,
+                        product_id: product_id,
+                        price: price
+                    },
+                    success: function(response) {
+                        $('.addCard-overlay').addClass('active');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    },
+                });
+            });
+
+            $('.cart__list--quantity .plus').each(function() {
+                $(this).on('click', function() {
+
+                    const cart_id = $(this).closest('.cart__list').data('cart-id');
+                    const quantityElement = $(this).siblings('.quantity');
+                    const quantity = quantityElement.val();
+
+                    $.ajax({
+                        url: "{{ route('website.cart.update') }}",
+                        type: "POST",
+                        cache: false,
+                        dataType: "json",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            cart_id: cart_id,
+                            quantity: quantity,
+                            plus: true
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            location.reload();
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        },
+                    });
+                });
+            });
+
+            $('.cart__list--quantity .subtract').each(function() {
+                $(this).on('click', function() {
+
+                    const cart_id = $(this).closest('.cart__list').data('cart-id');
+                    const quantityElement = $(this).siblings('.quantity');
+                    const quantity = quantityElement.val();
+
+                    $.ajax({
+                        url: "{{ route('website.cart.update') }}",
+                        type: "POST",
+                        cache: false,
+                        dataType: "json",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            cart_id: cart_id,
+                            quantity: quantity,
+                            plus: false
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            location.reload();
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        },
+                    });
+                });
+            });
+
+
+        })
     </script>
 </body>
 

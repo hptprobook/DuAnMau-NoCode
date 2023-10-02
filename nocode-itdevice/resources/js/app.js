@@ -7,38 +7,16 @@
 import "./bootstrap";
 import { createApp } from "vue";
 import "../css/app.css";
-import Swiper from "swiper/bundle";
-import "swiper/css/bundle";
-
+import "./swiperComponent.js";
+import "./ajaxComponent";
+import "./home.js";
+import "./showroom.js";
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
  * to use in your application's views. An example is included for you.
  */
-window.onload = function () {
-    const swiper = new Swiper(".swiper", {
-        loop: true,
-        spaceBetween: 30,
-        centeredSlides: true,
-        autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-        on: {
-            init: function () {
-                console.log("swiper initialized");
-            },
-        },
-    });
-};
+
 const app = createApp({});
 
 import ExampleComponent from "./components/ExampleComponent.vue";
