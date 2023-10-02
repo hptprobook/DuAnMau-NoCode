@@ -21,7 +21,7 @@ class CartController extends Controller
     {
         $user = Auth::user();
 
-        $userCarts = $user->carts()->with('product')->get();
+        $userCarts = $user->carts()->where('status', 0)->with('product')->get();
 
         return view('website.cart.index', compact('userCarts'));
     }
@@ -124,6 +124,14 @@ class CartController extends Controller
         return response()->json(['message' => 'success']);
     }
 
+    public function address(Request $request)
+    {
+
+
+
+        return view('website.cart.address');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -135,7 +143,7 @@ class CartController extends Controller
         $cartItem->delete();
 
         $user = Auth::user();
-        $userCarts = $user->carts()->with('product')->get();
+        $userCarts = $user->carts()->where('status', 0)->with('product')->get();
 
         return view('website.cart.index', compact('userCarts'));
     }
