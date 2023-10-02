@@ -32,6 +32,8 @@ Route::prefix('website')->name('website.')->group(function () {
 
     Route::prefix('/cart')->name('cart.')->middleware('auth')->group(function () {
         Route::get('/', [CartController::class, 'index'])->name('index');
+        Route::post('/add', [CartController::class, 'add'])->name('add');
+        Route::post('/store', [CartController::class, 'store'])->name('store');
     });
 
     Route::prefix('/post')->name('post.')->group(function () {

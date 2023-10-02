@@ -49,9 +49,13 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="cart__list--info">
-                                        <a href="">
+                                        <a href="{{ route('website.product.detail', $item->product->id) }}">
+                                            @php
+                                                $decodedArray = json_decode($item->attributes);
+                                                $readableString = implode(', ', $decodedArray);
+                                            @endphp
                                             <h5 class="cart__info--name fw-600">
-                                                {{ $item->product->name }}
+                                                {{ $item->product->name }} ( {{ $readableString }})
                                             </h5>
                                         </a>
                                         <div class="cart__info--deal">
@@ -62,14 +66,14 @@
                                     </div>
                                 </div>
                                 @php
-                                    $newPrice = ($item->product->price - $item->product->price * ($item->product->discount / 100)) * $item->quantity;
+                                    $newPrice = ($item->provision - $item->provision * ($item->product->discount / 100)) * $item->quantity;
                                 @endphp
                                 <div class="col-md-3">
                                     <div class="cart__list--handle">
                                         <p class="new-price text-main fw-600">
                                             {{ number_format(round($newPrice, -4), 0, '.', '.') }}đ</p>
                                         <p class="old-price">
-                                            {{ number_format($item->quantity * $item->product->price, 0, ',', '.') }}đ</p>
+                                            {{ number_format($item->quantity * $item->provision, 0, ',', '.') }}đ</p>
                                         <div class="cart__list--quantity mt-2 d-flex">
                                             <span class="subtract">-</span>
                                             <input class="quantity" type="number" min="1" max="3"
