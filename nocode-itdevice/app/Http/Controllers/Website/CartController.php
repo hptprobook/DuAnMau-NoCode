@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -12,7 +14,11 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('website.cart.index');
+        $user = Auth::user();
+
+        $userCarts = $user->carts()->with('product')->get();
+
+        return view('website.cart.index', compact('userCarts'));
     }
 
     /**
