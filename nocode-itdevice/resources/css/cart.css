@@ -67,12 +67,26 @@
     left: 100%;
     top: 50%;
     height: 0;
-    width: 132px;
+    width: 185px;
     border-top: 1px dotted #000;
+}
+
+.cart__orderStatus--item .icon.active.borders::after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    height: 0;
+    width: 185px;
+    border-top: 1px dotted var(--main-color);
 }
 
 .cart__orderStatus--item i.active {
     color: red;
+}
+
+.cart__orderStatus--item.active {
+    color: var(--main-color);
 }
 
 .cart__list--img {
