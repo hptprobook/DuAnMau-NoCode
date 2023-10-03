@@ -2,35 +2,35 @@
 
 @section('content')
     <div class="cart m-auto">
+        <form action="" method="post">
+            @csrf
 
-        <a href="" class="text-blue back-link"><i class="bi bi-box-arrow-in-left pe-1"></i>Mua thêm sản
-            phẩm khác</a>
-        <div class="cartContainer mt-2 px-2 pt-2 pb-5">
-            <div class="cart__orderStatus px-5">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="cart__orderStatus--item active fw-500">
-                            <i class="bi bi-bag-check-fill icon active"></i>
-                            Giỏ hàng
+            <a href="" class="text-blue back-link"><i class="bi bi-box-arrow-in-left pe-1"></i>Mua thêm sản
+                phẩm khác</a>
+            <div class="cartContainer mt-2 px-2 pt-2 pb-5 active">
+                <div class="cart__orderStatus px-5">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="cart__orderStatus--item active fw-500">
+                                <i class="bi bi-bag-check-fill icon active"></i>
+                                Giỏ hàng
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="cart__orderStatus--item fw-500">
-                            <i class="bi bi-card-checklist icon"></i>
-                            Thông tin đặt hàng
+                        <div class="col-md-4">
+                            <div class="cart__orderStatus--item fw-500">
+                                <i class="bi bi-card-checklist icon"></i>
+                                Thông tin đặt hàng
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="cart__orderStatus--item fw-500">
-                            <i class="bi bi-shield-fill-check"></i>
-                            Hoàn tất
+                        <div class="col-md-4">
+                            <div class="cart__orderStatus--item fw-500">
+                                <i class="bi bi-shield-fill-check"></i>
+                                Hoàn tất
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <form action="{{ route('website.cart.address') }}" method="post">
-                @csrf
                 <div class="px-4">
                     <div>
 
@@ -117,10 +117,76 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="w-100 mt-2 cart__orderBtn fw-600">ĐẶT HÀNG NGAY</button>
+                    <button class="w-100 mt-2 cart__orderBtn fw-600">ĐẶT HÀNG NGAY</button>
+                </div>
+            </div>
+
+            <div class="addressContainer active mt-2 px-2 pt-2 pb-5">
+                <div class="cart__orderStatus px-5">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="cart__orderStatus--item active fw-500">
+                                <i class="bi bi-bag-check-fill icon active borders"></i>
+                                Giỏ hàng
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="cart__orderStatus--item active fw-500">
+                                <i class="bi bi-card-checklist icon active"></i>
+                                Thông tin đặt hàng
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="cart__orderStatus--item fw-500">
+                                <i class="bi bi-shield-fill-check"></i>
+                                Hoàn tất
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-            </form>
-        </div>
+                <div class="address__content mt-5 px-4">
+                    <h5>Thông tin khách mua hàng</h5>
+                    <div class="address__content--info mt-3 d-flex justify-content-between">
+                        <input type="text" name="fullname" class="w-50 me-2 ps-3" placeholder="Nhập họ tên">
+                        <input type="text" name="fullname" class="w-50 ms-2 ps-3" placeholder="Nhập số điện thoại">
+                    </div>
+                    <h5 class="mt-3">Địa chỉ nhận hàng</h5>
+                    <div class="address__content--home">
+                        <div class="mt-3 row">
+                            <div class="col-md-6">
+                                <select name="province" id="province"></select>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="district" id="district"></select>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="ward" id="ward"></select>
+                            </div>
+                            <div class="col-md-6">
+                                <select name="home" id="home"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" name="note" class="address__content--note mt-3 w-100 ps-3 mb-3"
+                        placeholder="Lưu ý / yêu cầu khác (không bắt buộc)">
+                    <hr>
+                    <div class="cart__pay my-3">
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-500">Phí vận chuyển: </span>
+                            <span class="fw-500">Miễn phí</span>
+                        </div>
+                        <div class="d-flex justify-content-between mt-2 mb-3">
+                            <span class="fw-500">Tổng tiền: </span>
+                            <span class="fw-700 text-main"
+                                style="font-size: 20px">{{ number_format(round($total, -4), 0, '.', '.') }} đ</span>
+                        </div>
+                    </div>
+
+                    <button class="w-100 mt-2 cart__orderBtn fw-600">ĐẶT HÀNG NGAY</button>
+                </div>
+            </div>
+
+        </form>
     </div>
 @endsection
