@@ -17,6 +17,7 @@ class AttributeValue extends Model
         'attribute_id',
         'product_id',
         'value',
+        'percent'
     ];
 
     public function product()

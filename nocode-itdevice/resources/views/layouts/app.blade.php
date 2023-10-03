@@ -29,6 +29,14 @@
 
 <body>
     <div id="app">
+
+        <div class="addCard-overlay">
+            <div id="addCart-successfully">
+                <p>Thêm thành công</p>
+                <a href="{{ route('website.cart.index') }}">Xác nhận</a>
+            </div>
+        </div>
+
         <div class="category-fixed">
             <div class="container">
                 <div class="row">
@@ -337,6 +345,150 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $(document).ready(function() {
+            var selectedAttributes = {};
+            $(".detail__attribute--value").change(function() {
+                var attributeName = $(this).data('attribute-name');
+                var attributeValueId = $(this).data('attribute-id');
+                var product_id = $('.product__detail--id').val();
+
+                selectedAttributes[attributeName] = attributeValueId;
+
+                $.ajax({
+                    url: "{{ route('website.cart.add') }}",
+                    type: "POST",
+                    cache: false,
+                    dataType: "json",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        product_id: product_id,
+                        attributes: selectedAttributes,
+                    },
+                    success: function(response) {
+                        var bonusPrice = response.bonusPrice;
+                        var productPrice = response.productPrice;
+                        var productNewPrice = response.productNewPrice;
+
+                        var formattedPrice = productPrice.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        });
+
+                        var formattedNewPrice = productNewPrice
+                            .toLocaleString('vi-VN', {
+                                style: 'currency',
+                                currency: 'VND'
+                            });
+
+                        $(".detail__info--price .old-price").text(formattedPrice);
+                        $(".detail__info--price .new-price").text(formattedNewPrice);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    },
+                });
+            });
+
+            $('.detail__info--btn').click(function(e) {
+                e.preventDefault();
+                var selectedAttributeValues = [];
+                $('input[type="radio"]:checked').each(function() {
+                    var attributeValue = $(this).data('attribute-value');
+
+                    if (selectedAttributeValues.indexOf(attributeValue) === -1) {
+                        selectedAttributeValues.push(attributeValue);
+                    }
+                });
+
+                var product_id = $('.product__detail--id').val();
+                var cleanedPriceText = parseInt($('.detail__info--price .new-price').text().replace(
+                    /[.,đ₫]/g, ''));
+
+                var price = parseInt(cleanedPriceText);
+
+                $.ajax({
+                    url: "{{ route('website.cart.store') }}",
+                    type: "POST",
+                    cache: false,
+                    dataType: "json",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        attributeValues: selectedAttributeValues,
+                        product_id: product_id,
+                        price: price
+                    },
+                    success: function(response) {
+                        $('.addCard-overlay').addClass('active');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    },
+                });
+            });
+
+            $('.cart__list--quantity .plus').each(function() {
+                $(this).on('click', function() {
+
+                    const cart_id = $(this).closest('.cart__list').data('cart-id');
+                    const quantityElement = $(this).siblings('.quantity');
+                    const quantity = quantityElement.val();
+
+                    $.ajax({
+                        url: "{{ route('website.cart.update') }}",
+                        type: "POST",
+                        cache: false,
+                        dataType: "json",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            cart_id: cart_id,
+                            quantity: quantity,
+                            plus: true
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            location.reload();
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        },
+                    });
+                });
+            });
+
+            $('.cart__list--quantity .subtract').each(function() {
+                $(this).on('click', function() {
+
+                    const cart_id = $(this).closest('.cart__list').data('cart-id');
+                    const quantityElement = $(this).siblings('.quantity');
+                    const quantity = quantityElement.val();
+
+                    $.ajax({
+                        url: "{{ route('website.cart.update') }}",
+                        type: "POST",
+                        cache: false,
+                        dataType: "json",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            cart_id: cart_id,
+                            quantity: quantity,
+                            plus: false
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            location.reload();
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        },
+                    });
+                });
+            });
+
+
+        })
+    </script>
 </body>
 
 </html>

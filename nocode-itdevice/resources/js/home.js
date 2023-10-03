@@ -8,7 +8,7 @@ $(document).ready(function () {
     });
 
     $(".cart__list--quantity .plus").on("click", function () {
-        console.log("hihi");
+        console.log("AFTER");
         var currentValue = parseInt(
             $(this).siblings(".cart__list--quantity .quantity").val()
         );

@@ -32,67 +32,76 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="product__detail--info pt-4">
-                    <h4 class="detail__info--name fw-600">{{ $product->name }}</h4>
-                    <div class="detail__info--rate d-flex">
-                        <span class="fw-600">0 <i class="bi bi-star-fill"></i></span>
-                        <a href="" class="text-blue fw-600">Xem đánh giá</a>
-                    </div>
-                    @php
-                        $newPrice = $product->price - $product->price * ($product->discount / 100);
-                    @endphp
+                <form action="" id="add-to-cart-form" method="post">
+                    @csrf
+                    <div class="product__detail--info pt-4">
+                        <h4 class="detail__info--name fw-600">{{ $product->name }}</h4>
+                        <input type="hidden" name="product_id" class="product__detail--id" value="{{ $product->id }}">
+                        <div class="detail__info--rate d-flex">
+                            <span class="fw-600">0 <i class="bi bi-star-fill"></i></span>
+                            <a href="" class="text-blue fw-600">Xem đánh giá</a>
+                        </div>
+                        @php
+                            $newPrice = $product->price - $product->price * ($product->discount / 100);
+                        @endphp
 
-                    @php
-                        $formattedAttributes = [];
-                        
-                        foreach ($attributes as $attribute) {
-                            $attributeName = $attribute->attribute->name;
-                            $attributeValue = $attribute->value;
-                            $attributeId = $attribute->id; // Assuming $attribute has an 'id' property
-                        
-                            if (!isset($formattedAttributes[$attributeName])) {
-                                $formattedAttributes[$attributeName] = [];
+                        @php
+                            $formattedAttributes = [];
+                            
+                            foreach ($attributes as $attribute) {
+                                $attributeName = $attribute->attribute->name;
+                                $attributeValue = $attribute->value;
+                                $attributeId = $attribute->id;
+                            
+                                if (!isset($formattedAttributes[$attributeName])) {
+                                    $formattedAttributes[$attributeName] = [];
+                                }
+                            
+                                $formattedAttributes[$attributeName][] = [
+                                    'id' => $attributeId,
+                                    'value' => $attributeValue,
+                                ];
                             }
-                        
-                            $formattedAttributes[$attributeName][] = [
-                                'id' => $attributeId,
-                                'value' => $attributeValue,
-                            ];
-                        }
-                    @endphp
+                        @endphp
 
-                    @foreach ($formattedAttributes as $attributeName => $attributeValues)
-                        <div class="d-flex align-items-center detail__attribute mt-3" style="font-size: 16px;">
-                            <span class="fw-600">{{ $attributeName }}:</span>
-                            @foreach ($attributeValues as $attributeValue)
-                                <label class="d-flex align-items-center ps-3" style="cursor: pointer;">
-                                    <input class="me-2" type="radio" name="{{ $attributeName }}"
-                                        value="{{ $attributeValue['id'] }}">
-                                    {{ $attributeValue['value'] }}
-                                </label>
-                            @endforeach
+                        @foreach ($formattedAttributes as $attributeName => $attributeValues)
+                            <div class="d-flex align-items-center detail__attribute mt-3" style="font-size: 16px;">
+                                <span class="fw-600">{{ $attributeName }}:</span>
+                                @foreach ($attributeValues as $attributeValue)
+                                    <label class="d-flex align-items-center ps-3" style="cursor: pointer;">
+                                        <input class="me-2 detail__attribute--value" type="radio"
+                                            data-attribute-name="{{ $attributeName }}"
+                                            data-attribute-value="{{ $attributeValue['value'] }}"
+                                            data-attribute-id="{{ $attributeValue['id'] }}" name="{{ $attributeName }}"
+                                            value="{{ $attributeValue['id'] }}">
+                                        {{ $attributeValue['value'] }}
+                                    </label>
+                                @endforeach
+                            </div>
+                        @endforeach
+                        <div class="detail__info--price my-3">
+                            <span
+                                class="new-price text-main fw-700 pe-3">{{ number_format(round($newPrice, -4), 0, '.', '.') }}đ</span>
+                            <span class="old-price pe-3">{{ number_format($product->price, 0, ',', '.') }}đ</span>
+                            <span class="discount text-main">-{{ $product->discount }}%</span>
                         </div>
-                    @endforeach
-                    <div class="detail__info--price my-3">
-                        <span
-                            class="new-price text-main fw-700 pe-3">{{ number_format(round($newPrice, -4), 0, '.', '.') }}đ</span>
-                        <span class="old-price pe-3">{{ number_format($product->price, 0, ',', '.') }}đ</span>
-                        <span class="discount text-main">-{{ $product->discount }}%</span>
-                    </div>
-                    <div class="card detail__info--gift mt-3">
-                        <h5 class="card-header">
-                            <span class="text-main"><i class="bi bi-gift-fill"></i> Quà tặng khuyến mãi</span>
-                        </h5>
-                        <div class="card-body">
-                            <p class="card-text"><i class="bi bi-1-circle-fill text-main pe-2"></i>Áo
-                                khoác Nocode</p>
-                            <p class="card-text"><i class="bi bi-2-circle-fill text-main pe-2"></i>Móc khóa Nocode</p>
-                            <p class="card-text"><i class="bi bi-3-circle-fill text-main pe-2"></i>Dây đeo thẻ Nocode</p>
+                        <div class="card detail__info--gift mt-3">
+                            <h5 class="card-header">
+                                <span class="text-main"><i class="bi bi-gift-fill"></i> Quà tặng khuyến mãi</span>
+                            </h5>
+                            <div class="card-body">
+                                <p class="card-text"><i class="bi bi-1-circle-fill text-main pe-2"></i>Áo
+                                    khoác Nocode</p>
+                                <p class="card-text"><i class="bi bi-2-circle-fill text-main pe-2"></i>Móc khóa Nocode</p>
+                                <p class="card-text"><i class="bi bi-3-circle-fill text-main pe-2"></i>Dây đeo thẻ Nocode
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <button class="detail__info--btn fw-700 mb-3">MUA NGAY</button>
+
+                    <button type="submit" class="detail__info--btn fw-700 mb-3">MUA NGAY</button>
+                </form>
 
                 <hr>
                 <div class="detail__info--deal my-3">

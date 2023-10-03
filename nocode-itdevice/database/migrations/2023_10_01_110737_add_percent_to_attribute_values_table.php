@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('attribute_values', function (Blueprint $table) {
-            $table->unsignedTinyInteger('percent');
+            $table->float('percent');
         });
     }
 
