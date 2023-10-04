@@ -188,7 +188,7 @@
                                         Xin chào<br>{{ Str::limit(Auth::user()->name, $limit = 8, $end = '...') }}
 
                                         <div class="logged--child">
-                                            <a href="" class="link">
+                                            <a href="{{ route('website.customer.index') }}" class="link">
                                                 <div class="header">
                                                     <i class="bi bi-emoji-laughing pe-3"></i>
                                                     Xin chào, {{ Auth::user()->name }}
@@ -199,13 +199,6 @@
                                                 <div class="body">
                                                     <i class="bi bi-clipboard2-check pe-3"></i>
                                                     Đơn hàng của tôi
-                                                </div>
-                                            </a>
-
-                                            <a href="" class="link">
-                                                <div class="body" style="border-bottom: 1px solid #f0f0f0">
-                                                    <i class="bi bi-eye pe-3"></i>
-                                                    Đã xem gần đây
                                                 </div>
                                             </a>
 

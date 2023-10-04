@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Cart;
 use App\Models\District;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Province;
 use App\Models\User;
@@ -91,6 +94,7 @@ class CartController extends Controller
         $existingCart = Cart::where('user_id', $user->id)
             ->where('product_id', $product_id)
             ->where('attributes', json_encode($attributeValues))
+            ->where('status', 0)
             ->first();
 
         if ($existingCart) {
@@ -112,13 +116,6 @@ class CartController extends Controller
 
     public function order(Request $request)
     {
-
-        $fullName = $request->input('fullname');
-        $phone = $request->input('phone');
-        $ward = $request->input('ward');
-        $street = $request->input('street');
-        $note = $request->input('note');
-
         $request->validate(
             [
                 'fullname' => ['required', 'string', 'max:191', 'min:3'],
@@ -146,12 +143,49 @@ class CartController extends Controller
             ]
         );
 
-        $cart_id = [];
+        $ward = Ward::find($request->input('ward'));
+        $street = $request->input('street') . ', ' . $ward->path_with_type;
+
+        $address = Address::create(
+            [
+                'user_id' => Auth::user()->id,
+                'full_name' => $request->input('fullname'),
+                'phone' => $request->input('phone'),
+                'ward_id' => $request->input('ward'),
+                'street' => $street,
+                'note' => $request->input('note'),
+            ]
+        );
+
+        $total_amount = 0;
+
         foreach ($request->input('cart_id') as $cardId) {
-            $cart_id[] = $cardId;
+            Cart::where('id', $cardId)->update([
+                'status' => 1
+            ]);
+
+            $cart = Cart::find($cardId);
+            $total_amount += ($cart->provision * $cart->quantity);
+
+            Order::create(
+                [
+                    'cart_id' => $cart->id,
+                    'quantity' => $cart->quantity,
+                    'price' => $cart->provision,
+                ]
+            );
         }
 
-        return view('website.cart.success', compact('cart_id'));
+        OrderDetail::create(
+            [
+                'user_id' => Auth::user()->id,
+                'status' => 0,
+                'total_amount' => $total_amount,
+                'address_id' => $address->id
+            ]
+        );
+
+        return view('website.cart.success', compact('total_amount'));
     }
 
     /**
