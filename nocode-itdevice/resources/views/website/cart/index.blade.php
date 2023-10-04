@@ -2,11 +2,10 @@
 
 @section('content')
     <div class="cart m-auto">
-        <form action="" method="post">
+        <form action="{{ route('website.cart.order') }}" method="post" class="cart-form">
             @csrf
 
-            <a href="" class="text-blue back-link"><i class="bi bi-box-arrow-in-left pe-1"></i>Mua thêm sản
-                phẩm khác</a>
+            <a href="" class="text-blue back-link"><i class="bi bi-box-arrow-in-left pe-1"></i>Trở về</a>
             <div class="cartContainer mt-2 px-2 pt-2 pb-5 active">
                 <div class="cart__orderStatus px-5">
                     <div class="row">
@@ -49,7 +48,8 @@
                                             class="cart__list--delete"><i class="bi bi-trash3"></i>Xóa</a>
                                     </div>
 
-                                    <input type="hidden" class="cart__list--id" name="cart_id" value="{{ $item->id }}">
+                                    <input type="hidden" class="cart__list--id" name="cart_id[]"
+                                        value="{{ $item->id }}">
                                     <div class="col-md-7">
                                         <div class="cart__list--info">
                                             <a href="{{ route('website.product.detail', $item->product->id) }}">
@@ -95,12 +95,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr>
                         @endforeach
-                    </div>
-                    <div class="cart__discount my-4">
-                        <input type="text" placeholder="Nhập mã giảm giá">
-                        <button>Áp dụng</button>
                     </div>
 
                     <hr>
@@ -121,7 +116,7 @@
                 </div>
             </div>
 
-            <div class="addressContainer active mt-2 px-2 pt-2 pb-5">
+            <div class="addressContainer mt-2 px-2 pt-2 pb-5">
                 <div class="cart__orderStatus px-5">
                     <div class="row">
                         <div class="col-md-4">
@@ -148,8 +143,18 @@
                 <div class="address__content mt-5 px-4">
                     <h5>Thông tin khách mua hàng</h5>
                     <div class="address__content--info mt-3 d-flex justify-content-between">
-                        <input type="text" name="fullname" class="w-50 me-2 ps-3" placeholder="Nhập họ tên">
-                        <input type="text" name="fullname" class="w-50 ms-2 ps-3" placeholder="Nhập số điện thoại">
+                        <div class="form-group w-50 me-2">
+                            <input type="text" name="fullname" class="w-100 ps-3" placeholder="Nhập họ tên">
+                            @error('fullname')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group w-50 ms-2">
+                            <input type="text" name="phone" class="w-100 ps-3" placeholder="Nhập số điện thoại">
+                            @error('phone')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
                     </div>
                     <h5 class="mt-3">Địa chỉ nhận hàng</h5>
                     <div class="address__content--home px-5">
@@ -161,24 +166,39 @@
                                         <option value="{{ $province->id }}">{{ $province->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('province')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                             <div class="col-md-6 mt-3 ps-2">
                                 <select class="w-100 ps-2" name="district" id="district">
-                                    <option value="">Huyện / Trị trấn</option>
+                                    <option value="">Quận / huyện</option>
                                 </select>
+                                @error('district')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                             <div class="col-md-6 mt-3 pe-2">
                                 <select class="w-100 ps-2" name="ward" id="ward">
-                                    <option value="">Xã / phường</option>
+                                    <option value="">Xã / phường / Thị trấn</option>
                                 </select>
+                                @error('ward')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                             <div class="col-md-6 mt-3 ps-2">
                                 <input class="w-100 ps-2" name="street" id="street" placeholder="Số nhà, đường" />
+                                @error('street')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>
                     <input type="text" name="note" class="address__content--note mt-3 w-100 ps-3 mb-3"
                         placeholder="Lưu ý / yêu cầu khác (không bắt buộc)">
+                    @error('note')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                     <hr>
                     <div class="cart__pay my-3">
                         <div class="d-flex justify-content-between">
@@ -192,8 +212,8 @@
                         </div>
                     </div>
 
-                    <button class="w-100 mt-2 cart__orderBtn fw-600">ĐẶT HÀNG NGAY</button>
-
+                    <button onclick="document.querySelector('.cart-form').submit();" type="submit"
+                        class="w-100 mt-2 cart__orderBtn fw-600">ĐẶT HÀNG NGAY</button>
 
                 </div>
             </div>

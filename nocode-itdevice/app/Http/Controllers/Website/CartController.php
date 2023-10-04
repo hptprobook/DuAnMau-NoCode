@@ -47,6 +47,8 @@ class CartController extends Controller
         $productNewPrice = $productPrice - ($productPrice * $product->discount / 100);
 
         return response()->json(['bonusPrice' => $productPrice - $product->price, 'productPrice' => $productPrice, 'productNewPrice' => $productNewPrice]);
+
+        // return response()->json(['message' => 'Success']);
     }
 
     public function getDistrict(Request $request)
@@ -106,6 +108,50 @@ class CartController extends Controller
             ]);
         }
         return response()->json(['message' => 'success']);
+    }
+
+    public function order(Request $request)
+    {
+
+        $fullName = $request->input('fullname');
+        $phone = $request->input('phone');
+        $ward = $request->input('ward');
+        $street = $request->input('street');
+        $note = $request->input('note');
+
+        $request->validate(
+            [
+                'fullname' => ['required', 'string', 'max:191', 'min:3'],
+                'phone' => ['required', 'regex:/^[0-9]{10,11}$/'],
+                'province' => ['required'],
+                'district' => ['required'],
+                'ward' => ['required'],
+                'street' => ['required', 'max:255', 'min: 5'],
+                'note' => ['max: 255']
+            ],
+            [
+                'required' => ':attribute không được để trống',
+                'max' => ':attribute không vượt quá :max ký tự',
+                'min' => ':attribute phải lớn hơn :min ký tự',
+                'regex' => 'Định dạng không chính xác',
+            ],
+            [
+                'fullname' => 'Tên khách hàng',
+                'phone' => 'Số điện thoại',
+                'province' => 'Trường này',
+                'district' => 'Trường này',
+                'ward' => 'Trường này',
+                'street' => 'Trường này',
+                'note' => 'Trường này'
+            ]
+        );
+
+        $cart_id = [];
+        foreach ($request->input('cart_id') as $cardId) {
+            $cart_id[] = $cardId;
+        }
+
+        return view('website.cart.success', compact('cart_id'));
     }
 
     /**

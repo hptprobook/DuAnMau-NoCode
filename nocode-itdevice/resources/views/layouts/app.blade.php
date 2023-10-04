@@ -365,6 +365,8 @@
                         success: function(response) {
 
                             $('#district').empty();
+                            $('#district').append(
+                                '<option value="">Chọn Quận / huyện</option>');
 
                             $.each(response.districts, function(index, district) {
 
@@ -402,8 +404,9 @@
                         },
                         success: function(response) {
 
-                            console.log(response);
                             $('#ward').empty();
+                            $('#ward').append(
+                                '<option value="">Chọn Xã / phường / trị trấn</option>');
                             $.each(response.wards, function(index, ward) {
                                 $('#ward').append($('<option>', {
                                     value: ward.id,
@@ -422,6 +425,7 @@
             });
 
             $(".detail__attribute--value").change(function() {
+
                 var selectedAttributes = {};
                 var attributeName = $(this).data('attribute-name');
                 var attributeValueId = $(this).data('attribute-id');
@@ -440,6 +444,7 @@
                         attributes: selectedAttributes,
                     },
                     success: function(response) {
+                        // console.log(response);
                         var bonusPrice = response.bonusPrice;
                         var productPrice = response.productPrice;
                         var productNewPrice = response.productNewPrice;

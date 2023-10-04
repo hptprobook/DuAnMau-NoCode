@@ -219,7 +219,7 @@
 }
 
 .address__content--home {
-    height: 132px;
+    min-height: 132px;
     background-color: #ececec;
     border-radius: 4px;
 }
