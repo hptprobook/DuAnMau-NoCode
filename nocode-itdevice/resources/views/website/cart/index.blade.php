@@ -152,19 +152,28 @@
                         <input type="text" name="fullname" class="w-50 ms-2 ps-3" placeholder="Nhập số điện thoại">
                     </div>
                     <h5 class="mt-3">Địa chỉ nhận hàng</h5>
-                    <div class="address__content--home">
+                    <div class="address__content--home px-5">
                         <div class="mt-3 row">
-                            <div class="col-md-6">
-                                <select name="province" id="province"></select>
+                            <div class="col-md-6 mt-3 pe-2">
+                                <select class="w-100 ps-2" name="province" id="province">
+                                    <option value="">Tỉnh / Thành phố</option>
+                                    @foreach ($provinces as $province)
+                                        <option value="{{ $province->id }}">{{ $province->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="col-md-6">
-                                <select name="district" id="district"></select>
+                            <div class="col-md-6 mt-3 ps-2">
+                                <select class="w-100 ps-2" name="district" id="district">
+                                    <option value="">Huyện / Trị trấn</option>
+                                </select>
                             </div>
-                            <div class="col-md-6">
-                                <select name="ward" id="ward"></select>
+                            <div class="col-md-6 mt-3 pe-2">
+                                <select class="w-100 ps-2" name="ward" id="ward">
+                                    <option value="">Xã / phường</option>
+                                </select>
                             </div>
-                            <div class="col-md-6">
-                                <select name="home" id="home"></select>
+                            <div class="col-md-6 mt-3 ps-2">
+                                <input class="w-100 ps-2" name="street" id="street" placeholder="Số nhà, đường" />
                             </div>
                         </div>
                     </div>
@@ -184,6 +193,8 @@
                     </div>
 
                     <button class="w-100 mt-2 cart__orderBtn fw-600">ĐẶT HÀNG NGAY</button>
+
+
                 </div>
             </div>
 

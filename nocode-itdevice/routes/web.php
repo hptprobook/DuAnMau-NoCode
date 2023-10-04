@@ -37,6 +37,9 @@ Route::prefix('website')->name('website.')->group(function () {
         Route::get('/delete/{id}', [CartController::class, 'destroy'])->name('delete');
         Route::post('/update', [CartController::class, 'update'])->name('update');
         Route::post('/address', [CartController::class, 'address'])->name('address');
+
+        Route::post('/getDistrict', [CartController::class, 'getDistrict'])->name('getDistrict');
+        Route::post('/getWard', [CartController::class, 'getWard'])->name('getWard');
     });
 
     Route::prefix('/post')->name('post.')->group(function () {

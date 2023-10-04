@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Cart;
+use App\Models\District;
 use App\Models\Product;
+use App\Models\Province;
 use App\Models\User;
+use App\Models\Ward;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,10 +23,11 @@ class CartController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $provinces = Province::all();
 
         $userCarts = $user->carts()->where('status', 0)->with('product')->get();
 
-        return view('website.cart.index', compact('userCarts'));
+        return view('website.cart.index', compact('userCarts', 'provinces'));
     }
 
     public function add(Request $request)
@@ -45,6 +49,24 @@ class CartController extends Controller
         return response()->json(['bonusPrice' => $productPrice - $product->price, 'productPrice' => $productPrice, 'productNewPrice' => $productNewPrice]);
     }
 
+    public function getDistrict(Request $request)
+    {
+
+        $province_id = sprintf('%02d', $request->input('province_id'), '0');
+
+        $districts = District::where('parent_code', $province_id)->get();
+
+        return response()->json(['districts' => $districts]);
+    }
+
+    public function getWard(Request $request)
+    {
+        $district_id = sprintf('%03d', $request->input('district_id'), '00');
+
+        $wards = Ward::where('parent_code', $district_id)->get();
+
+        return response()->json(['wards' => $wards]);
+    }
 
 
     /**

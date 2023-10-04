@@ -348,8 +348,81 @@
 
     <script>
         $(document).ready(function() {
-            var selectedAttributes = {};
+
+            $('#province').on('change', function() {
+                var province_id = $(this).val();
+
+                if (province_id) {
+                    $.ajax({
+                        url: '{{ route('website.cart.getDistrict') }}',
+                        method: 'POST',
+                        cache: false,
+                        dataType: "json",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            province_id: province_id
+                        },
+                        success: function(response) {
+
+                            $('#district').empty();
+
+                            $.each(response.districts, function(index, district) {
+
+                                $('#district').append($('<option>', {
+                                    value: district.id,
+                                    text: district.name_with_type
+                                }));
+                            });
+                            $('#ward').empty();
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                            console.log('Error: ' + errorThrown);
+                        }
+                    });
+                    $('#ward').empty();
+                } else {
+                    $('#district').empty();
+                }
+
+            });
+
+            $('#district').on('change', function() {
+                var district_id = $(this).val();
+                console.log(district_id);
+
+                if (district_id) {
+                    $.ajax({
+                        url: '{{ route('website.cart.getWard') }}',
+                        method: 'POST',
+                        dataType: "json",
+                        cache: false,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            district_id: district_id
+                        },
+                        success: function(response) {
+
+                            console.log(response);
+                            $('#ward').empty();
+                            $.each(response.wards, function(index, ward) {
+                                $('#ward').append($('<option>', {
+                                    value: ward.id,
+                                    text: ward.name_with_type
+                                }));
+                            });
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                            console.log('Error: ' + errorThrown);
+                        }
+                    });
+                } else {
+                    // If no district is selected, clear the options in the "award" select box
+                    $('#wards').empty();
+                }
+            });
+
             $(".detail__attribute--value").change(function() {
+                var selectedAttributes = {};
                 var attributeName = $(this).data('attribute-name');
                 var attributeValueId = $(this).data('attribute-id');
                 var product_id = $('.product__detail--id').val();

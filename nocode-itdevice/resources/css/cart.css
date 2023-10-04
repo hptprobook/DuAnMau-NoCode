@@ -231,4 +231,12 @@
     height: 40px;
 }
 
+.address__content--home select,
+.address__content--home input {
+    outline: none;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid #888;
+}
+
 

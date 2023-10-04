@@ -5,22 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Address extends Model
+class Ward extends Model
 {
     use HasFactory;
-
-    public function ward()
-    {
-        return $this->belongsTo(Ward::class, 'ward_id');
-    }
 
     public function district()
     {
         return $this->belongsTo(District::class);
     }
 
-    public function province()
+    public function addresses()
     {
-        return $this->belongsTo(Province::class);
+        return $this->hasMany(Address::class);
     }
 }
