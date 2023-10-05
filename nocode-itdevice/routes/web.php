@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\PostController as WebsitePostController;
@@ -37,6 +38,18 @@ Route::prefix('website')->name('website.')->group(function () {
         Route::get('/delete/{id}', [CartController::class, 'destroy'])->name('delete');
         Route::post('/update', [CartController::class, 'update'])->name('update');
         Route::post('/address', [CartController::class, 'address'])->name('address');
+
+        Route::post('/order', [CartController::class, 'order'])->name('order');
+
+        Route::post('/getDistrict', [CartController::class, 'getDistrict'])->name('getDistrict');
+        Route::post('/getWard', [CartController::class, 'getWard'])->name('getWard');
+    });
+
+    Route::prefix('/customer')->name('customer.')->middleware('auth')->group(function () {
+        Route::get('/', [CustomerController::class, 'index'])->name('index');
+        Route::get('/address', [CustomerController::class, 'address'])->name('address');
+        Route::get('/order', [CustomerController::class, 'order'])->name('order');
+        Route::get('/order-detail/{id}', [CustomerController::class, 'orderDetail'])->name('orderDetail');
     });
 
     Route::prefix('/post')->name('post.')->group(function () {

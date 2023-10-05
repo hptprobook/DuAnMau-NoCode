@@ -1,0 +1,19 @@
+.customer__sidebar,
+.customer__container {
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    border-radius: 4px;
+    height: 400px;
+}
+
+.customer__sidebar--info {
+    font-size: 18px;
+}
+
+.customer__sidebar a:hover{
+    color: var(--main-color);
+}
+
+.customer__sidebar a.active {
+    color: var(--main-color);
+}
