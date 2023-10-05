@@ -35,9 +35,27 @@ class CustomerController extends Controller
 
         $customer = Auth::user();
 
-        $orders = OrderDetail::where('user_id', $customer->id)->get();
+        $orders = OrderDetail::where('user_id', $customer->id)
+            ->with('address')
+            ->simplePaginate(4);
 
         return view('website.customer.order', compact('customer', 'orders'));
+    }
+
+    public function orderDetail(string $id)
+    {
+
+        $customer = Auth::user();
+
+        $orderIds = json_decode(OrderDetail::find($id)->order_id);
+
+        $orders = [];
+
+        foreach ($orderIds as $orderId) {
+            $orders[] = Order::find($orderId);
+        }
+
+        return view('website.customer.orderDetail', compact('orderIds', 'customer', 'orders', 'id'));
     }
 
     /**

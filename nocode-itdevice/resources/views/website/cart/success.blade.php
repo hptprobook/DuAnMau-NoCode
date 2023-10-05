@@ -28,12 +28,22 @@
 
 
             </div>
-            <div>
-                <div class="alert alert-success">Đặt hàng thành công</div>
-                <a href="">Về trang chủ</a>
-                <a href="">Theo dõi đơn hàng</a>
-                <input type="text" placeholder="Nhập mã giảm giá">
-                <button>Áp dụng</button>
+            <div class="w-100">
+                <h4 class="text-main fw-700 pt-5 pb-4 text-center">Bạn đã đặt hàng thành công</h4>
+                <form action="" method="post" style="width: 400px;border: 1px solid #888; border-radius:4px"
+                    class="mb-5 m-auto d-flex justify-content-center">
+                    @csrf
+                    <input type="text" placeholder="Nhập mã giảm giá" class="ps-3"
+                        style="height: 40px; outline: none; border: none; width: 80%;">
+                    <button class="coupon-btn" style="width: 20%; border: none">Áp dụng</button>
+                </form>
+                <a href="{{ route('website.home') }}" class="text-center text-blue" style="font-size: 18px">
+                    <div>Về trang chủ</div>
+                </a>
+                <a href="{{ route('website.customer.order') }}" class="text-center text-blue" style="font-size: 18px">
+                    <div>Theo dõi đơn hàng</div>
+                </a>
+
             </div>
         </div>
     </div>

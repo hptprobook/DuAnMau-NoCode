@@ -49,6 +49,7 @@ Route::prefix('website')->name('website.')->group(function () {
         Route::get('/', [CustomerController::class, 'index'])->name('index');
         Route::get('/address', [CustomerController::class, 'address'])->name('address');
         Route::get('/order', [CustomerController::class, 'order'])->name('order');
+        Route::get('/order-detail/{id}', [CustomerController::class, 'orderDetail'])->name('orderDetail');
     });
 
     Route::prefix('/post')->name('post.')->group(function () {
