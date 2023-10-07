@@ -59,7 +59,7 @@
                                                     @php
                                                         $readableString = '';
                                                         $decodedArray = json_decode($item->attributes);
-                                                        
+
                                                         if ($decodedArray != null) {
                                                             $readableString = implode(', ', $decodedArray);
                                                         } else {
@@ -228,8 +228,10 @@
 
             </form>
         @else
-            <div class="text-center">Giỏ hàng trống</div>
-            <a href="{{ route('website.product.index') }}">Tiếp tục mua sắm</a>
+            <h4 class="py-5 text-center fw-700">Giỏ hàng trống</h4>
+            <h5 class="text-center">
+                <a class="text-blue" href="{{ route('website.product.index') }}">Danh sách sản phẩm bán chạy</a>
+            </h5>
         @endif
     </div>
 @endsection

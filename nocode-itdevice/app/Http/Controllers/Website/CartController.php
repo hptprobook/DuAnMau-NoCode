@@ -158,6 +158,7 @@ class CartController extends Controller
         );
 
         $total_amount = 0;
+        $order_ids = [];
 
         foreach ($request->input('cart_id') as $cardId) {
             Cart::where('id', $cardId)->update([
@@ -167,18 +168,21 @@ class CartController extends Controller
             $cart = Cart::find($cardId);
             $total_amount += ($cart->provision * $cart->quantity);
 
-            Order::create(
+            $order = Order::create(
                 [
                     'cart_id' => $cart->id,
                     'quantity' => $cart->quantity,
                     'price' => $cart->provision,
                 ]
             );
+
+            $order_ids[] = $order->id;
         }
 
         OrderDetail::create(
             [
                 'user_id' => Auth::user()->id,
+                'order_id' => json_encode($order_ids),
                 'status' => 0,
                 'total_amount' => $total_amount,
                 'address_id' => $address->id
