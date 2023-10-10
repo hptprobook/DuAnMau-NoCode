@@ -491,6 +491,7 @@
                         price: price
                     },
                     success: function(response) {
+                        console.log(response);
                         $('.addCard-overlay').addClass('active');
                     },
                     error: function(error) {

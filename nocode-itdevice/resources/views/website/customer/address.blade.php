@@ -40,8 +40,12 @@
                     <h4 class="fw-700">Danh sách địa chỉ đã lưu</h4>
 
                     @foreach ($address as $street)
-                        <p>{{ $street->street }}</p>
+                        <div>
+                            <input type="radio" id="address{{ $street->id }}" name="address" id="">
+                            <label for="address{{ $street->id }}">{{ $street->street }}</label>
+                        </div>
                     @endforeach
+                    <button type="submit" class="save-info-btn px-3 mt-2 text-white fw-500">Đặt làm mặc định</button>
 
                 </div>
             </div>

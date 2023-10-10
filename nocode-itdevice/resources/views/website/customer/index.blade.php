@@ -37,36 +37,56 @@
             </div>
             <div class="col-md-9">
                 <div class="customer__container p-4">
-                    <h4 class="fw-700">Thông tin tài khoản</h4>
-                    <div class="row align-items-center" style="height: 52px">
-                        <div class="col-md-2 justify-content-end d-flex">
-                            <label for="">Họ tên</label>
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
                         </div>
-                        <div class="col-md-10">
-                            <input type="text" value="{{ $customer->name }}">
+                    @endif
+                    <form action="{{ route('website.customer.info') }}" method="post">
+                        @csrf
+                        <h4 class="fw-700">Thông tin tài khoản</h4>
+                        <div class="row align-items-center" style="height: 52px">
+                            <div class="col-md-2 justify-content-end d-flex">
+                                <label for="fullname">Họ tên</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="input" type="text" id="fullname" name="fullname"
+                                    value="{{ $customer->name }}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row align-items-center" style="height: 52px">
-                        <div class="col-md-2 justify-content-end d-flex">
-                            <label for="">Số điện thoại</label>
+                        @error('fullname')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                        <div class="row align-items-center" style="height: 52px">
+                            <div class="col-md-2 justify-content-end d-flex">
+                                <label for="customer-phone">Số điện thoại</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="input" type="text" name="phone" id="customer-phone"
+                                    value="{{ $customer->phone_number }}">
+                            </div>
                         </div>
-                        <div class="col-md-10">
-                            <input type="text" value="{{ $customer->phone }}">
-                        </div>
-                    </div>
+                        @error('fullname')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
 
-                    <div class="row align-items-center" style="height: 52px">
-                        <div class="col-md-2 justify-content-end d-flex">
-                            <label for="">Email</label>
+                        <div class="row align-items-center" style="height: 52px">
+                            <div class="col-md-2 justify-content-end d-flex">
+                                <label for="customer-email">Email</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input class="input" type="text" id="customer-email" name="email"
+                                    value="{{ $customer->email }}">
+                            </div>
                         </div>
-                        <div class="col-md-10">
-                            <input type="text" value="{{ $customer->email }}">
-                        </div>
-                    </div>
+                        @error('fullname')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
 
-                    <div class="offset-2 p-1">
-                        <button>Lưu thay đổi</button>
-                    </div>
+                        <div class="offset-2 p-1">
+                            <button type="submit" class="save-info-btn px-3 mt-2 text-white fw-500">Lưu thay đổi</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

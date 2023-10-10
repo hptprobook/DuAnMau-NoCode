@@ -50,6 +50,9 @@ Route::prefix('website')->name('website.')->group(function () {
         Route::get('/address', [CustomerController::class, 'address'])->name('address');
         Route::get('/order', [CustomerController::class, 'order'])->name('order');
         Route::get('/order-detail/{id}', [CustomerController::class, 'orderDetail'])->name('orderDetail');
+        Route::post('/info', [CustomerController::class, 'info'])->name('info');
+        Route::get('/reset', [CustomerController::class, 'reset'])->name('reset');
+        Route::get('/order-destroy/{id}', [CustomerController::class, 'orderDestroy'])->name('orderDestroy');
     });
 
     Route::prefix('/post')->name('post.')->group(function () {
@@ -166,5 +169,15 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/', [WebsiteController::class, 'info'])->name('info');
         Route::post('/update-info', [WebsiteController::class, 'updateInfo'])->name('updateInfo');
         Route::get('/image', [WebsiteController::class, 'image'])->name('image');
+    });
+
+    Route::prefix('order')->name('order.')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::get('/confirm/{id}', [OrderController::class, 'confirmOrder'])->name('confirmOrder');
+        Route::get('/confirmShipping/{id}', [OrderController::class, 'confirmShipping'])->name('confirmShipping');
+        Route::get('/confirmReceive/{id}', [OrderController::class, 'confirmReceive'])->name('confirmReceive');
+        Route::get('/destroyOrder/{id}', [OrderController::class, 'destroyOrder'])->name('destroyOrder');
+        Route::get('/action', [OrderController::class, 'action'])->name('action');
+        Route::get('/orderDetail/{id}', [OrderController::class, 'detail'])->name('orderDetail');
     });
 });

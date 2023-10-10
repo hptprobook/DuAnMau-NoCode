@@ -44,9 +44,32 @@
                 <div class="customer__container p-4">
                     <h4 class="fw-700">Chi tiết đơn hàng #{{ $id }}</h4>
 
-                    @foreach ($orders as $item)
-                        {{ $item }}
-                    @endforeach
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tên sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Loại</th>
+                                <th>Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($orders as $item)
+                                <tr>
+                                    <td><a
+                                            href="{{ route('website.product.detail', $item->product->id) }}">{{ $item->product->name }}</a>
+                                    </td>
+                                    <td>{{ $item->quantity }}</td>
+                                    <td>{{ $item->attributes ?? '' }}</td>
+                                    <td>{{ number_format(round($item->provision, -4), 0, '.', '.') }}đ</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+
+
+
 
 
                 </div>

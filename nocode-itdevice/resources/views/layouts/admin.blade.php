@@ -118,11 +118,10 @@
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
                             <li><a href="{{ route('admin.attribute.index') }}">Thêm mới</a></li>
-                            <li><a href="{{ route('admin.order') }}">Danh sách</a></li>
                         </ul>
                     </li>
                     <li class="nav-link {{ $module_active == 'order' ? 'active' : '' }}">
-                        <a href="{{ route('admin.order') }}">
+                        <a href="{{ route('admin.order.index') }}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
                             </div>
@@ -130,7 +129,7 @@
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
-                            <li><a href="{{ route('admin.order') }}">Đơn hàng</a></li>
+                            <li><a href="{{ route('admin.order.index') }}">Đơn hàng</a></li>
                         </ul>
                     </li>
                     <li class="nav-link {{ $module_active == 'user' ? 'active' : '' }}">
