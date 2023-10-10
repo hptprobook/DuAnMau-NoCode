@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\MainCategory;
 use App\Models\Website;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class WebsiteServiceProvider extends ServiceProvider
@@ -28,5 +30,14 @@ class WebsiteServiceProvider extends ServiceProvider
 
         $mainCats = MainCategory::with('categories.childCategories')->get();
         view()->share('mainCats', $mainCats);
+
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user_id = $user->id;
+        } else {
+            $user_id = 0;
+        }
+
+        view()->share('cartCount', $user_id);
     }
 }

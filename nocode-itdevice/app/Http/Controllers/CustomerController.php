@@ -9,6 +9,7 @@ use App\Models\OrderDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
@@ -19,6 +20,8 @@ class CustomerController extends Controller
     {
 
         $customer = Auth::user();
+
+        view()->share(compact('customer'));
 
         return view('website.customer.index', compact('customer'));
     }
@@ -106,56 +109,44 @@ class CustomerController extends Controller
         return redirect()->route('website.customer.index', compact('customer'))->with('success', 'Cập nhật thông tin thành công!');
     }
 
-    public function reset()
+    public function change()
     {
-        return view('auth.passwords.reset');
+        return view('auth.passwords.change');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function changePassword(Request $request)
     {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $request->validate(
+            [
+                'old-password' => ['required'],
+                'new-password' => ['required', 'min:8', 'max:50'],
+                'confirm-password' => ['required', 'same:new-password'],
+            ],
+            [
+                'required' => 'Trường này không được để trống',
+                'min' => ':attribute phải có ít nhất :min ký tự',
+                'max' => ':attribute phải có ít nhất :max ký tự',
+                'same' => ':attribute không chính xác'
+            ],
+            [
+                'old-password' => 'Mật khẩu cũ',
+                'new-password' => 'Mật khẩu mới',
+                'confirm-password' => 'Xác nhận mật khẩu mới'
+            ]
+        );
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $user = Auth::user();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        if (!Hash::check($request->input('old-password'), $user->password)) {
+            return back()->withErrors(['old-password' => 'Mật khẩu cũ không đúng.']);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $user->password = Hash::make($request->input('new-password'));
+        $user->save();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        Auth::logout();
+
+        return view('auth.login');
     }
 }

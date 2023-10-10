@@ -7,6 +7,36 @@
         <div class="row">
 
             @if ($products->count() > 0)
+                <div class="d-flex justify-content-between">
+
+                    <form action="" style="width: 360px" method="get">
+                        <label for="" class="form-label">Lọc theo khoảng giá</label>
+                        <input type="hidden" name="mainCat" value="{{ $mainCatId }}">
+                        <input type="hidden" name="category" value="{{ $catId }}">
+                        <input type="hidden" name="childCat" value="{{ $childCatId }}">
+                        <div class="d-flex">
+                            <input type="number" name="from" class="form-control" placeholder="Từ ..."
+                                value="{{ $fromPrice ?? 0 }}">
+                            <input type="number" name="to" class="form-control ms-2" placeholder="đến ..."
+                                value="{{ $toPrice ?? 20000000 }}">
+                        </div>
+                        <button type="submit" class="btn btn-danger mt-2">Lọc</button>
+                    </form>
+
+                    <form action="" style="width: 150px" method="get">
+                        <label for="sort" class="form-label">Sắp xếp theo</label>
+                        <input type="hidden" name="mainCat" value="{{ $mainCatId }}">
+                        <input type="hidden" name="category" value="{{ $catId }}">
+                        <input type="hidden" name="childCat" value="{{ $childCatId }}">
+                        <select class="form-select" id="sort">
+                            <option value="">Nổi bật</option>
+                            <option value="asc">Giá tăng dần</option>
+                            <option value="desc">Giá giảm dần</option>
+                        </select>
+                        <button type="submit" class="btn btn-danger mt-2 float-end">Sắp xếp</button>
+                    </form>
+                </div>
+
                 @foreach ($products as $product)
                     <div class="col-md-3">
                         <div class="productList__item mt-4 p-4">

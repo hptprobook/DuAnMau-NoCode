@@ -53,6 +53,9 @@ Route::prefix('website')->name('website.')->group(function () {
         Route::post('/info', [CustomerController::class, 'info'])->name('info');
         Route::get('/reset', [CustomerController::class, 'reset'])->name('reset');
         Route::get('/order-destroy/{id}', [CustomerController::class, 'orderDestroy'])->name('orderDestroy');
+
+        Route::get('/change-password', [CustomerController::class, 'change'])->name('change');
+        Route::post('/change-password-', [CustomerController::class, 'changePassword'])->name('changePassword');
     });
 
     Route::prefix('/post')->name('post.')->group(function () {
