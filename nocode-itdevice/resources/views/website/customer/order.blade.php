@@ -69,9 +69,14 @@
                                             {{ $item->status }}
                                         </span>
                                     </td>
-                                    <td style="vertical-align: middle;"><a class="btn btn-warning text-white"
+                                    <td style="vertical-align: middle;">
+                                        <a class="btn btn-warning text-white"
                                             href="{{ route('website.customer.orderDetail', $item->id) }}">Chi
-                                            tiết</a></td>
+                                            tiết</a>
+                                        <a class="btn btn-danger text-white ms-2"
+                                            href="{{ route('website.customer.orderDestroy', $item->id) }}">Huỷ</a>
+                                    </td>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
