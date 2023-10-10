@@ -16,11 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('full_name');
             $table->string('phone');
-            $table->unsignedBigInteger('province_id');
-            $table->unsignedBigInteger('district_id');
+            $table->unsignedBigInteger('province_id')->nullable();
+            $table->unsignedBigInteger('district_id')->nullable();
             $table->unsignedBigInteger('ward_id');
             $table->string('street');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('province_id')->references('id')->on('provinces');
             $table->foreign('district_id')->references('id')->on('districts');

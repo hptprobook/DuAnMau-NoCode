@@ -195,7 +195,7 @@
                                                 </div>
                                             </a>
 
-                                            <a href="" class="link">
+                                            <a href="{{ route('website.customer.order') }}" class="link">
                                                 <div class="body">
                                                     <i class="bi bi-clipboard2-check pe-3"></i>
                                                     Đơn hàng của tôi
