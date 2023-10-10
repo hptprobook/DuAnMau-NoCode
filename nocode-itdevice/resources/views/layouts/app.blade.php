@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/solid.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -78,7 +79,6 @@
                                 @endforeach
                             </ul>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -101,11 +101,10 @@
                             <i class="bi bi-list"></i>
                             Danh mục
                         </div>
-                        <form action="" method="POST" class="ms-2 navbar--form">
+                        <form action="{{ route('website.product.index') }}" method="get" class="ms-2 navbar--form">
                             @csrf
-                            @method('POST')
                             <input type="text" class="form-input-invisible ps-3 w-95" name="search"
-                                placeholder="Bạn cần tìm gì?">
+                                placeholder="Bạn cần tìm gì?" value="{{ $search ?? '' }}">
                             <button type="submit" class="form-input-invisible float-end me-2 ms-1">
                                 <i class="bi bi-search"></i>
                             </button>
@@ -139,7 +138,7 @@
                         <div class="navbar--cart h-44 navbar__item">
                             <a href="{{ route('website.cart.index') }}" class="d-flex">
                                 <i class="bi bi-cart pe-2 icon">
-                                    <span class="count">1</span>
+                                    <span class="count">{{ $customer->id }}</span>
                                 </i>
                                 <div class="">Giỏ hàng</div>
                             </a>
@@ -199,6 +198,13 @@
                                                 <div class="body">
                                                     <i class="bi bi-clipboard2-check pe-3"></i>
                                                     Đơn hàng của tôi
+                                                </div>
+                                            </a>
+
+                                            <a href="{{ route('website.customer.change') }}" class="link">
+                                                <div class="body">
+                                                    <i class="bi bi-lock pe-3"></i>
+                                                    Đổi mật khẩu
                                                 </div>
                                             </a>
 
@@ -491,6 +497,7 @@
                         price: price
                     },
                     success: function(response) {
+                        console.log(response);
                         $('.addCard-overlay').addClass('active');
                     },
                     error: function(error) {

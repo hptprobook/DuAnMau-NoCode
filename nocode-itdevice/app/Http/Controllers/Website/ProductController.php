@@ -17,14 +17,16 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        // Lấy các tham số truy vấn từ URL
         $mainCatId = $request->input('mainCat');
         $catId = $request->input('category');
         $childCatId = $request->input('childCat');
+        $search = $request->input('search') ?? '';
+        $fromPrice = $request->input('from');
+        $toPrice = $request->input('to');
+        $sort = $request->input('sort');
 
         $name = "";
 
-        // Truy vấn danh sách sản phẩm dựa trên các tham số truy vấn
         $productsQuery = Product::query();
 
         if ($mainCatId) {
@@ -48,10 +50,25 @@ class ProductController extends Controller
             $name = ChildCategory::find($childCatId)->name;
         }
 
+        if (!empty($search)) {
+            $productsQuery->where('name', 'like', '%' . $search . '%');
+        }
+
+        if ($fromPrice !== null && $toPrice !== null) {
+            $productsQuery->whereBetween('price', [$fromPrice, $toPrice]);
+        }
+
+        if ($sort === 'asc') {
+            $productsQuery->orderBy('price', 'asc');
+        } elseif ($sort === 'desc') {
+            $productsQuery->orderBy('price', 'desc');
+        }
+
         $products = $productsQuery->get();
 
-        return view('website.product.index', compact('products', 'name'));
+        return view('website.product.index', compact('products', 'name', 'mainCatId', 'catId', 'childCatId', 'search', 'fromPrice', 'toPrice'));
     }
+
 
 
 

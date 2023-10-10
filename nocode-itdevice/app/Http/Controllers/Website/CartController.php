@@ -107,7 +107,7 @@ class CartController extends Controller
                 'product_id' => $product_id,
                 'quantity' => 1,
                 'provision' => $price,
-                'status' => 0,
+                'status' => '0',
                 'attributes' => json_encode($attributeValues)
             ]);
         }
@@ -158,7 +158,7 @@ class CartController extends Controller
         );
 
         $total_amount = 0;
-        $order_ids = [];
+        $cart_ids = [];
 
         foreach ($request->input('cart_id') as $cardId) {
             Cart::where('id', $cardId)->update([
@@ -170,20 +170,20 @@ class CartController extends Controller
 
             $order = Order::create(
                 [
-                    'cart_id' => $cart->id,
+                    'product_id' => $cart->product_id,
                     'quantity' => $cart->quantity,
                     'price' => $cart->provision,
                 ]
             );
 
-            $order_ids[] = $order->id;
+            $cart_ids[] = intval($cardId);
         }
 
         OrderDetail::create(
             [
                 'user_id' => Auth::user()->id,
-                'order_id' => json_encode($order_ids),
-                'status' => 0,
+                'cart_id' => json_encode($cart_ids),
+                'status' => 'Đang xác nhận',
                 'total_amount' => $total_amount,
                 'address_id' => $address->id
             ]

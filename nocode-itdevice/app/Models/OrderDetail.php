@@ -9,10 +9,12 @@ class OrderDetail extends Model
 {
     use HasFactory;
 
+    public $countOrder;
+
     protected $fillable = [
         'id',
         'user_id',
-        'order_id',
+        'cart_id',
         'status',
         'total_amount',
         'address_id',
@@ -31,5 +33,10 @@ class OrderDetail extends Model
     public function address()
     {
         return $this->belongsTo(Address::class, 'address_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
