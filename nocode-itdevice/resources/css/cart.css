@@ -8,10 +8,11 @@
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 99999999999999999999;
+    z-index: 9999999999;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
     display: none;
 }
 
@@ -19,11 +20,16 @@
     display: flex;
 }
 
-.addCart-successfully {
+#addCart-successfully {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #fff;
+    width: 360px;
+    height: 200px;
+    border-radius: 4px;
+    box-shadow: var(--box-shadow);
 }
 
 .cart .back-link {
