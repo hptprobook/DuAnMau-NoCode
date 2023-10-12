@@ -12,7 +12,7 @@
                                     <a href="{{ route('website.product.index', ['mainCat' => $mainCat->id]) }}"
                                         title="{{ $mainCat->name }}" class="home__sidebar--maincat">
                                         {{ Str::limit($mainCat->name, $limit = 18, $end = '...') }}
-                                        <i class="fa-solid fa-angle-right"></i>
+                                        <i class="fa-solid fa-angle-right hidden__icon" ></i>
                                     </a>
 
                                     <div class="home__sidebar--child">

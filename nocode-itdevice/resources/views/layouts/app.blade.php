@@ -115,28 +115,28 @@
                     <ul class="navbar-nav ms-auto fs-13">
 
                         <div class="navbar--hotline h-44 navbar__item">
-                            <a href="" class="d-flex">
+                            <a href="" class="d-flex align-items-center justify-content-center">
                                 <i class="bi bi-headset pe-2"></i>
                                 <div class="">Hotline<br> {{ $website_info->hotline }}</div>
                             </a>
                         </div>
 
                         <div class="navbar--showroom h-44 navbar__item">
-                            <a href="{{ route('website.showroom') }}" class="d-flex">
+                            <a href="{{ route('website.showroom') }}" class="d-flex d-flex align-items-center justify-content-center">
                                 <i class="bi bi-geo-alt pe-2"></i>
                                 <div class="">Hệ thống Showroom</div>
                             </a>
                         </div>
 
                         <div class="navbar--research-order h-44 navbar__item">
-                            <a href="" class="d-flex">
+                            <a href="" class="d-flex align-items-center justify-content-center">
                                 <i class="bi bi-clipboard2-check pe-2 icon"></i>
                                 <div class="">Tra cứu <br /> đơn hàng</div>
                             </a>
                         </div>
 
                         <div class="navbar--cart h-44 navbar__item">
-                            <a href="{{ route('website.cart.index') }}" class="d-flex">
+                            <a href="{{ route('website.cart.index') }}" class="d-flex d-flex align-items-center justify-content-center">
                                 <i class="bi bi-cart pe-2 icon">
                                     {{-- <span class="count"></span> --}}
                                 </i>
@@ -231,7 +231,6 @@
                 </div>
             </div>
         </nav>
-
         <header class="header head">
             <div class="container d-flex">
                 <a href="">
@@ -266,12 +265,6 @@
                 </a>
             </div>
         </header>
-
-
-
-
-
-
         <main class="mt-4">
             @yield('content')
         </main>
@@ -353,7 +346,7 @@
 
                 if (province_id) {
                     $.ajax({
-                        url: '{{ route('website.cart.getDistrict') }}',
+                        url: "{{ route('website.cart.getDistrict') }}",
                         method: 'POST',
                         cache: false,
                         dataType: "json",
@@ -393,7 +386,7 @@
 
                 if (district_id) {
                     $.ajax({
-                        url: '{{ route('website.cart.getWard') }}',
+                        url: "{{ route('website.cart.getWard') }}",
                         method: 'POST',
                         dataType: "json",
                         cache: false,

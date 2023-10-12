@@ -228,3 +228,9 @@
     border-radius: 6px;
     background-color: rgba(255, 0, 0, 0.062);
 }
+@media only screen and (max-width: 739px) {
+    .hidden__icon{
+        display: none;
+    }
+
+}
