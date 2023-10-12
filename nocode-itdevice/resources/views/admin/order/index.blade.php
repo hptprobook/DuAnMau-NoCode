@@ -42,7 +42,7 @@
                     <a href="{{ request()->fullUrlWithQuery(['status' => 'Đã huỷ']) }}" class="text-primary">Đã huỷ<span
                             class="text-muted">({{ $count[4] }})</span></a>
                 </div>
-                <form action="{{ route('admin.order.action') }}" method="posst">
+                <form action="{{ route('admin.order.action') }}" method="">
                     @csrf
 
                     <div class="form-action form-inline d-flex py-3">
