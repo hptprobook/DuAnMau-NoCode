@@ -33,8 +33,8 @@
 
         <div class="addCard-overlay">
             <div id="addCart-successfully">
-                <p>Thêm thành công</p>
-                <a href="{{ route('website.cart.index') }}">Xác nhận</a>
+                <p style="font-size: 18px">Thêm sản phẩm thành công</p>
+                <a class="btn btn-danger mt-3" href="{{ route('website.cart.index') }}">Xác nhận</a>
             </div>
         </div>
 
@@ -138,7 +138,7 @@
                         <div class="navbar--cart h-44 navbar__item">
                             <a href="{{ route('website.cart.index') }}" class="d-flex d-flex align-items-center justify-content-center">
                                 <i class="bi bi-cart pe-2 icon">
-                                    <span class="count">{{-- $customer->id --}}</span>
+                                    {{-- <span class="count"></span> --}}
                                 </i>
                                 <div class="">Giỏ hàng</div>
                             </a>
