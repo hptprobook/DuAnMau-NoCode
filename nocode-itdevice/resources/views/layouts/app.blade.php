@@ -230,8 +230,45 @@
                     </ul>
                 </div>
             </div>
+            <div class="home__sidebar category__mobile" style="display:none">
+                        <ul class="home__sidebar--list list-unstyled">
+                            @foreach ($mainCats as $mainCat)
+                                <li class="home__sidebar--item">
+                                    <a href="{{ route('website.product.index', ['mainCat' => $mainCat->id]) }}"
+                                        title="{{ $mainCat->name }}" class="home__sidebar--maincat">
+                                        {{ Str::limit($mainCat->name, $limit = 18, $end = '...') }}
+                                        <i class="fa-solid fa-angle-right hidden__icon" ></i>
+                                    </a>
+
+                                    <div class="home__sidebar--child">
+                                        <div class="row">
+                                            @foreach ($mainCat->categories as $category)
+                                                <div class="col-custom mt-3">
+                                                    <div class="sidebar__child--list">
+                                                        <h5><a href="{{ route('website.product.index', ['category' => $category->id]) }}"
+                                                                class="text-dark sidebar__list--title">{{ $category->name }}</a>
+                                                        </h5>
+                                                        <ul class="list-unstyled">
+                                                            @foreach ($category->childCategories as $childCategory)
+                                                                <li class="sidebar__child--item">
+                                                                    <a href="{{ route('website.product.index', ['childCat' => $childCategory->id]) }}"
+                                                                        title="{{ $childCategory->name }}"
+                                                                        class="sidebar__item--link">{{ $childCategory->name }}</a>
+                                                                </li>
+                                                            @endforeach
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
         </nav>
-        <header class="header head">
+        <header class="header head header__desktop">
             <div class="container d-flex">
                 <a href="">
                     <div class="header--item">
