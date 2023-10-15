@@ -437,10 +437,7 @@
     }
     /* responsive end */
     .home__sidebar--list::-webkit-scrollbar,
-    .header::-webkit-scrollbar
-    .pc__header__categories::-webkit-scrollbar {
-        display: none;
-    }
+    .header::-webkit-scrollbar,
     .header--item{
         width: 200px;
         text-align: center;
