@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/solid.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -32,8 +33,8 @@
 
         <div class="addCard-overlay">
             <div id="addCart-successfully">
-                <p>Thêm thành công</p>
-                <a href="{{ route('website.cart.index') }}">Xác nhận</a>
+                <p style="font-size: 18px">Thêm sản phẩm thành công</p>
+                <a class="btn btn-danger mt-3" href="{{ route('website.cart.index') }}">Xác nhận</a>
             </div>
         </div>
 
@@ -78,7 +79,6 @@
                                 @endforeach
                             </ul>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -101,11 +101,10 @@
                             <i class="bi bi-list"></i>
                             Danh mục
                         </div>
-                        <form action="" method="POST" class="ms-2 navbar--form">
+                        <form action="{{ route('website.product.index') }}" method="get" class="ms-2 navbar--form">
                             @csrf
-                            @method('POST')
                             <input type="text" class="form-input-invisible ps-3 w-95" name="search"
-                                placeholder="Bạn cần tìm gì?">
+                                placeholder="Bạn cần tìm gì?" value="{{ $search ?? '' }}">
                             <button type="submit" class="form-input-invisible float-end me-2 ms-1">
                                 <i class="bi bi-search"></i>
                             </button>
@@ -116,30 +115,30 @@
                     <ul class="navbar-nav ms-auto fs-13">
 
                         <div class="navbar--hotline h-44 navbar__item">
-                            <a href="" class="d-flex">
+                            <a href="" class="d-flex align-items-center justify-content-center">
                                 <i class="bi bi-headset pe-2"></i>
                                 <div class="">Hotline<br> {{ $website_info->hotline }}</div>
                             </a>
                         </div>
 
                         <div class="navbar--showroom h-44 navbar__item">
-                            <a href="{{ route('website.showroom') }}" class="d-flex">
+                            <a href="{{ route('website.showroom') }}" class="d-flex d-flex align-items-center justify-content-center">
                                 <i class="bi bi-geo-alt pe-2"></i>
                                 <div class="">Hệ thống Showroom</div>
                             </a>
                         </div>
 
                         <div class="navbar--research-order h-44 navbar__item">
-                            <a href="" class="d-flex">
+                            <a href="" class="d-flex align-items-center justify-content-center">
                                 <i class="bi bi-clipboard2-check pe-2 icon"></i>
                                 <div class="">Tra cứu <br /> đơn hàng</div>
                             </a>
                         </div>
 
                         <div class="navbar--cart h-44 navbar__item">
-                            <a href="{{ route('website.cart.index') }}" class="d-flex">
+                            <a href="{{ route('website.cart.index') }}" class="d-flex d-flex align-items-center justify-content-center">
                                 <i class="bi bi-cart pe-2 icon">
-                                    <span class="count">1</span>
+                                    {{-- <span class="count"></span> --}}
                                 </i>
                                 <div class="">Giỏ hàng</div>
                             </a>
@@ -188,24 +187,24 @@
                                         Xin chào<br>{{ Str::limit(Auth::user()->name, $limit = 8, $end = '...') }}
 
                                         <div class="logged--child">
-                                            <a href="" class="link">
+                                            <a href="{{ route('website.customer.index') }}" class="link">
                                                 <div class="header">
                                                     <i class="bi bi-emoji-laughing pe-3"></i>
                                                     Xin chào, {{ Auth::user()->name }}
                                                 </div>
                                             </a>
 
-                                            <a href="" class="link">
+                                            <a href="{{ route('website.customer.order') }}" class="link">
                                                 <div class="body">
                                                     <i class="bi bi-clipboard2-check pe-3"></i>
                                                     Đơn hàng của tôi
                                                 </div>
                                             </a>
 
-                                            <a href="" class="link">
-                                                <div class="body" style="border-bottom: 1px solid #f0f0f0">
-                                                    <i class="bi bi-eye pe-3"></i>
-                                                    Đã xem gần đây
+                                            <a href="{{ route('website.customer.change') }}" class="link">
+                                                <div class="body">
+                                                    <i class="bi bi-lock pe-3"></i>
+                                                    Đổi mật khẩu
                                                 </div>
                                             </a>
 
@@ -231,9 +230,45 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+            <div class="home__sidebar category__mobile" style="display:none">
+                        <ul class="home__sidebar--list list-unstyled">
+                            @foreach ($mainCats as $mainCat)
+                                <li class="home__sidebar--item">
+                                    <a href="{{ route('website.product.index', ['mainCat' => $mainCat->id]) }}"
+                                        title="{{ $mainCat->name }}" class="home__sidebar--maincat">
+                                        {{ Str::limit($mainCat->name, $limit = 18, $end = '...') }}
+                                        <i class="fa-solid fa-angle-right hidden__icon" ></i>
+                                    </a>
 
-        <header class="header head">
+                                    <div class="home__sidebar--child">
+                                        <div class="row">
+                                            @foreach ($mainCat->categories as $category)
+                                                <div class="col-custom mt-3">
+                                                    <div class="sidebar__child--list">
+                                                        <h5><a href="{{ route('website.product.index', ['category' => $category->id]) }}"
+                                                                class="text-dark sidebar__list--title">{{ $category->name }}</a>
+                                                        </h5>
+                                                        <ul class="list-unstyled">
+                                                            @foreach ($category->childCategories as $childCategory)
+                                                                <li class="sidebar__child--item">
+                                                                    <a href="{{ route('website.product.index', ['childCat' => $childCategory->id]) }}"
+                                                                        title="{{ $childCategory->name }}"
+                                                                        class="sidebar__item--link">{{ $childCategory->name }}</a>
+                                                                </li>
+                                                            @endforeach
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+        </nav>
+        <header class="header head header__desktop">
             <div class="container d-flex">
                 <a href="">
                     <div class="header--item">
@@ -267,12 +302,6 @@
                 </a>
             </div>
         </header>
-
-
-
-
-
-
         <main class="mt-4">
             @yield('content')
         </main>
@@ -348,8 +377,85 @@
 
     <script>
         $(document).ready(function() {
-            var selectedAttributes = {};
+
+            $('#province').on('change', function() {
+                var province_id = $(this).val();
+
+                if (province_id) {
+                    $.ajax({
+                        url: "{{ route('website.cart.getDistrict') }}",
+                        method: 'POST',
+                        cache: false,
+                        dataType: "json",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            province_id: province_id
+                        },
+                        success: function(response) {
+
+                            $('#district').empty();
+                            $('#district').append(
+                                '<option value="">Chọn Quận / huyện</option>');
+
+                            $.each(response.districts, function(index, district) {
+
+                                $('#district').append($('<option>', {
+                                    value: district.id,
+                                    text: district.name_with_type
+                                }));
+                            });
+                            $('#ward').empty();
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                            console.log('Error: ' + errorThrown);
+                        }
+                    });
+                    $('#ward').empty();
+                } else {
+                    $('#district').empty();
+                }
+
+            });
+
+            $('#district').on('change', function() {
+                var district_id = $(this).val();
+                console.log(district_id);
+
+                if (district_id) {
+                    $.ajax({
+                        url: "{{ route('website.cart.getWard') }}",
+                        method: 'POST',
+                        dataType: "json",
+                        cache: false,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            district_id: district_id
+                        },
+                        success: function(response) {
+
+                            $('#ward').empty();
+                            $('#ward').append(
+                                '<option value="">Chọn Xã / phường / trị trấn</option>');
+                            $.each(response.wards, function(index, ward) {
+                                $('#ward').append($('<option>', {
+                                    value: ward.id,
+                                    text: ward.name_with_type
+                                }));
+                            });
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                            console.log('Error: ' + errorThrown);
+                        }
+                    });
+                } else {
+                    // If no district is selected, clear the options in the "award" select box
+                    $('#wards').empty();
+                }
+            });
+
             $(".detail__attribute--value").change(function() {
+
+                var selectedAttributes = {};
                 var attributeName = $(this).data('attribute-name');
                 var attributeValueId = $(this).data('attribute-id');
                 var product_id = $('.product__detail--id').val();
@@ -367,6 +473,7 @@
                         attributes: selectedAttributes,
                     },
                     success: function(response) {
+                        // console.log(response);
                         var bonusPrice = response.bonusPrice;
                         var productPrice = response.productPrice;
                         var productNewPrice = response.productNewPrice;
@@ -420,6 +527,7 @@
                         price: price
                     },
                     success: function(response) {
+                        console.log(response);
                         $('.addCard-overlay').addClass('active');
                     },
                     error: function(error) {

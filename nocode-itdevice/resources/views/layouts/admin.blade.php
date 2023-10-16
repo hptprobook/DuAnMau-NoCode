@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
     <script src="https://cdn.tiny.cloud/1/ccfwwhqm4w7lrxwp1zz4l7xeej6uq3si24gldj34zyqqtcj4/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
     <title>Admintrator</title>
@@ -118,11 +119,10 @@
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
                             <li><a href="{{ route('admin.attribute.index') }}">Thêm mới</a></li>
-                            <li><a href="{{ route('admin.order') }}">Danh sách</a></li>
                         </ul>
                     </li>
                     <li class="nav-link {{ $module_active == 'order' ? 'active' : '' }}">
-                        <a href="{{ route('admin.order') }}">
+                        <a href="{{ route('admin.order.index') }}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
                             </div>
@@ -130,7 +130,22 @@
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
-                            <li><a href="{{ route('admin.order') }}">Đơn hàng</a></li>
+                            <li><a href="{{ route('admin.order.index') }}">Đơn hàng</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-link {{ $module_active == 'coupon' ? 'active' : '' }}">
+                        <a href="{{ route('admin.coupon.index') }}">
+                            <div class="nav-link-icon d-inline-flex">
+                                <i class="far fa-folder"></i>
+                            </div>
+                            Coupon
+                        </a>
+                        <i class="arrow fas fa-angle-right"></i>
+                        <ul class="sub-menu">
+                            <li><a href="{{ route('admin.coupon.index') }}">Danh sách</a></li>
+                        </ul>
+                        <ul class="sub-menu">
+                            <li><a href="{{ route('admin.coupon.create') }}">Thêm mới</a></li>
                         </ul>
                     </li>
                     <li class="nav-link {{ $module_active == 'user' ? 'active' : '' }}">

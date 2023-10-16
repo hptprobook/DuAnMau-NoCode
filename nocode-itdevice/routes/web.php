@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\PostController as WebsitePostController;
@@ -37,6 +39,25 @@ Route::prefix('website')->name('website.')->group(function () {
         Route::get('/delete/{id}', [CartController::class, 'destroy'])->name('delete');
         Route::post('/update', [CartController::class, 'update'])->name('update');
         Route::post('/address', [CartController::class, 'address'])->name('address');
+
+        Route::post('/order', [CartController::class, 'order'])->name('order');
+        Route::post('/order/coupon', [CartController::class, 'coupon'])->name('coupon');
+
+        Route::post('/getDistrict', [CartController::class, 'getDistrict'])->name('getDistrict');
+        Route::post('/getWard', [CartController::class, 'getWard'])->name('getWard');
+    });
+
+    Route::prefix('/customer')->name('customer.')->middleware('auth')->group(function () {
+        Route::get('/', [CustomerController::class, 'index'])->name('index');
+        Route::get('/address', [CustomerController::class, 'address'])->name('address');
+        Route::get('/order', [CustomerController::class, 'order'])->name('order');
+        Route::get('/order-detail/{id}', [CustomerController::class, 'orderDetail'])->name('orderDetail');
+        Route::post('/info', [CustomerController::class, 'info'])->name('info');
+        Route::get('/reset', [CustomerController::class, 'reset'])->name('reset');
+        Route::get('/order-destroy/{id}', [CustomerController::class, 'orderDestroy'])->name('orderDestroy');
+
+        Route::get('/change-password', [CustomerController::class, 'change'])->name('change');
+        Route::post('/change-password-', [CustomerController::class, 'changePassword'])->name('changePassword');
     });
 
     Route::prefix('/post')->name('post.')->group(function () {
@@ -120,6 +141,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/list/{id}', [AttributeController::class, 'list'])->name('list');
     });
 
+    Route::prefix('/coupon')->name('coupon.')->group(function () {
+        Route::get('/', [CouponController::class, 'index'])->name('index');
+        Route::get('/create', [CouponController::class, 'create'])->name('create');
+        Route::post('/store', [CouponController::class, 'store'])->name('store');
+    });
+
 
     Route::prefix('post')->name('post.')->group(function () {
         Route::get('/', [PostController::class, 'index'])->name('index');
@@ -153,5 +180,15 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/', [WebsiteController::class, 'info'])->name('info');
         Route::post('/update-info', [WebsiteController::class, 'updateInfo'])->name('updateInfo');
         Route::get('/image', [WebsiteController::class, 'image'])->name('image');
+    });
+
+    Route::prefix('order')->name('order.')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::get('/confirm/{id}', [OrderController::class, 'confirmOrder'])->name('confirmOrder');
+        Route::get('/confirmShipping/{id}', [OrderController::class, 'confirmShipping'])->name('confirmShipping');
+        Route::get('/confirmReceive/{id}', [OrderController::class, 'confirmReceive'])->name('confirmReceive');
+        Route::get('/destroyOrder/{id}', [OrderController::class, 'destroyOrder'])->name('destroyOrder');
+        Route::get('/action', [OrderController::class, 'action'])->name('action');
+        Route::get('/orderDetail/{id}', [OrderController::class, 'detail'])->name('orderDetail');
     });
 });

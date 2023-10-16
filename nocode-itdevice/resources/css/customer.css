@@ -1,0 +1,35 @@
+.customer__sidebar,
+.customer__container {
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    border-radius: 4px;
+    height: 480px;
+}
+
+.customer__sidebar--info {
+    font-size: 18px;
+}
+
+.customer__sidebar a:hover{
+    color: var(--main-color);
+}
+
+.customer__sidebar a.active {
+    color: var(--main-color);
+}
+
+.customer__container .input {
+    height: 40px;
+    outline: none;
+    padding-left: 12px;
+    border-radius: 4px;
+    border: 1px solid #888;
+    width: 360px;
+}
+
+.customer__container .save-info-btn {
+    height: 40px;
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 4px;
+}

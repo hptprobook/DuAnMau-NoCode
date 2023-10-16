@@ -9,25 +9,31 @@ class Address extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+    protected $fillable =
+    [
         'id',
         'user_id',
-        'name',
+        'full_name',
         'phone',
-        'province',
-        'district',
-        'ward',
+        'province_id',
+        'district_id',
+        'ward_id',
         'street',
         'note',
     ];
 
-    public function user()
+    public function ward()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Ward::class, 'ward_id');
     }
 
-    public function order()
+    public function district()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(District::class);
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
     }
 }

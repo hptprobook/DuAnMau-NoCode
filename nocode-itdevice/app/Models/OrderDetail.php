@@ -9,13 +9,15 @@ class OrderDetail extends Model
 {
     use HasFactory;
 
+    public $countOrder;
+
     protected $fillable = [
         'id',
-        'order_id',
-        'product_id',
-        'quantity',
-        'price',
-        'subtotal',
+        'user_id',
+        'cart_id',
+        'status',
+        'total_amount',
+        'address_id',
     ];
 
     public function product()
@@ -26,5 +28,15 @@ class OrderDetail extends Model
     public function order()
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class, 'address_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
