@@ -7,6 +7,8 @@ use App\Models\Address;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Cart;
+use App\Models\Coupon;
+use App\Models\CouponUsage;
 use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -179,7 +181,7 @@ class CartController extends Controller
             $cart_ids[] = intval($cardId);
         }
 
-        OrderDetail::create(
+        $orderDetail = OrderDetail::create(
             [
                 'user_id' => Auth::user()->id,
                 'cart_id' => json_encode($cart_ids),
@@ -189,8 +191,62 @@ class CartController extends Controller
             ]
         );
 
-        return view('website.cart.success', compact('total_amount'));
+        $orderDetailId = $orderDetail->id;
+
+        return view('website.cart.success', compact('total_amount', 'orderDetailId'));
     }
+
+    public function coupon(Request $request)
+    {
+        $orderDetailId = $request->input('order_id');
+        $orderDetail = OrderDetail::find($orderDetailId);
+        $code = $request->input('code');
+        $now = now();
+        $success = 'Thành công';
+        $error = '';
+        $coupon = Coupon::where('code', $code)->first();
+        $couponUsage = CouponUsage::where('coupon_id', $coupon->id);
+
+
+        if (!$coupon) {
+            $error = "Mã không hợp lệ";
+            return view('website.cart.success', compact('orderDetailId', 'error', 'orderDetail'));
+        } else {
+            if ($coupon->quantity <= 0) {
+                $error = 'Mã đã sử dụng hết';
+                return view('website.cart.success', compact('orderDetailId', 'error', 'orderDetail'));
+            } elseif ($coupon->start_date > $now) {
+                $error = 'Mã không tồn tại';
+                return view('website.cart.success', compact('orderDetailId', 'error', 'orderDetail'));
+            } elseif ($coupon->end_date < $now) {
+                $error = 'Mã đã hết hạn';
+                return view('website.cart.success', compact('orderDetailId', 'error', 'orderDetail'));
+            } elseif (!empty($couponUsage)) {
+                $error = 'Mã đã được sử dụng';
+                return view('website.cart.success', compact('orderDetailId', 'error', 'orderDetail'));
+            } else {
+                // Áp dụng giảm giá vào đơn hàng tại đây
+                if ($coupon->discount_type == 'fixed') {
+                    $orderDetailNewPrice = $orderDetail->total_amount - $coupon->discount_amount;
+                } else {
+                    $orderDetailNewPrice = $orderDetail->total_amount - ($orderDetail->total_amount * ($coupon->discount_amount / 100));
+                }
+
+                OrderDetail::where('id', $orderDetail->id)->update(['total_amount' => $orderDetailNewPrice]);
+
+                CouponUsage::create(
+                    [
+                        'coupon_id' => $coupon->id,
+                        'order_id' => $orderDetailId,
+                    ]
+
+                );
+
+                return view('website.cart.success', compact('orderDetailId', 'success', 'orderDetail'));
+            }
+        }
+    }
+
 
     /**
      * Display the specified resource.

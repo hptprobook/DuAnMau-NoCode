@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\CartController;
@@ -40,6 +41,7 @@ Route::prefix('website')->name('website.')->group(function () {
         Route::post('/address', [CartController::class, 'address'])->name('address');
 
         Route::post('/order', [CartController::class, 'order'])->name('order');
+        Route::post('/order/coupon', [CartController::class, 'coupon'])->name('coupon');
 
         Route::post('/getDistrict', [CartController::class, 'getDistrict'])->name('getDistrict');
         Route::post('/getWard', [CartController::class, 'getWard'])->name('getWard');
@@ -79,7 +81,7 @@ Auth::routes();
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('auth', 'checkRole:ADMIN')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('product')->name('product.')->group(function () {
@@ -137,6 +139,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/add/{id}', [AttributeController::class, 'add'])->name('add');
         Route::post('/store', [AttributeController::class, 'store'])->name('store');
         Route::get('/list/{id}', [AttributeController::class, 'list'])->name('list');
+    });
+
+    Route::prefix('/coupon')->name('coupon.')->group(function () {
+        Route::get('/', [CouponController::class, 'index'])->name('index');
+        Route::get('/create', [CouponController::class, 'create'])->name('create');
+        Route::post('/store', [CouponController::class, 'store'])->name('store');
     });
 
 
