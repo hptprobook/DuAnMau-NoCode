@@ -115,28 +115,28 @@
                     <ul class="navbar-nav ms-auto fs-13">
 
                         <div class="navbar--hotline h-44 navbar__item">
-                            <a href="" class="d-flex">
+                            <a href="" class="d-flex align-items-center justify-content-center">
                                 <i class="bi bi-headset pe-2"></i>
                                 <div class="">Hotline<br> {{ $website_info->hotline }}</div>
                             </a>
                         </div>
 
                         <div class="navbar--showroom h-44 navbar__item">
-                            <a href="{{ route('website.showroom') }}" class="d-flex">
+                            <a href="{{ route('website.showroom') }}" class="d-flex d-flex align-items-center justify-content-center">
                                 <i class="bi bi-geo-alt pe-2"></i>
                                 <div class="">Hệ thống Showroom</div>
                             </a>
                         </div>
 
                         <div class="navbar--research-order h-44 navbar__item">
-                            <a href="" class="d-flex">
+                            <a href="" class="d-flex align-items-center justify-content-center">
                                 <i class="bi bi-clipboard2-check pe-2 icon"></i>
                                 <div class="">Tra cứu <br /> đơn hàng</div>
                             </a>
                         </div>
 
                         <div class="navbar--cart h-44 navbar__item">
-                            <a href="{{ route('website.cart.index') }}" class="d-flex">
+                            <a href="{{ route('website.cart.index') }}" class="d-flex d-flex align-items-center justify-content-center">
                                 <i class="bi bi-cart pe-2 icon">
                                     {{-- <span class="count"></span> --}}
                                 </i>
@@ -230,9 +230,45 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+            <div class="home__sidebar category__mobile" style="display:none">
+                        <ul class="home__sidebar--list list-unstyled">
+                            @foreach ($mainCats as $mainCat)
+                                <li class="home__sidebar--item">
+                                    <a href="{{ route('website.product.index', ['mainCat' => $mainCat->id]) }}"
+                                        title="{{ $mainCat->name }}" class="home__sidebar--maincat">
+                                        {{ Str::limit($mainCat->name, $limit = 18, $end = '...') }}
+                                        <i class="fa-solid fa-angle-right hidden__icon" ></i>
+                                    </a>
 
-        <header class="header head">
+                                    <div class="home__sidebar--child">
+                                        <div class="row">
+                                            @foreach ($mainCat->categories as $category)
+                                                <div class="col-custom mt-3">
+                                                    <div class="sidebar__child--list">
+                                                        <h5><a href="{{ route('website.product.index', ['category' => $category->id]) }}"
+                                                                class="text-dark sidebar__list--title">{{ $category->name }}</a>
+                                                        </h5>
+                                                        <ul class="list-unstyled">
+                                                            @foreach ($category->childCategories as $childCategory)
+                                                                <li class="sidebar__child--item">
+                                                                    <a href="{{ route('website.product.index', ['childCat' => $childCategory->id]) }}"
+                                                                        title="{{ $childCategory->name }}"
+                                                                        class="sidebar__item--link">{{ $childCategory->name }}</a>
+                                                                </li>
+                                                            @endforeach
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+        </nav>
+        <header class="header head header__desktop">
             <div class="container d-flex">
                 <a href="">
                     <div class="header--item">
@@ -266,12 +302,6 @@
                 </a>
             </div>
         </header>
-
-
-
-
-
-
         <main class="mt-4">
             @yield('content')
         </main>
@@ -353,7 +383,7 @@
 
                 if (province_id) {
                     $.ajax({
-                        url: '{{ route('website.cart.getDistrict') }}',
+                        url: "{{ route('website.cart.getDistrict') }}",
                         method: 'POST',
                         cache: false,
                         dataType: "json",
@@ -393,7 +423,7 @@
 
                 if (district_id) {
                     $.ajax({
-                        url: '{{ route('website.cart.getWard') }}',
+                        url: "{{ route('website.cart.getWard') }}",
                         method: 'POST',
                         dataType: "json",
                         cache: false,
