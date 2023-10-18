@@ -217,6 +217,9 @@
     text-decoration: line-through;
     margin-top: 6px;
     margin-bottom: 6px;
+    /* position: absolute; */
+    bottom: 0;
+    right: 0;
 }
 
 .home__pc--itemNewPrice {

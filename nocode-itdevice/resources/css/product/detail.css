@@ -140,3 +140,13 @@
     margin-bottom: 12px;
     overflow: hidden;
 }
+@media only screen and (max-width:739px) {
+    .detail__info--price{
+        flex-direction: column;
+        height: fit-content;
+        align-items: flex-start;
+    }
+    .product__detail{
+        overflow-x: scroll;
+    }
+}

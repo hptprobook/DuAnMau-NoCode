@@ -302,7 +302,7 @@
                 </a>
             </div>
         </header>
-        <main class="mt-4">
+        <main class="mt-4 main">
             @yield('content')
         </main>
 
