@@ -1,5 +1,7 @@
 ## Hướng Dẫn Cài Đặt Dự Án "DuAnMau-NoCode"
 
+### git clone https://github.com/hptprobook/DuAnMau-NoCode.git
+
 Dưới đây là các bước chi tiết để cài đặt và cấu hình dự án:
 
 ### 1. **Khởi Chạy IDE và mySQL Control Tool**
