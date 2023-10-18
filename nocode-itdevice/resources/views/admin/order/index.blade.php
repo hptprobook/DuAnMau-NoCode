@@ -108,8 +108,7 @@
                                     <td>{{ $order->note }}</td>
                                     <td>
                                         @if ($order->status == 'Đang xác nhận')
-                                            <a style="width: 30px"
-                                                href="{{ route('admin.order.confirmOrder', $order->id) }}"
+                                            <a style="width: 30px" href="{{ route('admin.order.sendMail', $order->id) }}"
                                                 title="Xác nhận đơn hàng"
                                                 class="btn btn-success btn-sm rounded-0 text-white"><i
                                                     class="fa-solid fa-check"></i></a>

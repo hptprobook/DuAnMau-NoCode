@@ -70,10 +70,9 @@ class AttributeController extends Controller
     {
         $product = Product::find($id);
 
-        $attributeValues = $product->attributeValues;
-        $relatedAttributes = $product->relatedAttributes;
+        $attributes = $product->attributeValues;
 
-        return view('admin.attribute.list', compact('product', 'attributeValues', 'relatedAttributes'));
+        return view('admin.attribute.list', compact('attributes', 'product'));
     }
 
     /**

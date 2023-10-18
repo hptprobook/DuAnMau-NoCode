@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ThanksMail;
 use App\Models\Cart;
 use App\Models\OrderDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -126,6 +129,24 @@ class OrderController extends Controller
                 return redirect()->route('admin.order.index')->with('success', 'Huỷ thành công');
             default:
                 return redirect()->route('admin.order.index')->with('status', '');
+        }
+    }
+
+    public function sendMail($id)
+    {
+
+        $orderDetail = OrderDetail::find($id);
+
+        $user = User::find($orderDetail->user_id);
+
+        if ($user) {
+            $userEmail = $user->email;
+
+            Mail::to($userEmail)->send(new ThanksMail($id));
+
+            return redirect()->route('admin.order.confirmOrder', compact('id'))->with('success', 'Xác nhận thành công');
+        } else {
+            return redirect()->route('admin.order.index')->with('error', 'Không tìm thấy người dùng để gửi email');
         }
     }
 

@@ -50,12 +50,12 @@ class Product extends Model
     public function relatedAttributes()
     {
         return $this->hasManyThrough(
-            Attribute::class,    // Model của bảng thuộc tính
-            AttributeValue::class,  // Model của bảng giá trị thuộc tính
-            'product_id',         // Khóa ngoại trong bảng giá trị thuộc tính
-            'id',                 // Khóa chính trong bảng sản phẩm
-            'id',                 // Khóa chính trong bảng thuộc tính
-            'attribute_id'        // Khóa ngoại trong bảng thuộc tính
+            Attribute::class,
+            AttributeValue::class,
+            'product_id',
+            'id',
+            'id',
+            'attribute_id'
         );
     }
 

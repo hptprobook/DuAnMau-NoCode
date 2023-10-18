@@ -19,6 +19,7 @@ use App\Models\Ward;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -118,32 +119,35 @@ class CartController extends Controller
 
     public function order(Request $request)
     {
-        $request->validate(
-            [
-                'fullname' => ['required', 'string', 'max:191', 'min:3'],
-                'phone' => ['required', 'regex:/^[0-9]{10,11}$/'],
-                'province' => ['required'],
-                'district' => ['required'],
-                'ward' => ['required'],
-                'street' => ['required', 'max:255', 'min: 5'],
-                'note' => ['max: 255']
-            ],
-            [
-                'required' => ':attribute không được để trống',
-                'max' => ':attribute không vượt quá :max ký tự',
-                'min' => ':attribute phải lớn hơn :min ký tự',
-                'regex' => 'Định dạng không chính xác',
-            ],
-            [
-                'fullname' => 'Tên khách hàng',
-                'phone' => 'Số điện thoại',
-                'province' => 'Trường này',
-                'district' => 'Trường này',
-                'ward' => 'Trường này',
-                'street' => 'Trường này',
-                'note' => 'Trường này'
-            ]
-        );
+        $validator = Validator::make($request->all(), [
+            'fullname' => ['required', 'string', 'max:191', 'min:3'],
+            'phone' => ['required', 'regex:/^[0-9]{10,11}$/'],
+            'province' => ['required'],
+            'district' => ['required'],
+            'ward' => ['required'],
+            'street' => ['required', 'max:255', 'min: 5'],
+            'note' => ['max: 255'],
+        ], [
+            'required' => ':attribute không được để trống',
+            'max' => ':attribute không vượt quá :max ký tự',
+            'min' => ':attribute phải lớn hơn :min ký tự',
+            'regex' => 'Định dạng không chính xác',
+        ], [
+            'fullname' => 'Tên khách hàng',
+            'phone' => 'Số điện thoại',
+            'province' => 'Tỉnh/thành',
+            'district' => 'Quận/huyện',
+            'ward' => 'Phường/xã',
+            'street' => 'Đường',
+            'note' => 'Ghi chú',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('validationError', true);
+        }
 
         $ward = Ward::find($request->input('ward'));
         $street = $request->input('street') . ', ' . $ward->path_with_type;
@@ -205,7 +209,11 @@ class CartController extends Controller
         $success = 'Thành công';
         $error = '';
         $coupon = Coupon::where('code', $code)->first();
-        $couponUsage = CouponUsage::where('coupon_id', $coupon->id);
+
+        $couponUsage = [];
+        if ($coupon) {
+            $couponUsage = CouponUsage::where('coupon_id', $coupon->id);
+        }
 
 
         if (!$coupon) {
