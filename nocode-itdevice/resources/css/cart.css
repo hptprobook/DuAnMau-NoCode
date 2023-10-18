@@ -248,3 +248,13 @@
     border-radius: 4px;
     border: 1px solid #888;
 }
+
+@media only screen and (max-width: 739px) {
+    .cart{
+        width: 100vw;
+    }
+    .cartContainer{
+        width: 100%;
+    }
+}
+

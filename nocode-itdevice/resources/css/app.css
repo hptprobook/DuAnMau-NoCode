@@ -425,19 +425,26 @@
         width: 100%;
         height: fit-content;
     }
-    .slider__mobile{
-        margin-top: 5rem;
-    }
+    /* .slider__mobile{
+        margin-top: 6rem;
+    } */
     .footer {
         text-align: center;
     }
     .desktop__category{
         display: none;
     }
+    .main{
+        margin-top: 8rem !important;
+    }
     }
     /* responsive end */
+    html::-webkit-scrollbar,
     .home__sidebar--list::-webkit-scrollbar,
     .header::-webkit-scrollbar,
+    .main::-webkit-scrollbar{
+        display: none;
+    }
     .header--item{
         width: 200px;
         text-align: center;
