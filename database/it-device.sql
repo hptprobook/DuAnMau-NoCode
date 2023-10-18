@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 10, 2023 lúc 10:24 AM
+-- Thời gian đã tạo: Th10 18, 2023 lúc 04:33 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -47,19 +47,7 @@ CREATE TABLE `addresses` (
 
 INSERT INTO `addresses` (`id`, `user_id`, `full_name`, `phone`, `province_id`, `district_id`, `ward_id`, `street`, `note`, `created_at`, `updated_at`) VALUES
 (1, 2, 'Phan Thanh Hoá', '0833129021', NULL, NULL, 24142, '45/19 Nguyễn Viết Xuân, Phường Tân Thành, Thành phố Buôn Ma Thuột, Tỉnh Đắk Lắk', 'Không', '2023-10-04 00:35:33', '2023-10-04 00:35:33'),
-(2, 2, 'Phan Thanh Tiến', '0942904455', NULL, NULL, 10234, 'Vạn lý trường thành, Xã Quất Động, Huyện Thường Tín, Thành phố Hà Nội', NULL, '2023-10-04 00:44:59', '2023-10-04 00:44:59'),
-(13, 2, 'Phan Thanh Hóa', '0833129021', NULL, NULL, 24424, 'Thôn 4, Xã Ea H\'MLay, Huyện M\'Đrắk, Tỉnh Đắk Lắk', NULL, '2023-10-05 00:06:58', '2023-10-05 00:06:58'),
-(14, 2, 'Phan Thanh Hóa', '0833129021', NULL, NULL, 24424, '45/19 Nguyễn Viết Xuân, Xã Ea H\'MLay, Huyện M\'Đrắk, Tỉnh Đắk Lắk', NULL, '2023-10-05 02:23:42', '2023-10-05 02:23:42'),
-(15, 2, 'Phan Thanh Hóa', '0833129021', NULL, NULL, 5104, '45/19 Nguyễn Viết Xuân, Xã Hợp Phong, Huyện Cao Phong, Tỉnh Hoà Bình', NULL, '2023-10-05 20:19:54', '2023-10-05 20:19:54'),
-(16, 2, 'Phan Thanh Hóa', '0833129021', NULL, NULL, 5104, '45/19 Nguyễn Viết Xuân, Xã Hợp Phong, Huyện Cao Phong, Tỉnh Hoà Bình', NULL, '2023-10-05 20:20:08', '2023-10-05 20:20:08'),
-(17, 2, 'Phan Thanh Hóa', '0833129021', NULL, NULL, 5104, '45/19 Nguyễn Viết Xuân, Xã Hợp Phong, Huyện Cao Phong, Tỉnh Hoà Bình', NULL, '2023-10-05 20:20:30', '2023-10-05 20:20:30'),
-(18, 2, 'Phan Thanh Hóa', '0833129021', NULL, NULL, 2239, '45/19 Nguyễn Viết Xuân, Xã Thượng Nông, Huyện Na Hang, Tỉnh Tuyên Quang', NULL, '2023-10-05 20:35:20', '2023-10-05 20:35:20'),
-(19, 2, 'Phan Thanh Hóa', '0833129021', NULL, NULL, 2887, '45/19 Nguyễn Viết Xuân, Xã Nậm Khánh, Huyện Bắc Hà, Tỉnh Lào Cai', NULL, '2023-10-06 20:14:24', '2023-10-06 20:14:24'),
-(20, 2, 'Hoàng Văn Nam', '0394849582', NULL, NULL, 2230, 'Vạn lý trường thành, Xã Thượng Giáp, Huyện Na Hang, Tỉnh Tuyên Quang', 'ádasdasdasdas', '2023-10-07 02:12:30', '2023-10-07 02:12:30'),
-(21, 2, 'Phan Thanh Hóa', '0833129021', NULL, NULL, 24424, 'Thôn 4, Xã Ea H\'MLay, Huyện M\'Đrắk, Tỉnh Đắk Lắk', NULL, '2023-10-07 08:25:06', '2023-10-07 08:25:06'),
-(22, 2, 'Phan Thanh Hóa', '0833129021', NULL, NULL, 2338, 'Thôn 4, Xã Phúc Thịnh, Huyện Chiêm Hóa, Tỉnh Tuyên Quang', NULL, '2023-10-08 01:52:58', '2023-10-08 01:52:58'),
-(23, 2, 'Phan Thanh Hóa', '0833129021', NULL, NULL, 2338, 'Thôn 4, Xã Phúc Thịnh, Huyện Chiêm Hóa, Tỉnh Tuyên Quang', NULL, '2023-10-08 01:55:18', '2023-10-08 01:55:18'),
-(24, 2, 'Phan Thanh Hóa', '0833129021', NULL, NULL, 2338, 'Thôn 4, Xã Phúc Thịnh, Huyện Chiêm Hóa, Tỉnh Tuyên Quang', NULL, '2023-10-08 01:55:33', '2023-10-08 01:55:33');
+(2, 2, 'Phan Thanh Tiến', '0942904455', NULL, NULL, 10234, 'Vạn lý trường thành, Xã Quất Động, Huyện Thường Tín, Thành phố Hà Nội', NULL, '2023-10-04 00:44:59', '2023-10-04 00:44:59');
 
 -- --------------------------------------------------------
 
@@ -150,8 +138,16 @@ INSERT INTO `carts` (`id`, `user_id`, `product_id`, `quantity`, `provision`, `st
 (49, 2, 28, 1, 9740000, 1, 'null', '2023-10-07 02:12:07', '2023-10-07 02:12:30'),
 (50, 2, 26, 1, 330000, 1, 'null', '2023-10-07 08:24:50', '2023-10-07 08:25:06'),
 (51, 2, 1, 1, 15640000, 1, 'null', '2023-10-08 01:52:47', '2023-10-08 01:55:33'),
-(52, 2, 1, 1, 15640000, 0, 'null', '2023-10-09 01:17:56', '2023-10-09 01:17:56'),
-(53, 2, 9, 1, 39190000, 0, 'null', '2023-10-09 08:02:49', '2023-10-09 08:02:49');
+(52, 2, 1, 1, 15640000, 1, 'null', '2023-10-09 01:17:56', '2023-10-10 02:41:38'),
+(53, 2, 9, 1, 39190000, 1, 'null', '2023-10-09 08:02:49', '2023-10-10 02:41:38'),
+(54, 2, 4, 1, 20440000, 1, 'null', '2023-10-10 02:41:21', '2023-10-10 02:41:38'),
+(55, 2, 3, 1, 16760000, 1, 'null', '2023-10-11 01:01:01', '2023-10-11 01:05:05'),
+(56, 2, 3, 1, 16760000, 1, 'null', '2023-10-11 01:06:06', '2023-10-11 01:11:25'),
+(57, 2, 3, 1, 16760000, 1, 'null', '2023-10-11 01:15:17', '2023-10-11 01:15:33'),
+(58, 2, 3, 1, 16760000, 1, 'null', '2023-10-11 01:17:45', '2023-10-11 01:19:00'),
+(59, 2, 3, 1, 16760000, 1, 'null', '2023-10-17 00:24:53', '2023-10-17 00:25:02'),
+(60, 2, 3, 1, 16760000, 0, 'null', '2023-10-17 07:26:33', '2023-10-17 07:26:33'),
+(61, 2, 1, 1, 16370900, 0, '[\"V\\u00e0ng\",\"24\"]', '2023-10-17 19:24:40', '2023-10-17 19:24:40');
 
 -- --------------------------------------------------------
 
@@ -854,11 +850,19 @@ CREATE TABLE `coupons` (
   `code` varchar(255) NOT NULL,
   `discount_type` varchar(255) NOT NULL,
   `discount_amount` bigint(20) UNSIGNED NOT NULL,
+  `quantity` bigint(20) UNSIGNED DEFAULT NULL,
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `coupons`
+--
+
+INSERT INTO `coupons` (`id`, `code`, `discount_type`, `discount_amount`, `quantity`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
+(1, 'VUITHANG8', 'fixed', 300000, 100, '2023-10-11 00:00:00', '2023-11-11 00:00:00', '2023-10-10 21:07:42', '2023-10-10 21:07:42');
 
 -- --------------------------------------------------------
 
@@ -868,14 +872,19 @@ CREATE TABLE `coupons` (
 
 CREATE TABLE `coupon_usages` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
   `coupon_id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `used_at` datetime NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `order_id` bigint(20) UNSIGNED NOT NULL
+  `order_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `coupon_usages`
+--
+
+INSERT INTO `coupon_usages` (`id`, `coupon_id`, `created_at`, `updated_at`, `order_id`) VALUES
+(5, 1, '2023-10-11 01:34:33', '2023-10-11 01:34:33', 23),
+(6, 1, '2023-10-11 01:34:46', '2023-10-11 01:34:46', 23);
 
 -- --------------------------------------------------------
 
@@ -2015,7 +2024,23 @@ INSERT INTO `orders` (`id`, `product_id`, `quantity`, `price`, `created_at`, `up
 (9, 26, 1, 330000, '2023-10-07 08:25:06', '2023-10-07 08:25:06'),
 (10, 1, 1, 15640000, '2023-10-08 01:52:58', '2023-10-08 01:52:58'),
 (11, 1, 1, 15640000, '2023-10-08 01:55:18', '2023-10-08 01:55:18'),
-(12, 1, 1, 15640000, '2023-10-08 01:55:33', '2023-10-08 01:55:33');
+(12, 1, 1, 15640000, '2023-10-08 01:55:33', '2023-10-08 01:55:33'),
+(13, 1, 1, 15640000, '2023-10-10 02:41:38', '2023-10-10 02:41:38'),
+(14, 9, 1, 39190000, '2023-10-10 02:41:38', '2023-10-10 02:41:38'),
+(15, 4, 1, 20440000, '2023-10-10 02:41:38', '2023-10-10 02:41:38'),
+(16, 3, 1, 16760000, '2023-10-11 01:01:17', '2023-10-11 01:01:17'),
+(17, 3, 1, 16760000, '2023-10-11 01:02:00', '2023-10-11 01:02:00'),
+(18, 3, 1, 16760000, '2023-10-11 01:02:43', '2023-10-11 01:02:43'),
+(19, 3, 1, 16760000, '2023-10-11 01:05:05', '2023-10-11 01:05:05'),
+(20, 3, 1, 16760000, '2023-10-11 01:06:17', '2023-10-11 01:06:17'),
+(21, 3, 1, 16760000, '2023-10-11 01:10:01', '2023-10-11 01:10:01'),
+(22, 3, 1, 16760000, '2023-10-11 01:11:25', '2023-10-11 01:11:25'),
+(23, 3, 1, 16760000, '2023-10-11 01:15:24', '2023-10-11 01:15:24'),
+(24, 3, 1, 16760000, '2023-10-11 01:15:33', '2023-10-11 01:15:33'),
+(25, 3, 1, 16760000, '2023-10-11 01:17:52', '2023-10-11 01:17:52'),
+(26, 3, 1, 16760000, '2023-10-11 01:18:36', '2023-10-11 01:18:36'),
+(27, 3, 1, 16760000, '2023-10-11 01:19:00', '2023-10-11 01:19:00'),
+(28, 3, 1, 16760000, '2023-10-17 00:25:02', '2023-10-17 00:25:02');
 
 -- --------------------------------------------------------
 
@@ -2039,12 +2064,26 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `user_id`, `cart_id`, `status`, `total_amount`, `address_id`, `created_at`, `updated_at`) VALUES
-(2, 2, '[1]', 'Đã nhận hàng', 20440000, 14, '2023-10-05 02:23:42', '2023-10-07 08:22:17'),
-(3, 2, '[45]', 'Đã xác nhận', 16370900, 17, '2023-10-05 20:20:30', '2023-10-07 08:19:13'),
+(2, 2, '[1]', 'Đã huỷ', 20440000, 14, '2023-10-05 02:23:42', '2023-10-10 02:47:44'),
+(3, 2, '[45]', 'Đã nhận hàng', 16370900, 17, '2023-10-05 20:20:30', '2023-10-10 20:27:14'),
 (4, 2, '[46,47]', 'Đã xác nhận', 104060000, 18, '2023-10-05 20:35:20', '2023-10-08 01:22:17'),
 (6, 2, '[49]', 'Đã xác nhận', 9740000, 20, '2023-10-07 02:12:30', '2023-10-08 01:22:17'),
 (7, 2, '[50]', 'Đã xác nhận', 330000, 21, '2023-10-07 08:25:06', '2023-10-07 20:42:58'),
-(10, 2, '[51]', 'Đang xác nhận', 15640000, 24, '2023-10-08 01:55:33', '2023-10-08 01:55:33');
+(10, 2, '[51]', 'Đang xác nhận', 15640000, 24, '2023-10-08 01:55:33', '2023-10-08 01:55:33'),
+(11, 2, '[52,53,54]', 'Đang xác nhận', 75270000, 25, '2023-10-10 02:41:38', '2023-10-10 02:41:38'),
+(12, 2, '[55]', 'Đang xác nhận', 16760000, 26, '2023-10-11 01:01:17', '2023-10-11 01:01:17'),
+(13, 2, '[55]', 'Đang xác nhận', 16760000, 27, '2023-10-11 01:02:00', '2023-10-11 01:02:00'),
+(14, 2, '[55]', 'Đang xác nhận', 16760000, 28, '2023-10-11 01:02:43', '2023-10-11 01:02:43'),
+(15, 2, '[55]', 'Đang xác nhận', 16760000, 29, '2023-10-11 01:05:05', '2023-10-11 01:05:05'),
+(16, 2, '[56]', 'Đang xác nhận', 16760000, 30, '2023-10-11 01:06:17', '2023-10-11 01:06:17'),
+(17, 2, '[56]', 'Đang xác nhận', 16760000, 31, '2023-10-11 01:10:01', '2023-10-11 01:10:01'),
+(18, 2, '[56]', 'Đang xác nhận', 16760000, 32, '2023-10-11 01:11:25', '2023-10-11 01:11:25'),
+(19, 2, '[57]', 'Đang xác nhận', 16760000, 33, '2023-10-11 01:15:24', '2023-10-11 01:15:24'),
+(20, 2, '[57]', 'Đã xác nhận', 16760000, 34, '2023-10-11 01:15:33', '2023-10-17 01:19:02'),
+(21, 2, '[58]', 'Đã xác nhận', 16760000, 35, '2023-10-11 01:17:52', '2023-10-17 01:17:27'),
+(22, 2, '[58]', 'Đã xác nhận', 16760000, 36, '2023-10-11 01:18:36', '2023-10-17 01:14:16'),
+(23, 2, '[58]', 'Đã xác nhận', 14660000, 37, '2023-10-11 01:19:00', '2023-10-17 01:10:38'),
+(24, 2, '[59]', 'Đã xác nhận', 16760000, 38, '2023-10-17 00:25:02', '2023-10-17 01:03:51');
 
 -- --------------------------------------------------------
 
@@ -2075,7 +2114,7 @@ CREATE TABLE `password_reset_tokens` (
 --
 
 INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
-('hptprobook@gmail.com', '$2y$10$wm04tY/QfDCAIvzDv3OUie3LYuUkdtNhub2hA4B4KsHbMK6OMIMeK', '2023-10-09 02:03:16');
+('hptprobook@gmail.com', '$2y$10$A7EkhCYz6oW0IQdS8jrY7.VU8uH1TrfoUsTqqOTk0eq77VhpLC.86', '2023-10-10 02:04:18');
 
 -- --------------------------------------------------------
 
@@ -2322,8 +2361,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `address`, `phone_number`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`, `status`) VALUES
 (1, 'William', NULL, NULL, 'phamvinhquang14042003@gmail.com', NULL, '$2y$10$qyATTXtyiX2poPrn3U31k.MaoC/5/ziD5xQ6ZgN4hMwPf21Gz.YxW', 'USER', NULL, '2023-09-25 01:10:14', '2023-09-25 01:10:14', NULL),
-(2, 'Phan Thanh Hóa', NULL, '0833129021', 'hptprobook@gmail.com', NULL, '$2y$10$MwEgiTlQtSO0VAeqKVlICu5tsNmD4DEaQx4uxTox.dQDfKG1798sm', 'USER', 'yjLTNP821qGGi0gr78Op7GjAxNSLq6VpICaVS9coEsSpJUZq7vfMcUAlsgJv', '2023-09-26 19:12:37', '2023-10-05 00:34:54', NULL),
-(3, 'tin nguyen', NULL, NULL, 'gutboy0500@gmail.com', NULL, '$2y$10$0N1sqKKqBBXmVZS8PMyzbe7maqUMX2V1X2QoEA1cQ5h/UEgNIR7SG', 'USER', 'Fpxng92XqtLb5pcRp1DMzy9uXABhKsp9odCiTom1YH0pVw3zSF2kifVIBwP5', '2023-09-27 01:02:50', '2023-09-27 01:02:50', NULL),
+(2, 'Phan Thanh Hóa', NULL, '0833129021', 'hptprobook@gmail.com', NULL, '$2y$10$zqd/EDeeYUS3u0fT9WrbSe1ObBfVod0GygX2I9i.W2Cl0TLInJmMO', 'ADMIN', 'C8KXBEI3EhggUdGTk6azMfkzceWoOtUrMl5zDSeVnLjg9tfjOn5STGbtBGn2', '2023-09-26 19:12:37', '2023-10-10 02:20:51', NULL),
+(3, 'tin nguyen', NULL, NULL, 'gutboy0500@gmail.com', NULL, '$2y$10$0N1sqKKqBBXmVZS8PMyzbe7maqUMX2V1X2QoEA1cQ5h/UEgNIR7SG', 'ADMIN', 'Fpxng92XqtLb5pcRp1DMzy9uXABhKsp9odCiTom1YH0pVw3zSF2kifVIBwP5', '2023-09-27 01:02:50', '2023-10-17 00:35:37', 'active'),
 (4, 'Phan Thanh Hóa', NULL, NULL, 'robinsonphan0@gmail.com', NULL, '$2y$10$Mj4N5MvgmSLOWmglNpqmSubTApbuzCbbxk9NAX27N0WQmTVu5jtiW', 'USER', NULL, '2023-10-09 01:47:20', '2023-10-09 01:47:20', NULL);
 
 -- --------------------------------------------------------
@@ -13015,7 +13054,7 @@ CREATE TABLE `websites` (
 --
 
 INSERT INTO `websites` (`id`, `title`, `logo`, `description`, `support_phone`, `support_email`, `care_phone`, `hotline`, `facebook`, `zalo`, `big_banners`, `child_banners`, `deal_banners`, `footer_banners`, `created_at`, `updated_at`) VALUES
-(1, 'Xin chào', NULL, '', NULL, NULL, NULL, '19900293', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 'IT-DEVICE -- Chuyên cung cấp thiết bị tin học chất lượng cao.', NULL, 'IT-DEVICE -- Chuyên cung cấp thiết bị tin học chất lượng cao, giá cả phù hợp, hỗ trợ trả góp, có mặt trên hầu hết 63 tỉnh thành', '0833129021', 'hptprobook@gmail.com', '0833129021', '19900293', 'facebook.com', '0833129021', NULL, NULL, NULL, NULL, NULL, '2023-10-17 19:20:15');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -13078,10 +13117,7 @@ ALTER TABLE `coupons`
 --
 ALTER TABLE `coupon_usages`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `coupon_usages_user_id_foreign` (`user_id`),
-  ADD KEY `coupon_usages_coupon_id_foreign` (`coupon_id`),
-  ADD KEY `coupon_usages_product_id_foreign` (`product_id`),
-  ADD KEY `coupon_usages_order_id_foreign` (`order_id`);
+  ADD KEY `coupon_usages_coupon_id_foreign` (`coupon_id`);
 
 --
 -- Chỉ mục cho bảng `districts`
@@ -13204,7 +13240,7 @@ ALTER TABLE `websites`
 -- AUTO_INCREMENT cho bảng `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT cho bảng `attributes`
@@ -13222,7 +13258,7 @@ ALTER TABLE `attribute_values`
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -13240,13 +13276,13 @@ ALTER TABLE `child_categories`
 -- AUTO_INCREMENT cho bảng `coupons`
 --
 ALTER TABLE `coupons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `coupon_usages`
 --
 ALTER TABLE `coupon_usages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `districts`
@@ -13282,13 +13318,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
@@ -13375,10 +13411,7 @@ ALTER TABLE `child_categories`
 -- Các ràng buộc cho bảng `coupon_usages`
 --
 ALTER TABLE `coupon_usages`
-  ADD CONSTRAINT `coupon_usages_coupon_id_foreign` FOREIGN KEY (`coupon_id`) REFERENCES `coupons` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `coupon_usages_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `coupon_usages` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `coupon_usages_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `coupon_usages_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `coupon_usages_coupon_id_foreign` FOREIGN KEY (`coupon_id`) REFERENCES `coupons` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `images`
