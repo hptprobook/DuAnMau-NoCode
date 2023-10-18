@@ -1,6 +1,6 @@
 ## Hướng Dẫn Cài Đặt Dự Án "DuAnMau-NoCode"
 
-### git clone https://github.com/hptprobook/DuAnMau-NoCode.git
+`git clone https://github.com/hptprobook/DuAnMau-NoCode.git`
 
 Dưới đây là các bước chi tiết để cài đặt và cấu hình dự án:
 
