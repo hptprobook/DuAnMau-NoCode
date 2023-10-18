@@ -7,9 +7,9 @@
                 @csrf
 
                 <a href="" class="text-blue back-link"><i class="bi bi-box-arrow-in-left pe-1"></i>Trở về</a>
-                <div class="cartContainer mt-2 px-2 pt-2 pb-5 active">
+                <div class="cartContainer @if (session('validationError')) disable @endif mt-2 px-2 pt-2 pb-5 active">
 
-                    <div class="cart__orderStatus px-5">
+                    <div class="cart__orderStatus px-5 ">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="cart__orderStatus--item active fw-500">
@@ -123,7 +123,7 @@
 
                 </div>
 
-                <div class="addressContainer mt-2 px-2 pt-2 pb-5">
+                <div class="addressContainer mt-2 px-2 pt-2 pb-5 @if (session('validationError')) active @endif">
                     <div class="cart__orderStatus px-5">
                         <div class="row">
                             <div class="col-md-4">
@@ -131,6 +131,7 @@
                                     <i class="bi bi-bag-check-fill icon active borders"></i>
                                     Giỏ hàng
                                 </div>
+
                             </div>
                             <div class="col-md-4">
                                 <div class="cart__orderStatus--item active fw-500">

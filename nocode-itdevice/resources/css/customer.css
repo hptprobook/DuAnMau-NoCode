@@ -3,14 +3,14 @@
     background-color: #fff;
     box-shadow: var(--box-shadow);
     border-radius: 4px;
-    height: 480px;
+    height: 600px;
 }
 
 .customer__sidebar--info {
     font-size: 18px;
 }
 
-.customer__sidebar a:hover{
+.customer__sidebar a:hover {
     color: var(--main-color);
 }
 

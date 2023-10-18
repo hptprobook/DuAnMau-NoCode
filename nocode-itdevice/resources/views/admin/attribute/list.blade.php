@@ -30,25 +30,33 @@
                         <h6 class="mt-2">Danh sách thuộc tính</h6>
 
                         @php
-                            $previousAttributeName = '';
+                            $formattedAttributes = [];
+
+                            foreach ($attributes as $attribute) {
+                                $attributeName = $attribute->attribute->name;
+                                $attributeValue = $attribute->value;
+                                $attributeId = $attribute->id;
+
+                                if (!isset($formattedAttributes[$attributeName])) {
+                                    $formattedAttributes[$attributeName] = [];
+                                }
+
+                                $formattedAttributes[$attributeName][] = [
+                                    'id' => $attributeId,
+                                    'value' => $attributeValue,
+                                ];
+                            }
                         @endphp
 
-                        @foreach ($relatedAttributes as $attribute)
-                            @if ($attribute->name !== $previousAttributeName)
-                                <p>{{ $attribute->name }}:
-                                    @php
-                                        $attributeValuesForAttribute = $attributeValues
-                                            ->where('attribute_id', $attribute->id)
-                                            ->pluck('value')
-                                            ->implode(', ');
-                                    @endphp
-                                    {{ $attributeValuesForAttribute }}
-                                </p>
-                            @endif
-
-                            @php
-                                $previousAttributeName = $attribute->name;
-                            @endphp
+                        @foreach ($formattedAttributes as $attributeName => $attributeValues)
+                            <div class="d-flex align-items-center detail__attribute mt-3" style="font-size: 16px;">
+                                <span class="fw-600">{{ $attributeName }}:</span>
+                                @foreach ($attributeValues as $attributeValue)
+                                    <label class="d-flex align-items-center ps-3" style="cursor: pointer;">
+                                        {{ $attributeValue['value'] }} |
+                                    </label>
+                                @endforeach
+                            </div>
                         @endforeach
 
 

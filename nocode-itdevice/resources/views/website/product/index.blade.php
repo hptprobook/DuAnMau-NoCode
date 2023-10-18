@@ -7,14 +7,14 @@
         <div class="row">
 
             @if ($products->count() > 0)
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between filter__product">
 
-                    <form action="" style="width: 360px" method="get">
+                    <form action="" style="width: 360px" method="get" class="filter__product--form">
                         <label for="" class="form-label">Lọc theo khoảng giá</label>
                         <input type="hidden" name="mainCat" value="{{ $mainCatId }}">
                         <input type="hidden" name="category" value="{{ $catId }}">
                         <input type="hidden" name="childCat" value="{{ $childCatId }}">
-                        <div class="d-flex">
+                        <div class="d-flex style__form-controller">
                             <input type="number" name="from" class="form-control" placeholder="Từ ..."
                                 value="{{ $fromPrice ?? 0 }}">
                             <input type="number" name="to" class="form-control ms-2" placeholder="đến ..."
@@ -33,13 +33,13 @@
                             <option value="asc">Giá tăng dần</option>
                             <option value="desc">Giá giảm dần</option>
                         </select>
-                        <button type="submit" class="btn btn-danger mt-2 float-end">Sắp xếp</button>
+                        <button type="submit" class="btn btn-danger mt-2 float-end btn__pos">Sắp xếp</button>
                     </form>
                 </div>
 
                 @foreach ($products as $product)
-                    <div class="col-md-3">
-                        <div class="productList__item mt-4 p-4">
+                    <div class="col m-2 p-0 d-flex justify-content-between">
+                        <div class="productList__item p-1">
                             <a href="{{ route('website.product.detail', $product->id) }}">
                                 <div class="productList__item--img">
                                     <img class="img-c" src="{{ asset($product->avatar) }}" alt="">

@@ -81,7 +81,7 @@ Auth::routes();
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('auth', 'checkRole:ADMIN')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('product')->name('product.')->group(function () {
@@ -179,6 +179,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::prefix('website')->name('website.')->group(function () {
         Route::get('/', [WebsiteController::class, 'info'])->name('info');
         Route::post('/update-info', [WebsiteController::class, 'updateInfo'])->name('updateInfo');
+        Route::post('/update-img', [WebsiteController::class, 'updateImg'])->name('updateImg');
         Route::get('/image', [WebsiteController::class, 'image'])->name('image');
     });
 
@@ -190,5 +191,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
         Route::get('/destroyOrder/{id}', [OrderController::class, 'destroyOrder'])->name('destroyOrder');
         Route::get('/action', [OrderController::class, 'action'])->name('action');
         Route::get('/orderDetail/{id}', [OrderController::class, 'detail'])->name('orderDetail');
+        Route::get('/mail/{id}', [OrderController::class, 'sendMail'])->name('sendMail');
     });
 });

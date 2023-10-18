@@ -30,6 +30,13 @@ class WebsiteController extends Controller
         return view('admin.website.image');
     }
 
+    public function updateImg(Request $request)
+    {
+
+
+        return redirect()->route('admin.website.img', compact('website'))->with('success', 'Cập nhật thông tin thành công!');
+    }
+
     public function updateInfo(Request $request)
     {
 
