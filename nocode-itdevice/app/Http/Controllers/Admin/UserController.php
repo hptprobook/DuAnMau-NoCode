@@ -145,7 +145,7 @@ class UserController extends Controller
         $request->validate(
             [
                 'name' => ['required', 'string', 'max:255'],
-                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'password' => ['nullable', 'min:8', 'confirmed'],
             ],
             [
                 'required' => ':attribute không được để trống',
@@ -161,15 +161,23 @@ class UserController extends Controller
 
         $role = $request->input('role') == '' ? 'USER' : $request->input('role');
 
-        User::where('id', $id)->update([
+        $user = User::where('id', $id);
+
+        $dataToUpdate = [
             'name' => $request->input('name'),
-            'password' => Hash::make($request->input('password')),
             'role' => $role,
             'status' => 'active'
-        ]);
+        ];
+
+        if ($request->input('password')) {
+            $dataToUpdate['password'] = Hash::make($request->input('password'));
+        }
+
+        $user->update($dataToUpdate);
 
         return redirect('admin/user')->with('success', 'Chỉnh sửa thành công!');
     }
+
 
     /**
      * Remove the specified resource from storage.

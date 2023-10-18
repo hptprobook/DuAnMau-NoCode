@@ -11,8 +11,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/solid.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -122,7 +127,8 @@
                         </div>
 
                         <div class="navbar--showroom h-44 navbar__item">
-                            <a href="{{ route('website.showroom') }}" class="d-flex d-flex align-items-center justify-content-center">
+                            <a href="{{ route('website.showroom') }}"
+                                class="d-flex d-flex align-items-center justify-content-center">
                                 <i class="bi bi-geo-alt pe-2"></i>
                                 <div class="">Hệ thống Showroom</div>
                             </a>
@@ -136,7 +142,8 @@
                         </div>
 
                         <div class="navbar--cart h-44 navbar__item">
-                            <a href="{{ route('website.cart.index') }}" class="d-flex d-flex align-items-center justify-content-center">
+                            <a href="{{ route('website.cart.index') }}"
+                                class="d-flex d-flex align-items-center justify-content-center">
                                 <i class="bi bi-cart pe-2 icon">
                                     {{-- <span class="count"></span> --}}
                                 </i>
@@ -231,42 +238,42 @@
                 </div>
             </div>
             <div class="home__sidebar category__mobile" style="display:none">
-                        <ul class="home__sidebar--list list-unstyled">
-                            @foreach ($mainCats as $mainCat)
-                                <li class="home__sidebar--item">
-                                    <a href="{{ route('website.product.index', ['mainCat' => $mainCat->id]) }}"
-                                        title="{{ $mainCat->name }}" class="home__sidebar--maincat">
-                                        {{ Str::limit($mainCat->name, $limit = 18, $end = '...') }}
-                                        <i class="fa-solid fa-angle-right hidden__icon" ></i>
-                                    </a>
+                <ul class="home__sidebar--list list-unstyled">
+                    @foreach ($mainCats as $mainCat)
+                        <li class="home__sidebar--item">
+                            <a href="{{ route('website.product.index', ['mainCat' => $mainCat->id]) }}"
+                                title="{{ $mainCat->name }}" class="home__sidebar--maincat">
+                                {{ Str::limit($mainCat->name, $limit = 18, $end = '...') }}
+                                <i class="fa-solid fa-angle-right hidden__icon"></i>
+                            </a>
 
-                                    <div class="home__sidebar--child">
-                                        <div class="row">
-                                            @foreach ($mainCat->categories as $category)
-                                                <div class="col-custom mt-3">
-                                                    <div class="sidebar__child--list">
-                                                        <h5><a href="{{ route('website.product.index', ['category' => $category->id]) }}"
-                                                                class="text-dark sidebar__list--title">{{ $category->name }}</a>
-                                                        </h5>
-                                                        <ul class="list-unstyled">
-                                                            @foreach ($category->childCategories as $childCategory)
-                                                                <li class="sidebar__child--item">
-                                                                    <a href="{{ route('website.product.index', ['childCat' => $childCategory->id]) }}"
-                                                                        title="{{ $childCategory->name }}"
-                                                                        class="sidebar__item--link">{{ $childCategory->name }}</a>
-                                                                </li>
-                                                            @endforeach
+                            <div class="home__sidebar--child">
+                                <div class="row">
+                                    @foreach ($mainCat->categories as $category)
+                                        <div class="col-custom mt-3">
+                                            <div class="sidebar__child--list">
+                                                <h5><a href="{{ route('website.product.index', ['category' => $category->id]) }}"
+                                                        class="text-dark sidebar__list--title">{{ $category->name }}</a>
+                                                </h5>
+                                                <ul class="list-unstyled">
+                                                    @foreach ($category->childCategories as $childCategory)
+                                                        <li class="sidebar__child--item">
+                                                            <a href="{{ route('website.product.index', ['childCat' => $childCategory->id]) }}"
+                                                                title="{{ $childCategory->name }}"
+                                                                class="sidebar__item--link">{{ $childCategory->name }}</a>
+                                                        </li>
+                                                    @endforeach
 
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            @endforeach
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </nav>
         <header class="header head header__desktop">
             <div class="container d-flex">
@@ -345,9 +352,12 @@
                     <div class="col-md-3 col-sm-6 col-12">
                         <b class="footer__title">TỔNG ĐÀI HỖ TRỢ(Miễn phí)</b>
                         <ul class="mt-2 list-unstyled">
-                            <li>Gọi mua: <a class="footer__contact" href="">1800.1800</a></li>
-                            <li>CSKH: <a class="footer__contact" href="">18001008</a></li>
-                            <li>Email: <a class="footer__contact" href="">hptprobook@gmail.com</a></li>
+                            <li>Gọi mua: <a class="footer__contact"
+                                    href="">{{ $website_info->support_phone }}</a></li>
+                            <li>CSKH: <a class="footer__contact" href="">{{ $website_info->care_phone }}</a>
+                            </li>
+                            <li>Email: <a class="footer__contact"
+                                    href="">{{ $website_info->support_email }}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -374,6 +384,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
 
     <script>
         $(document).ready(function() {
